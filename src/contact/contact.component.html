@@ -1,0 +1,123 @@
+
+<div class="bg-white min-h-screen">
+    <!-- Header -->
+    <header class="relative bg-[#E06732]">
+        <div class="bg-[#0F172A] py-20" style="clip-path: polygon(0 0, 100% 0, 100% 85%, 50% 100%, 0 85%);">
+            <div class="text-center text-white">
+                <h1 class="text-5xl font-extrabold">Contact</h1>
+            </div>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-6 py-12 md:py-20">
+        <!-- Form section -->
+        <section class="max-w-4xl mx-auto">
+            <h2 class="text-3xl font-bold text-gray-900 mb-8">Nous contacter</h2>
+            <form [formGroup]="contactForm" (ngSubmit)="submitForm()" novalidate class="space-y-6">
+                <div class="grid md:grid-cols-2 gap-x-8 gap-y-6">
+                    <!-- Nom complet -->
+                    <div>
+                        <label for="fullName" class="text-sm font-medium text-gray-700">Nom complet</label>
+                        <input type="text" id="fullName" formControlName="fullName" 
+                               class="mt-1 block w-full rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-[#E06732] focus:border-transparent transition"
+                               [class]="(fullName?.valid && fullName?.value) ? 'bg-slate-200 border-2 border-[#E06732] text-gray-800' : 'bg-white border border-gray-400'">
+                        @if (submitted() && fullName?.invalid) {
+                            <p class="text-red-500 text-xs mt-1">Le nom complet est requis.</p>
+                        }
+                    </div>
+                     <!-- Société -->
+                    <div>
+                        <label for="company" class="text-sm font-medium text-gray-700">Société</label>
+                        <input type="text" id="company" formControlName="company"
+                               class="mt-1 block w-full rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-[#E06732] focus:border-transparent transition"
+                               [class]="(company?.valid && company?.value) ? 'bg-slate-200 border-2 border-[#E06732] text-gray-800' : 'bg-white border border-gray-400'">
+                         @if (submitted() && company?.invalid) {
+                            <p class="text-red-500 text-xs mt-1">Le nom de la société est requis.</p>
+                        }
+                    </div>
+                    <!-- Email -->
+                    <div>
+                        <label for="email" class="text-sm font-medium text-gray-700">Email</label>
+                        <input type="email" id="email" formControlName="email"
+                               class="mt-1 block w-full rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-[#E06732] focus:border-transparent transition"
+                               [class]="(email?.valid && email?.value) ? 'bg-slate-200 border-2 border-[#E06732] text-gray-800' : 'bg-white border border-gray-400'">
+                        @if (submitted() && email?.invalid) {
+                            <p class="text-red-500 text-xs mt-1">Un email valide est requis.</p>
+                        }
+                    </div>
+                    <!-- Téléphone -->
+                    <div>
+                        <label for="phone" class="text-sm font-medium text-gray-700">Téléphone</label>
+                        <input type="tel" id="phone" formControlName="phone" (blur)="formatPhoneNumber()"
+                               class="mt-1 block w-full rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-[#E06732] focus:border-transparent transition"
+                               [class]="(phone?.valid && phone?.value) ? 'bg-slate-200 border-2 border-[#E06732] text-gray-800' : 'bg-white border border-gray-400'">
+                         @if (submitted() && phone?.invalid) {
+                            <p class="text-red-500 text-xs mt-1">Le numéro de téléphone est requis.</p>
+                        }
+                    </div>
+                     <!-- Code Postal -->
+                    <div>
+                        <label for="postalCode" class="text-sm font-medium text-gray-700">Code Postal</label>
+                        <input type="text" id="postalCode" formControlName="postalCode"
+                               class="mt-1 block w-full rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-[#E06732] focus:border-transparent transition"
+                               [class]="(postalCode?.valid && postalCode?.value) ? 'bg-slate-200 border-2 border-[#E06732] text-gray-800' : 'bg-white border border-gray-400'">
+                         @if (submitted() && postalCode?.invalid) {
+                            <p class="text-red-500 text-xs mt-1">Le code postal est requis.</p>
+                        }
+                    </div>
+                     <!-- Pays -->
+                    <div>
+                        <label for="country" class="text-sm font-medium text-gray-700">Pays</label>
+                        <select id="country" formControlName="country"
+                                class="mt-1 block w-full rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-[#E06732] focus:border-transparent transition"
+                                [class]="(country?.valid && country?.value) ? 'bg-slate-200 border-2 border-[#E06732] text-gray-800' : 'bg-white border border-gray-400'">
+                            <option value="" disabled>Sélectionner un pays</option>
+                            @for (country of countries(); track country.code) {
+                                <option [value]="country.name">{{ country.name }}</option>
+                            }
+                            <option value="Autre">Autre</option>
+                        </select>
+                         @if (submitted() && country?.invalid) {
+                            <p class="text-red-500 text-xs mt-1">Le pays est requis.</p>
+                        }
+                    </div>
+                </div>
+
+                <!-- Description -->
+                <div>
+                     <label for="description" class="text-sm font-medium text-gray-700">Description de votre besoin</label>
+                     <textarea id="description" formControlName="description" rows="5"
+                               class="mt-1 block w-full rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-[#E06732] focus:border-transparent transition"
+                               [class]="(description?.valid && description?.value) ? 'bg-slate-200 border-2 border-[#E06732] text-gray-800' : 'bg-white border border-gray-400'"></textarea>
+                      @if (submitted() && description?.invalid) {
+                        <p class="text-red-500 text-xs mt-1">La description est requise.</p>
+                    }
+                </div>
+
+                <!-- Privacy Policy -->
+                <div class="pt-2">
+                    <div class="flex items-start">
+                        <div class="flex items-center h-5">
+                           <input id="privacyPolicy" formControlName="privacyPolicy" type="checkbox" class="focus:ring-[#E06732] h-4 w-4 bg-white border-gray-300 rounded">
+                        </div>
+                        <div class="ml-3 text-sm">
+                            <label for="privacyPolicy" class="text-gray-600">J'accepte que mes données à caractère personnel soient collectées et traitées selon les conditions décrites à la page "Politique de confidentialité"</label>
+                        </div>
+                    </div>
+                     @if (submitted() && privacyPolicy?.invalid) {
+                        <p class="text-red-500 text-xs mt-1">Vous devez accepter la politique de confidentialité.</p>
+                    }
+                </div>
+
+                <div class="flex justify-between items-center pt-4">
+                     <button type="button" (click)="goBack()" class="text-[#E06732] hover:text-[#C85A28] font-medium transition-colors">
+                        Retour à l'accueil
+                    </button>
+                    <button type="submit" class="bg-blue-600 text-white font-semibold px-6 py-2.5 rounded-md hover:bg-blue-700 transition-all duration-300 shadow-sm hover:shadow-md">
+                        Envoyer
+                    </button>
+                </div>
+            </form>
+        </section>
+    </main>
+</div>

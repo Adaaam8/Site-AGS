@@ -1,0 +1,246 @@
+
+<div class="relative bg-white text-gray-800">
+
+  <!-- Header -->
+  <header [class.shadow-md]="isScrolled()" class="fixed top-0 left-0 right-0 z-50 bg-white transition-shadow duration-300">
+    <div class="container mx-auto px-6 py-4">
+      <div class="flex items-center justify-between">
+        <div (click)="scrollTo('hero')" class="text-2xl font-bold text-gray-900 cursor-pointer">
+          AGS <span class="text-[#E06732]">Concept</span>
+        </div>
+        <div class="hidden md:flex items-center space-x-8">
+          <a (click)="scrollTo('about')" class="text-gray-800 hover:text-[#E06732] transition-colors duration-200 cursor-pointer">À Propos</a>
+          <a (click)="scrollTo('services')" class="text-gray-800 hover:text-[#E06732] transition-colors duration-200 cursor-pointer">Nos Services</a>
+          <a (click)="scrollTo('process')" class="text-gray-800 hover:text-[#E06732] transition-colors duration-200 cursor-pointer">Notre Processus</a>
+          <a (click)="scrollTo('portfolio')" class="text-gray-800 hover:text-[#E06732] transition-colors duration-200 cursor-pointer">Nos Réalisations</a>
+          <button (click)="navigateTo('contact')" class="bg-[#E06732] text-white font-semibold px-5 py-2 rounded-lg hover:bg-[#C85A28] transition-all duration-300 shadow-sm hover:shadow-md">
+            Nous Contacter
+          </button>
+        </div>
+        <div class="md:hidden">
+          <button (click)="toggleMenu()" class="text-gray-800 focus:outline-none">
+            @if (!isMenuOpen()) {
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+            } @else {
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            }
+          </button>
+        </div>
+      </div>
+    </div>
+    <!-- Mobile Menu -->
+    @if (isMenuOpen()) {
+      <div class="md:hidden bg-white shadow-lg">
+        <a (click)="scrollTo('about')" class="block py-3 px-6 text-gray-800 hover:bg-[#FEF7F4] hover:text-[#C85A28] cursor-pointer">À Propos</a>
+        <a (click)="scrollTo('services')" class="block py-3 px-6 text-gray-800 hover:bg-[#FEF7F4] hover:text-[#C85A28] cursor-pointer">Nos Services</a>
+        <a (click)="scrollTo('process')" class="block py-3 px-6 text-gray-800 hover:bg-[#FEF7F4] hover:text-[#C85A28] cursor-pointer">Notre Processus</a>
+        <a (click)="scrollTo('portfolio')" class="block py-3 px-6 text-gray-800 hover:bg-[#FEF7F4] hover:text-[#C85A28] cursor-pointer">Nos Réalisations</a>
+        <a (click)="navigateTo('contact')" class="block py-3 px-6 text-gray-800 hover:bg-[#FEF7F4] hover:text-[#C85A28] cursor-pointer">Nous Contacter</a>
+      </div>
+    }
+  </header>
+
+  @if (activeView() === 'main') {
+    <main>
+      <!-- Hero Section -->
+      <section id="hero" class="relative min-h-screen flex items-center justify-center text-center overflow-hidden">
+        <div class="absolute inset-0 z-0">
+          <img ngSrc="https://picsum.photos/seed/webdesign/1920/1080" width="1920" height="1080" alt="Environnement de développement web sur un écran" class="w-full h-full object-cover object-center" priority>
+          <div class="absolute inset-0 bg-white/75"></div>
+        </div>
+        <div class="relative z-10 container mx-auto px-6">
+          <h1 class="text-4xl md:text-6xl font-extrabold text-gray-900 leading-tight mb-4">
+            Nous créons des <span class="text-[#E06732]">expériences digitales</span> qui inspirent.
+          </h1>
+          <p class="text-lg md:text-xl text-gray-700 max-w-3xl mx-auto mb-8">
+            AGS Concept transforme vos idées en sites web performants et en images de marque inoubliables, pour propulser votre entreprise vers le succès.
+          </p>
+          <button (click)="scrollTo('services')" class="bg-[#E06732] text-white font-bold py-3 px-8 rounded-lg text-lg hover:bg-[#C85A28] transition-all duration-300 transform hover:scale-105 shadow-lg">
+            Découvrir nos services
+          </button>
+        </div>
+      </section>
+
+      <!-- About Section -->
+      <section id="about" class="py-20 md:py-32">
+        <div class="container mx-auto px-6">
+          <div class="grid md:grid-cols-2 gap-12 items-center">
+            <div>
+              <img ngSrc="https://picsum.photos/seed/agsconcept/600/500" width="600" height="500" alt="Équipe AGS Concept en réunion" class="rounded-lg shadow-2xl w-full h-auto object-cover">
+            </div>
+            <div class="text-left">
+              <h2 class="text-sm font-bold uppercase text-[#E06732] mb-2">À Propos de Nous</h2>
+              <h3 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">Votre partenaire pour une présence en ligne réussie.</h3>
+              <p class="text-gray-600 mb-4">
+                Chez AGS Concept, nous sommes passionnés par le web et le design. Notre mission est d'accompagner les entreprises deoutes tailles dans leur transformation digitale.
+              </p>
+              <p class="text-gray-600">
+                Nous croyons qu'un site web efficace est plus qu'une simple vitrine : c'est un outil stratégique pour la croissance. C'est pourquoi nous combinons créativité, technologie et expertise en marketing pour livrer des solutions qui génèrent des résultats concrets.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Services Section -->
+      <section id="services" class="py-20 md:py-32 bg-gray-50">
+        <div class="container mx-auto px-6 text-center">
+          <h2 class="text-sm font-bold uppercase text-[#E06732] mb-2">Nos Services</h2>
+          <h3 class="text-3xl md:text-4xl font-bold text-gray-900 mb-12">Des solutions complètes pour votre succès digital.</h3>
+          <div class="grid md:grid-cols-3 gap-8">
+            @for (service of services(); track service.title) {
+              <div class="bg-white p-8 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300 transform hover:-translate-y-2">
+                <div class="flex items-center justify-center h-16 w-16 rounded-full bg-[#FDF0EA] text-[#C85A28] mx-auto mb-6" [innerHTML]="service.icon"></div>
+                <h4 class="text-xl font-bold text-gray-900 mb-3">{{ service.title }}</h4>
+                <p class="text-gray-600">{{ service.description }}</p>
+              </div>
+            }
+          </div>
+        </div>
+      </section>
+      
+      <!-- Process Section -->
+      <section id="process" class="py-20 md:py-32">
+        <div class="container mx-auto px-6">
+          <div class="text-center mb-16">
+            <h2 class="text-sm font-bold uppercase text-[#E06732] mb-2 tracking-wider">NOTRE PROCESSUS</h2>
+            <h3 class="text-3xl md:text-4xl font-bold text-gray-900">Un parcours en 4 étapes vers l'excellence.</h3>
+          </div>
+          
+          <div class="flex overflow-x-auto snap-x snap-mandatory md:grid md:grid-cols-4 md:gap-8 md:overflow-visible pb-4 md:pb-0 -mx-6 px-6 md:mx-0 md:px-0 space-x-6 md:space-x-0">
+            @for (step of processSteps(); track step.step) {
+              <div class="flex-shrink-0 w-[80%] sm:w-1/2 md:w-auto snap-center text-center">
+                  <div class="flex items-center justify-center h-12 w-12 rounded-full bg-[#E06732] text-white font-bold text-lg mx-auto mb-6">
+                    {{ step.step }}
+                  </div>
+                  <h4 class="text-lg font-bold text-gray-900">{{ step.title }}</h4>
+                  <hr class="my-4 border-gray-200 max-w-[80px] mx-auto">
+                  <p class="text-gray-600 text-sm">{{ step.description }}</p>
+              </div>
+            }
+          </div>
+        </div>
+      </section>
+
+      <!-- Portfolio Section -->
+      <section id="portfolio" class="py-20 md:py-32 bg-gray-50">
+          <div class="container mx-auto px-6">
+              <div class="text-center mb-16">
+                  <h2 class="text-sm font-bold uppercase text-[#E06732] mb-2 tracking-wider">NOS RÉALISATIONS</h2>
+                  <h3 class="text-3xl md:text-4xl font-bold text-gray-900">Découvrez quelques-uns de nos projets.</h3>
+              </div>
+
+              <div class="relative max-w-4xl mx-auto">
+                  <!-- Slider container -->
+                  <div class="overflow-hidden rounded-lg shadow-2xl">
+                      <div class="flex transition-transform duration-500 ease-in-out" [style.transform]="'translateX(-' + currentProjectIndex() * 100 + '%)'">
+                          @for (project of projects(); track project.title) {
+                              <div class="flex-shrink-0 w-full">
+                                  <div class="bg-white">
+                                      <img [ngSrc]="project.image" width="800" height="600" [alt]="project.title" class="w-full h-auto object-cover">
+                                      <div class="p-6">
+                                          <p class="text-sm text-[#C85A28] font-semibold">{{ project.category }}</p>
+                                          <h4 class="text-xl font-bold text-gray-900 mt-1">{{ project.title }}</h4>
+                                      </div>
+                                  </div>
+                              </div>
+                          }
+                      </div>
+                  </div>
+
+                  <!-- Prev/Next Buttons -->
+                  <button (click)="prevProject()" class="absolute top-1/2 -left-4 md:-left-16 transform -translate-y-1/2 bg-white/80 hover:bg-white rounded-full p-2 transition shadow-md">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-800" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
+                  </button>
+                  <button (click)="nextProject()" class="absolute top-1/2 -right-4 md:-right-16 transform -translate-y-1/2 bg-white/80 hover:bg-white rounded-full p-2 transition shadow-md">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-800" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+                  </button>
+
+                  <!-- Pagination dots -->
+                  <div class="flex justify-center space-x-2 mt-6">
+                      @for (project of projects(); track $index; let i = $index) {
+                          <button (click)="goToProject(i)" class="w-3 h-3 rounded-full transition" [class.bg-[#E06732]]="i === currentProjectIndex()" [class.bg-gray-300]="i !== currentProjectIndex()"></button>
+                      }
+                  </div>
+              </div>
+          </div>
+      </section>
+    </main>
+
+    <!-- CTA Section -->
+    <section class="container mx-auto px-6 relative z-10">
+      <div class="bg-[#E06732] rounded-lg shadow-xl p-8 md:p-12 text-center -mb-24 md:-mb-32">
+        <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Nous contacter</h2>
+        <p class="text-md md:text-lg text-[#FFF0E9] max-w-3xl mx-auto mb-8">
+          Des questions, des idées ou simplement envie d’échanger ? On est là pour vous répondre et discuter des sujets qui vous intéressent.
+        </p>
+        <button (click)="navigateTo('contact')" class="bg-transparent border-2 border-white text-white font-semibold px-8 py-3 rounded-lg hover:bg-white hover:text-[#E06732] transition-all duration-300">
+          Nous contacter
+        </button>
+      </div>
+    </section>
+
+    <!-- New Footer -->
+    <footer class="bg-[#0F172A] text-gray-400 pt-32 md:pt-40 pb-12">
+      <div class="container mx-auto px-6">
+        <div class="grid md:grid-cols-12 gap-8 mb-8">
+          <!-- Column 1: Logo & Socials -->
+          <div class="md:col-span-12 lg:col-span-5">
+            <h3 (click)="scrollTo('hero')" class="text-2xl font-bold text-white cursor-pointer">AGS <span class="text-[#E06732]">Concept</span></h3>
+            <p class="text-sm mt-4 mb-6">Inspiring new digital ways</p>
+            <div class="flex space-x-4">
+              <a href="#" class="text-gray-400 hover:text-[#E06732] transition-colors">
+                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C8.74 2 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.74 0 12s.014 3.667.072 4.947c.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072s3.667-.014 4.947-.072c4.358-.2 6.78-2.618 6.98-6.98.059-1.281.073-1.689.073-4.948s-.014-3.667-.072-4.947c-.2-4.358-2.618-6.78-6.98-6.98C15.667 2.014 15.26 2 12 2zm0 5a5 5 0 100 10 5 5 0 000-10zm0 8a3 3 0 110-6 3 3 0 010 6zm5.5-8.5a1.25 1.25 0 100-2.5 1.25 1.25 0 000 2.5z"/></svg>
+              </a>
+              <a href="#" class="text-gray-400 hover:text-[#E06732] transition-colors">
+                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" clip-rule="evenodd" /></svg>
+              </a>
+            </div>
+          </div>
+          
+          <div class="md:col-span-2"></div> <!-- Spacer -->
+
+          <!-- Column 2: Services -->
+          <div class="md:col-span-4 lg:col-span-2">
+            <h4 class="font-semibold text-white mb-4">Nos Services</h4>
+            <ul class="space-y-3">
+              <li><a (click)="scrollTo('services')" class="hover:text-[#E06732] transition-colors cursor-pointer">Développement Web</a></li>
+              <li><a (click)="scrollTo('services')" class="hover:text-[#E06732] transition-colors cursor-pointer">Design & UX/UI</a></li>
+              <li><a (click)="scrollTo('services')" class="hover:text-[#E06732] transition-colors cursor-pointer">Référencement (SEO)</a></li>
+            </ul>
+          </div>
+
+          <!-- Column 3: A Propos -->
+          <div class="md:col-span-4 lg:col-span-2">
+            <h4 class="font-semibold text-white mb-4">Nous Connaître</h4>
+            <ul class="space-y-3">
+              <li><a (click)="scrollTo('about')" class="hover:text-[#E06732] transition-colors cursor-pointer">À propos de nous</a></li>
+              <li><a (click)="scrollTo('process')" class="hover:text-[#E06732] transition-colors cursor-pointer">Notre Processus</a></li>
+              <li><a (click)="scrollTo('portfolio')" class="hover:text-[#E06732] transition-colors cursor-pointer">Nos réalisations</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <hr class="border-gray-700 my-8">
+
+        <div class="flex flex-col-reverse md:flex-row justify-between items-center text-sm">
+          <p class="mt-4 md:mt-0">&copy; {{ currentYear }} AGS Concept. Tous droits réservés.</p>
+          <div class="flex space-x-6">
+            <a href="#" class="hover:text-[#E06732] transition-colors">Mentions Légales</a>
+            <a href="#" class="hover:text-[#E06732] transition-colors">Politique de confidentialité</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+    
+  } @else {
+    <app-contact (backToHome)="navigateTo('main')"></app-contact>
+  }
+
+  <!-- Scroll to Top Button -->
+  @if(isScrolled()) {
+    <button (click)="scrollTo('hero')" class="fixed bottom-8 right-8 bg-[#E06732] text-white rounded-full p-3 shadow-lg hover:bg-[#C85A28] transition-all duration-300 z-50 animate-bounce">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"></path></svg>
+    </button>
+  }
+</div>
