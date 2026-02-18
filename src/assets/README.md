@@ -1,1 +1,0 @@
-Please place your `logo.png` file in this directory.

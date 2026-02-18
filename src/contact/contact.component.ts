@@ -1,7 +1,7 @@
-
-import { Component, ChangeDetectionStrategy, signal, output, OnInit } from '@angular/core';
+import { Component, ChangeDetectionStrategy, signal, computed, output, OnInit } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
 
 declare var libphonenumber: any;
 
@@ -14,18 +14,45 @@ declare var libphonenumber: any;
 export class ContactComponent implements OnInit {
   backToHome = output<void>();
 
+  // === URL du backend (à adapter en production) ===
+  private readonly API_URL = '/api/contact';
+
   contactForm = this.fb.group({
     fullName: ['', Validators.required],
     company: ['', Validators.required],
     email: ['', [Validators.required, Validators.email]],
     phone: ['', Validators.required],
     postalCode: ['', Validators.required],
-    country: ['', Validators.required],
-    description: ['', Validators.required],
+    country: ['France', Validators.required],
+    projectType: [[] as string[], Validators.required],
+    budget: [[] as string[], Validators.required],
+    deadline: [[] as string[], Validators.required],
+    existingAssets: [[] as string[]],
+    description: [''],
     privacyPolicy: [false, Validators.requiredTrue]
   });
 
   submitted = signal(false);
+  currentStep = signal(0);
+  stepDirection = signal<'next' | 'prev'>('next');
+  stepError = signal('');
+  stepsCompleted = signal(false);
+  isSending = signal(false);
+  sendSuccess = signal(false);
+  sendError = signal('');
+  formCompleted = signal(false);
+  formFading = signal(false);
+  selectionChanged = signal(0);
+
+  totalSteps = 4;
+
+  canComplete = computed(() => {
+    this.selectionChanged();
+    const hasProject = (this.projectType?.value as string[])?.length > 0;
+    const hasBudget = (this.budget?.value as string[])?.length > 0;
+    const hasDeadline = (this.deadline?.value as string[])?.length > 0;
+    return hasProject && hasBudget && hasDeadline;
+  });
 
   countries = signal([
     { name: 'Afghanistan', code: 'AF' },
@@ -115,7 +142,6 @@ export class ContactComponent implements OnInit {
     { name: 'Iran', code: 'IR' },
     { name: 'Irlande', code: 'IE' },
     { name: 'Islande', code: 'IS' },
-    { name: 'Israël', code: 'IL' },
     { name: 'Italie', code: 'IT' },
     { name: 'Jamaïque', code: 'JM' },
     { name: 'Japon', code: 'JP' },
@@ -227,11 +253,11 @@ export class ContactComponent implements OnInit {
     { name: 'Zimbabwe', code: 'ZW' },
   ].sort((a, b) => a.name.localeCompare(b.name)));
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private http: HttpClient) {}
 
   ngOnInit(): void {
     this.contactForm.get('country')?.valueChanges.subscribe(() => {
-        this.formatPhoneNumber();
+      this.formatPhoneNumber();
     });
   }
 
@@ -242,13 +268,13 @@ export class ContactComponent implements OnInit {
     if (!phoneControl || !countryControl || !phoneControl.value || !countryControl.value) {
       return;
     }
-    
+
     const countryName = countryControl.value;
     const countryData = this.countries().find(c => c.name === countryName);
     const countryCode = countryData ? countryData.code : undefined;
-    
+
     if (!countryCode) {
-      return; // Can't format without a country code
+      return;
     }
 
     try {
@@ -257,34 +283,150 @@ export class ContactComponent implements OnInit {
         const formattedNumber = phoneNumber.formatInternational();
         phoneControl.setValue(formattedNumber, { emitEvent: false });
       }
-    } catch (error) {
-      // Ignore parsing errors for incomplete numbers
+    } catch (error) {}
+  }
+
+  toggleOption(field: string, option: string): void {
+    const control = this.contactForm.get(field);
+    if (!control) return;
+    const current = control.value as string[];
+    if (current.includes(option)) {
+      control.setValue(current.filter(item => item !== option));
+    } else {
+      control.setValue([...current, option]);
     }
+    this.selectionChanged.update(v => v + 1);
+  }
+
+  isSelected(field: string, option: string): boolean {
+    const control = this.contactForm.get(field);
+    return control ? (control.value as string[]).includes(option) : false;
+  }
+
+  nextStep(): void {
+    this.stepError.set('');
+    const step = this.currentStep();
+
+    if (step === 0 && (this.projectType?.value as string[]).length === 0) {
+      this.stepError.set('Veuillez sélectionner au moins un type de projet.');
+      return;
+    }
+    if (step === 1 && (this.budget?.value as string[]).length === 0) {
+      this.stepError.set('Veuillez sélectionner au moins un budget.');
+      return;
+    }
+    if (step === 2 && (this.deadline?.value as string[]).length === 0) {
+      this.stepError.set('Veuillez sélectionner au moins un délai.');
+      return;
+    }
+
+    if (step < this.totalSteps - 1) {
+      this.stepDirection.set('next');
+      this.currentStep.set(step + 1);
+    }
+  }
+
+  prevStep(): void {
+    this.stepError.set('');
+    if (this.currentStep() > 0) {
+      this.stepDirection.set('prev');
+      this.currentStep.set(this.currentStep() - 1);
+    }
+  }
+
+  completeSteps(): void {
+    this.stepError.set('');
+    if ((this.projectType?.value as string[]).length === 0) {
+      this.stepError.set('Veuillez revenir à l\'étape 1 et sélectionner un type de projet.');
+      return;
+    }
+    if ((this.budget?.value as string[]).length === 0) {
+      this.stepError.set('Veuillez revenir à l\'étape 2 et sélectionner un budget.');
+      return;
+    }
+    if ((this.deadline?.value as string[]).length === 0) {
+      this.stepError.set('Veuillez revenir à l\'étape 3 et sélectionner un délai.');
+      return;
+    }
+    this.stepsCompleted.set(true);
+
+    // Animation : fade out du formulaire, puis message de succès
+    this.formFading.set(true);
+    setTimeout(() => {
+      this.formCompleted.set(true);
+    }, 600);
   }
 
   submitForm(): void {
     this.submitted.set(true);
-    if (this.contactForm.valid) {
-      console.log('Form Submitted!', this.contactForm.value);
-      alert('Merci ! Votre message a été envoyé avec succès.');
-      this.contactForm.reset({ phone: '', privacyPolicy: false, country: '' });
-      this.submitted.set(false);
-    } else {
+    this.sendError.set('');
+    this.sendSuccess.set(false);
+
+    if (!this.contactForm.valid) {
       console.log('Form is invalid');
+      return;
     }
+
+    if (!this.stepsCompleted()) {
+      this.sendError.set('Veuillez compléter le questionnaire projet avant d\'envoyer.');
+      return;
+    }
+
+    this.isSending.set(true);
+
+    const payload = {
+      fullName: this.contactForm.value.fullName,
+      company: this.contactForm.value.company,
+      email: this.contactForm.value.email,
+      phone: this.contactForm.value.phone,
+      postalCode: this.contactForm.value.postalCode,
+      country: this.contactForm.value.country,
+      projectType: this.contactForm.value.projectType,
+      budget: this.contactForm.value.budget,
+      deadline: this.contactForm.value.deadline,
+      existingAssets: this.contactForm.value.existingAssets,
+      description: this.contactForm.value.description || '',
+    };
+
+    this.http.post<{ success: boolean; message: string }>(this.API_URL, payload).subscribe({
+      next: (response) => {
+        this.isSending.set(false);
+        this.sendSuccess.set(true);
+        this.contactForm.reset({
+          phone: '',
+          privacyPolicy: false,
+          country: 'France',
+          existingAssets: [],
+          projectType: [],
+          budget: [],
+          deadline: [],
+        });
+        this.submitted.set(false);
+        this.currentStep.set(0);
+        this.stepsCompleted.set(false);
+      },
+      error: (error) => {
+        this.isSending.set(false);
+        const message = error.error?.error || 'Une erreur est survenue. Veuillez réessayer ou nous contacter directement par email.';
+        this.sendError.set(message);
+        console.error('API error:', error);
+      },
+    });
   }
 
   goBack(): void {
     this.backToHome.emit();
   }
 
-  // Helper getters for template validation
   get fullName() { return this.contactForm.get('fullName'); }
   get company() { return this.contactForm.get('company'); }
   get email() { return this.contactForm.get('email'); }
   get phone() { return this.contactForm.get('phone'); }
   get postalCode() { return this.contactForm.get('postalCode'); }
   get country() { return this.contactForm.get('country'); }
+  get projectType() { return this.contactForm.get('projectType'); }
+  get budget() { return this.contactForm.get('budget'); }
+  get deadline() { return this.contactForm.get('deadline'); }
   get description() { return this.contactForm.get('description'); }
   get privacyPolicy() { return this.contactForm.get('privacyPolicy'); }
 }
