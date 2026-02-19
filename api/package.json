@@ -1,0 +1,5 @@
+{
+  "name": "ags-api",
+  "private": true,
+  "type": "module"
+}
