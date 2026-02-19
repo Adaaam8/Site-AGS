@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git -C \"/c/Users/Dell/OneDrive/AGS Concept/Site AGS\" log --oneline -10)"
+    ]
+  }
+}
