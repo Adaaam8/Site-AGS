@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
   "dev": "ng serve",
-  "build": "ng build && copy public\\sitemap.xml dist\\sitemap.xml",
+  "build": "ng build && cp public/sitemap.xml dist/sitemap.xml",
   "preview": "ng serve --configuration=production"
   },
   "dependencies": {
