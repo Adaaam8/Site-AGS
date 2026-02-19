@@ -16,10 +16,10 @@
 
   <!-- Header -->
   <header [class.shadow-md]="isScrolled()" [style.background-color]="isScrolled() ? 'rgba(255,255,255,0.7)' : 'white'" [style.backdrop-filter]="isScrolled() ? 'blur(12px)' : 'none'" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
-    <div class="container mx-auto px-6 py-4">
+    <div class="container mx-auto px-6 py-3 md:py-4">
       <div class="flex items-center justify-between">
-       <div (click)="scrollTo('hero')" class="flex items-center gap-3 text-3xl font-bold text-gray-900 cursor-pointer">
-        <img src="assets/logo.png" class="h-12 w-auto"> 
+       <div (click)="scrollTo('hero')" class="flex items-center gap-2 md:gap-3 text-2xl md:text-3xl font-bold text-gray-900 cursor-pointer">
+        <img src="assets/logo.png" class="h-10 md:h-12 w-auto">
         AGS<span class="text-[#E06732] -ml-1">Concept</span>
       </div>
         <div class="hidden md:flex items-center space-x-8">
@@ -63,13 +63,13 @@
           <div class="absolute inset-0 bg-white/80"></div>
         </div>
         <div class="relative z-10 container mx-auto px-6">
-          <h1 class="animate-fade-up delay-1 text-4xl md:text-6xl font-extrabold text-gray-900 leading-tight mb-4">
+          <h1 class="animate-fade-up delay-1 text-3xl sm:text-4xl md:text-6xl font-extrabold text-gray-900 leading-tight mb-4 md:mb-6">
             Nous créons des <span class="text-[#E06732]">expériences digitales</span> qui inspirent.
           </h1>
-          <p class="animate-fade-up delay-2 text-xl md:text-xl text-gray-700 max-w-3xl mx-auto mb-8">
+          <p class="animate-fade-up delay-2 text-base sm:text-lg md:text-xl text-gray-700 max-w-3xl mx-auto mb-6 md:mb-8">
             AGS Concept transforme vos idées en sites web performants et en images de marque inoubliables, pour propulser votre entreprise vers le succès.
           </p>
-          <button (click)="scrollTo('services')" class="animate-fade-up delay-3 bg-[#E06732] text-white font-bold py-3 px-8 rounded-lg text-lg hover:bg-[#C85A28] transition-all duration-300 transform hover:scale-105 shadow-lg">
+          <button (click)="scrollTo('services')" class="animate-fade-up delay-3 bg-[#E06732] text-white font-bold py-3 px-6 sm:px-8 rounded-lg text-base sm:text-lg hover:bg-[#C85A28] transition-all duration-300 transform hover:scale-105 shadow-lg">
             Découvrir nos services
           </button>
         </div>
@@ -78,17 +78,17 @@
       <!-- About Section -->
       <section id="about" class="py-20 md:py-32">
         <div class="container mx-auto px-6">
-          <div class="grid md:grid-cols-2 gap-6 items-center">
-            <div class="flex justify-center">
-              <img src="assets/About-bg.jpg" alt="Équipe AGS Concept en réunion" class="rounded-lg shadow-2xl h-auto object-cover" style="width: 550px;">
+          <div class="grid md:grid-cols-2 gap-8 md:gap-6 items-center">
+            <div class="flex justify-center order-2 md:order-1">
+              <img src="assets/About-bg.jpg" alt="Équipe AGS Concept en réunion" class="rounded-lg shadow-2xl h-auto w-full max-h-full md:max-w-2xl object-cover">
             </div>
-            <div class="text-left -ml-8">
+            <div class="text-left order-1 md:order-2 md:pl-4">
               <h2 class="text-2xl font-bold uppercase text-[#E06732] mb-2">À Propos de Nous</h2>
-              <h3 class="text-3xl md:text-3xl font-bold text-gray-900 mb-6">Votre partenaire pour une présence en ligne réussie.</h3>
-              <p class="text-lg text-gray-800 mb-4">
+              <h3 class="text-2xl md:text-3xl font-bold text-gray-900 mb-6">Votre partenaire pour une présence en ligne réussie.</h3>
+              <p class="text-base md:text-lg text-gray-800 mb-4">
                 Nous créons des sites web performants et des identités de marque conçus pour attirer, convaincre et convertir.
               </p>
-              <p class="text-lg text-gray-800">
+              <p class="text-base md:text-lg text-gray-800">
                 Chez AGS Concept, nous aidons les entreprises à se démarquer dans un environnement digital saturé. Nous concevons des sites web performants et des identités de marque puissantes, pensés pour attirer l’attention, inspirer confiance et générer des résultats concrets.
               </p>
             </div>
@@ -96,32 +96,138 @@
         </div>
       </section>
 
-      <!-- Services Section -->
-      <section id="services" class="py-20 md:py-32 bg-gray-50">
-        <div class="container mx-auto px-6 text-center">
-          <h2 class="text-2xl font-bold uppercase text-[#E06732] mb-2">Nos Services</h2>
-          <h3 class="text-3xl md:text-3xl font-bold text-gray-900 mb-12">Des solutions complètes pour votre succès digital.</h3>
-          <div class="grid md:grid-cols-3 gap-8">
-            @for (service of services(); track service.title) {
-              <div class="bg-white p-8 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300 transform hover:-translate-y-2 relative overflow-hidden">
-                  <img [src]="service.image" class="absolute inset-0 w-full h-full object-cover opacity-20">
-                  <div class="relative z-10">
-                  <div class="flex items-center justify-center h-16 w-16 rounded-full bg-[#FDF0EA] text-[#C85A28] mx-auto mb-6" [innerHTML]="sanitizeHtml(service.icon)"></div>
-                  <h4 class="text-xl font-bold text-gray-900 mb-3">{{ service.title }}</h4>
-                  <p class="text-gray-800">{{ service.description }}</p>
-               </div>
-              </div>
-            }
-          </div>
+      <div class="bg-white">
+  <div class="container mx-auto px-6 py-16">
+    <div class="h-px bg-gradient-to-r from-transparent via-[#E06732] to-transparent 
+      opacity-50 mb-8"></div>
+    <div class="flex justify-center mb-8">
+      <div class="text-[#E06732] opacity-75">
+        <svg class="w-6 h-6 animate-bounce" fill="currentColor">
+          <path d="M19 14l-7 7m0 0l-7-7m7 7V3" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Services Section - Layout Alternant (Version Icônes Personnalisées) -->
+<section id="services" class="py-4 md:py-8 bg-white">
+  <div class="container mx-auto px-6">
+    <!-- Header -->
+    <div class="text-center mb-16">
+      <h2 class="text-xl md:text-2xl font-bold uppercase text-[#E06732] mb-3">Nos Services</h2>
+      <h3 class="text-2xl md:text-3xl font-bold text-gray-900">Des solutions complètes pour votre succès digital.</h3>
+    </div>
+
+    <!-- Service 1: Image Left, Text Right -->
+    <div class="mb-16 md:mb-20">
+      <div class="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
+        <!-- Image -->
+        <div class="order-2 md:order-1">
+          <img 
+            src="assets/web-design-template-copy-space-concept.jpg" 
+            alt="Création de Sites Web Modernes"
+            class="w-full h-auto max-h-96 object-contain rounded-lg shadow-lg hover:shadow-2xl transition-all duration-500 ease-out transform hover:-translate-y-2"
+          >
         </div>
-      </section>
+        <!-- Text -->
+        <div class="order-1 md:order-2">
+          <!-- Icon Circle -->
+          <div class="flex items-center justify-center h-20 w-20 rounded-full bg-[#FDF0EA] text-[#E06732] mb-6 mx-0 md:mx-0">
+            <svg class="w-10 h-10" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M21 2H3c-1.1 0-2 .9-2 2v18c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 18H3V4h18v16z"/>
+            </svg>
+          </div>
+          <h4 class="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
+            <span class="text-[#E06732]">Création de Sites Web</span> Modernes
+          </h4>
+          <p class="text-gray-700 text-base md:text-lg leading-relaxed">
+            Nous concevons des sites web vitrines et e-commerce sur mesure, rapides, responsives et optimisés pour une expérience utilisateur exceptionnelle.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Service 2: Text Left, Image Right -->
+    <div class="mb-16 md:mb-20">
+      <div class="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
+        <!-- Text -->
+        <div class="order-1">
+          <!-- Icon Circle -->
+          <div class="flex items-center justify-center h-20 w-20 rounded-full bg-[#FDF0EA] text-[#E06732] mb-6">
+            <svg class="w-10 h-10" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
+            </svg>
+          </div>
+          <h4 class="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
+            <span class="text-[#E06732]">Image de Marque &</span> Identité Visuelle
+          </h4>
+          <p class="text-gray-700 text-base md:text-lg leading-relaxed">
+            De la création de votre logo à la charte graphique complète, nous forgeons une identité de marque forte et cohérente qui vous démarque de la concurrence.
+          </p>
+        </div>
+        <!-- Image -->
+        <div class="order-2">
+          <img 
+            src="assets/service-visu.png" 
+            alt="Image de Marque & Identité Visuelle"
+            class="w-full h-auto max-h-96 object-contain rounded-lg shadow-lg hover:shadow-2xl transition-all duration-500 ease-out transform hover:-translate-y-2"
+          >
+        </div>
+      </div>
+    </div>
+
+    <!-- Service 3: Image Left, Text Right -->
+    <div>
+      <div class="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
+        <!-- Image -->
+        <div class="order-2 md:order-1">
+          <img 
+            src="assets/service-seo.png" 
+            alt="Visibilité & Hébergement Google"
+            class="w-full h-auto max-h-96 object-contain rounded-lg shadow-lg hover:shadow-2xl transition-all duration-500 ease-out transform hover:-translate-y-2"
+          >
+        </div>
+        <!-- Text -->
+        <div class="order-1 md:order-2">
+          <!-- Icon Circle -->
+          <div class="flex items-center justify-center h-20 w-20 rounded-full bg-[#FDF0EA] text-[#E06732] mb-6">
+            <svg class="w-10 h-10" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm3.5-9c.83 0 1.5-.67 1.5-1.5S16.33 8 15.5 8 14 8.67 14 9.5s.67 1.5 1.5 1.5zm-7 0c.83 0 1.5-.67 1.5-1.5S9.33 8 8.5 8 7 8.67 7 9.5 7.67 11 8.5 11zm3.5 6.5c2.33 0 4.31-1.46 5.11-3.5H6.89c.8 2.04 2.78 3.5 5.11 3.5z"/>
+            </svg>
+          </div>
+          <h4 class="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
+            <span class="text-[#E06732]">Visibilité &</span> Hébergement Google
+          </h4>
+          <p class="text-gray-700 text-base md:text-lg leading-relaxed">
+            Nous optimisons votre référencement naturel (SEO) et assurons un hébergement fiable et performant pour garantir une visibilité maximale sur Google.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="bg-white">
+  <div class="container mx-auto px-6 py-16">
+    <div class="h-px bg-gradient-to-r from-transparent via-[#E06732] to-transparent 
+      opacity-50 mb-8"></div>
+    <div class="flex justify-center mb-8">
+      <div class="text-[#E06732] opacity-75">
+        <svg class="w-6 h-6 animate-bounce" fill="currentColor">
+          <path d="M19 14l-7 7m0 0l-7-7m7 7V3" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+</div>
       
       <!-- Process Section -->
-      <section id="process" class="py-20 md:py-32">
+      <section id="process" class="py-4 md:py-8">
         <div class="container mx-auto px-6">
-          <div class="text-center mb-16">
-            <h2 class="text-2xl font-bold uppercase text-[#E06732] mb-2 tracking-wider">NOTRE PROCESSUS</h2>
-            <h3 class="text-3xl md:text-3xl font-bold text-gray-900">Un parcours en 4 étapes vers l'excellence.</h3>
+          <div class="text-center mb-12 md:mb-16">
+            <h2 class="text-xl md:text-2xl font-bold uppercase text-[#E06732] mb-2 tracking-wider">NOTRE PROCESSUS</h2>
+            <h3 class="text-2xl md:text-3xl font-bold text-gray-900">Un parcours en 4 étapes vers l'excellence.</h3>
           </div>
           
           <div class="flex overflow-x-auto snap-x snap-mandatory md:grid md:grid-cols-4 md:gap-8 md:overflow-visible pb-4 md:pb-0 -mx-6 px-6 md:mx-0 md:px-0 space-x-6 md:space-x-0">
@@ -140,11 +246,11 @@
       </section>
 
       <!-- Portfolio Section -->
-      <section id="portfolio" class="py-20 md:py-32 bg-gray-50">
+      <section id="portfolio" class="py-16 md:py-32 bg-gray-50">
           <div class="container mx-auto px-6">
-              <div class="text-center mb-8">
-                  <h2 class="text-2xl font-bold uppercase text-[#E06732] mb-2 tracking-wider">NOS RÉALISATIONS</h2>
-                  <h3 class="text-3xl md:text-3xl font-bold text-gray-900">Découvrez nos réalisations</h3>
+              <div class="text-center mb-8 md:mb-12">
+                  <h2 class="text-xl md:text-2xl font-bold uppercase text-[#E06732] mb-2 tracking-wider">NOS RÉALISATIONS</h2>
+                  <h3 class="text-2xl md:text-3xl font-bold text-gray-900">Découvrez nos réalisations</h3>
               </div>
 
               <div class="relative max-w-4xl mx-auto">
@@ -154,10 +260,10 @@
                           @for (project of projects(); track project.title) {
                               <div class="flex-shrink-0 w-full">
                                   <div class="bg-white">
-                                      <img [ngSrc]="project.image" width="800" height="600" [alt]="project.title" class="w-full h-80 object-cover object-top">
-                                      <div class="p-6">
-                                          <p class="text-sm text-[#C85A28] font-semibold">{{ project.category }}</p>
-                                          <h4 class="text-xl font-bold text-gray-900 mt-1">{{ project.title }}</h4>
+                                      <img [ngSrc]="project.image" width="800" height="600" [alt]="project.title" class="w-full h-48 sm:h-64 md:h-80 object-cover object-top">
+                                      <div class="p-4 md:p-6">
+                                          <p class="text-xs md:text-sm text-[#C85A28] font-semibold">{{ project.category }}</p>
+                                          <h4 class="text-lg md:text-xl font-bold text-gray-900 mt-1">{{ project.title }}</h4>
                                       </div>
                                   </div>
                               </div>
@@ -166,11 +272,11 @@
                   </div>
 
                   <!-- Prev/Next Buttons -->
-                  <button (click)="prevProject()" class="absolute top-1/2 -left-4 md:-left-16 transform -translate-y-1/2 bg-white/80 hover:bg-white rounded-full p-2 transition shadow-md">
-                      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-800" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
+                  <button (click)="prevProject()" class="absolute top-1/2 left-0 md:-left-16 transform -translate-y-1/2 bg-white/80 hover:bg-white rounded-full p-2 transition shadow-md z-10">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 md:h-6 md:w-6 text-gray-800" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
                   </button>
-                  <button (click)="nextProject()" class="absolute top-1/2 -right-4 md:-right-16 transform -translate-y-1/2 bg-white/80 hover:bg-white rounded-full p-2 transition shadow-md">
-                      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-800" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+                  <button (click)="nextProject()" class="absolute top-1/2 right-0 md:-right-16 transform -translate-y-1/2 bg-white/80 hover:bg-white rounded-full p-2 transition shadow-md z-10">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 md:h-6 md:w-6 text-gray-800" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
                   </button>
 
                   <!-- Pagination dots -->
@@ -186,12 +292,12 @@
 
     <!-- CTA Section -->
     <section class="container mx-auto px-6 relative z-10">
-      <div class="bg-[#E06732] rounded-lg shadow-xl p-8 md:p-12 text-center -mb-24 md:-mb-32 max-w-4xl mx-auto">
-        <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Nous contacter</h2>
-        <p class="text-md md:text-lg text-[#FFF0E9] max-w-3xl mx-auto mb-8">
+      <div class="bg-[#E06732] rounded-lg shadow-xl p-6 md:p-12 text-center -mb-20 md:-mb-32 max-w-4xl mx-auto">
+        <h2 class="text-2xl md:text-4xl font-bold text-white mb-3 md:mb-4">Nous contacter</h2>
+        <p class="text-sm md:text-lg text-[#FFF0E9] max-w-3xl mx-auto mb-6 md:mb-8">
           Des questions, des idées ou simplement envie d’échanger ? On est là pour vous répondre et discuter des sujets qui vous intéressent.
         </p>
-        <button (click)="navigateTo('contact')" class="bg-transparent border-2 border-white text-white font-semibold px-8 py-3 rounded-lg hover:bg-white hover:text-[#E06732] transition-all duration-300">
+        <button (click)="navigateTo(&quot;contact&quot;)" class="bg-transparent border-2 border-white text-white font-semibold px-6 md:px-8 py-2 md:py-3 rounded-lg hover:bg-white hover:text-[#E06732] transition-all duration-300 text-sm md:text-base">
           Nous contacter
         </button>
       </div>
@@ -202,12 +308,12 @@
   }
 
   <!-- Footer visible sur toutes les pages -->
-  <footer [class]="activeView() === 'main' ? 'bg-[#0F172A] text-gray-400 pt-36 md:pt-44 pb-12' : 'bg-[#0F172A] text-gray-400 pt-12 pb-12'">
+  <footer [class]="activeView() === 'main' ? 'bg-[#0F172A] text-gray-400 pt-24 md:pt-44 pb-8 md:pb-12' : 'bg-[#0F172A] text-gray-400 pt-8 md:pt-12 pb-8 md:pb-12'">
       <div class="container mx-auto px-6">
-        <div class="grid md:grid-cols-12 gap-8 mb-8">
+        <div class="grid md:grid-cols-12 gap-6 md:gap-8 mb-8">
           <div class="md:col-span-12 lg:col-span-5">
-            <h3 (click)="scrollTo('hero')" class="text-2xl font-bold text-white cursor-pointer flex items-center gap-3">
-            <img src="assets/logo.png" class="h-12 w-auto">
+            <h3 (click)="scrollTo('hero')" class="text-xl md:text-2xl font-bold text-white cursor-pointer flex items-center gap-2 md:gap-3">
+            <img src="assets/logo.png" class="h-10 md:h-12 w-auto">
             AGS<span class="text-[#E06732] -ml-1">Concept</span>
             </h3>
             <div class="flex space-x-4 mt-4">
@@ -258,7 +364,7 @@
 
 <!-- Scroll to Top Button -->
 @if(isScrolled()) {
-  <button (click)="scrollToTop()" class="fixed bottom-8 right-8 bg-[#E06732] text-white rounded-full p-3 shadow-lg hover:bg-[#C85A28] transition-all duration-300 z-50">
-    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"></path></svg>
+  <button (click)="scrollToTop()" class="fixed bottom-6 md:bottom-8 right-6 md:right-8 bg-[#E06732] text-white rounded-full p-2 md:p-3 shadow-lg hover:bg-[#C85A28] transition-all duration-300 z-50">
+    <svg class="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"></path></svg>
   </button>
 }
