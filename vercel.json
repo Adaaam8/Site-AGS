@@ -15,7 +15,11 @@
   ],
   "rewrites": [
     {
-      "source": "/:path((?!sitemap\\.xml|robots\\.txt).*)",
+      "source": "/favicon.ico",
+      "destination": "/assets/favicon.png"
+    },
+    {
+      "source": "/:path((?!sitemap\\.xml|robots\\.txt|favicon).*)",
       "destination": "/index.html"
     }
   ]
