@@ -312,9 +312,37 @@
 
                 <!-- Messages de feedback -->
                 @if (sendSuccess()) {
-                    <div class="bg-green-50 border border-green-300 text-green-700 rounded-lg p-4 text-center">
-                        <p class="font-semibold">C'est envoyé !</p>
-                        <p class="text-sm mt-3">Votre demande a bien été reçue. Un email de confirmation vous a été adressé. Notre équipe examinera votre projet et vous contactera sous 24 à 48h. Merci !</p>
+                    <!-- Overlay darkening background -->
+                    <div class="fixed inset-0 bg-black/50 z-40 animate-fade-in"></div>
+
+                    <!-- Modal Success Popup -->
+                    <div class="fixed inset-0 flex items-center justify-center z-50">
+                        <div class="bg-white rounded-xl shadow-2xl max-w-md w-full mx-4 overflow-hidden animate-scale-in">
+                            <!-- Success Icon -->
+                            <div class="bg-gradient-to-br from-[#E06732] to-[#C85A28] p-8 flex flex-col items-center">
+                                <div class="relative mb-4">
+                                    <div class="w-24 h-24 rounded-full bg-white/10 flex items-center justify-center">
+                                        <svg class="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
+                                        </svg>
+                                    </div>
+                                </div>
+                                <h2 class="text-2xl font-bold text-white text-center">C'est envoyé !</h2>
+                            </div>
+
+                            <!-- Message Content -->
+                            <div class="p-8 text-center">
+                                <p class="text-gray-700 mb-6 leading-relaxed">
+                                    Votre demande a bien été reçue. Un email de confirmation vous a été adressé. Notre équipe examinera votre projet et vous contactera sous 24 à 48h. Merci !
+                                </p>
+
+                                <!-- OK Button -->
+                                <button (click)="closeSuccessModal()"
+                                        class="w-full bg-[#E06732] text-white font-bold py-3 rounded-lg hover:bg-[#C85A28] transition-all duration-300 transform hover:scale-105">
+                                    OK
+                                </button>
+                            </div>
+                        </div>
                     </div>
                 }
                 @if (sendError()) {
@@ -334,5 +362,21 @@
     }
     .animate-slide-in {
         animation: slideIn 0.4s ease-out forwards;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to   { opacity: 1; }
+    }
+    .animate-fade-in {
+        animation: fadeIn 0.3s ease-out forwards;
+    }
+
+    @keyframes scaleIn {
+        from { opacity: 0; transform: scale(0.9); }
+        to   { opacity: 1; transform: scale(1); }
+    }
+    .animate-scale-in {
+        animation: scaleIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
     }
 </style>

@@ -418,6 +418,24 @@ export class ContactComponent implements OnInit {
     this.backToHome.emit();
   }
 
+  closeSuccessModal(): void {
+    this.sendSuccess.set(false);
+    this.submitted.set(false);
+    this.currentStep.set(0);
+    this.stepsCompleted.set(false);
+    this.formCompleted.set(false);
+    this.contactForm.reset({
+      phone: '',
+      privacyPolicy: false,
+      country: 'France',
+      existingAssets: [],
+      projectType: [],
+      budget: [],
+      deadline: [],
+    });
+    this.backToHome.emit();
+  }
+
   get fullName() { return this.contactForm.get('fullName'); }
   get company() { return this.contactForm.get('company'); }
   get email() { return this.contactForm.get('email'); }
