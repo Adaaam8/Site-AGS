@@ -268,16 +268,8 @@
                 </div>
             </div>
             <h3 class="text-xl font-bold text-gray-900 mb-2 animate-fade-up" style="animation-delay: 0.4s;">
-                Merci pour ces informations !
+                Formulaire complété avec succès
             </h3>
-            <p class="text-gray-600 max-w-sm animate-fade-up" style="animation-delay: 0.6s;">
-                Votre projet a bien été pris en compte. Nous analyserons vos besoins avec attention et reviendrons vers vous dans les plus brefs délais.
-            </p>
-            <!-- Petite touche déco -->
-            <div class="mt-6 flex items-center gap-2 text-sm text-[#E06732] font-medium animate-fade-up" style="animation-delay: 0.8s;">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                Réponse sous 24 à 48h
-            </div>
         </div>
     }
 </div>
@@ -321,8 +313,8 @@
                 <!-- Messages de feedback -->
                 @if (sendSuccess()) {
                     <div class="bg-green-50 border border-green-300 text-green-700 rounded-lg p-4 text-center">
-                        <p class="font-semibold">Merci ! Votre message a été envoyé avec succès.</p>
-                        <p class="text-sm mt-1">Nous vous répondrons dans les plus brefs délais.</p>
+                        <p class="font-semibold">C'est envoyé !</p>
+                        <p class="text-sm mt-3">Votre demande a bien été reçue. Un email de confirmation vous a été adressé. Notre équipe examinera votre projet et vous contactera sous 24 à 48h. Merci !</p>
                     </div>
                 }
                 @if (sendError()) {
