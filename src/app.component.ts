@@ -166,7 +166,9 @@ ngAfterViewChecked(): void {
     this.activeView.set(view);
     this.videoStarted = false; // Reset video state to allow replay when returning to main view
     if (isPlatformBrowser(this.platformId)) {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+        setTimeout(() => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }, 0);
     }
     this.isMenuOpen.set(false);
   }
