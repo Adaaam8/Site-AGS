@@ -186,4 +186,8 @@ ngAfterViewChecked(): void {
   goToProject(index: number): void {
     this.currentProjectIndex.set(index);
   }
+
+  callPhone(): void {
+    window.location.href = 'tel:0782928620';
+  }
 }
