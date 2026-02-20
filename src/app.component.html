@@ -43,15 +43,23 @@
       </div>
     </div>
     <!-- Mobile Menu -->
-    @if (isMenuOpen()) {
-      <div class="md:hidden bg-white shadow-lg">
-        <a (click)="scrollTo('about')" class="block py-3 px-6 text-gray-800 hover:bg-[#FEF7F4] hover:text-[#C85A28] cursor-pointer">À Propos</a>
-        <a (click)="scrollTo('services')" class="block py-3 px-6 text-gray-800 hover:bg-[#FEF7F4] hover:text-[#C85A28] cursor-pointer">Nos Services</a>
-        <a (click)="scrollTo('process')" class="block py-3 px-6 text-gray-800 hover:bg-[#FEF7F4] hover:text-[#C85A28] cursor-pointer">Notre Processus</a>
-        <a (click)="scrollTo('portfolio')" class="block py-3 px-6 text-gray-800 hover:bg-[#FEF7F4] hover:text-[#C85A28] cursor-pointer">Nos Réalisations</a>
-        <a (click)="navigateTo('contact')" class="block py-3 px-6 text-gray-800 hover:bg-[#FEF7F4] hover:text-[#C85A28] cursor-pointer">Nous Contacter</a>
-      </div>
-    }
+<div class="md:hidden fixed top-0 right-0 h-full w-72 bg-white shadow-2xl z-50 flex flex-col pt-20 px-6 gap-2 transition-transform duration-300 ease-in-out"
+     [class.translate-x-0]="isMenuOpen()"
+     [class.translate-x-full]="!isMenuOpen()">
+  <a (click)="scrollTo('about')" class="block py-3 px-4 rounded-lg text-gray-800 hover:bg-[#FEF7F4] hover:text-[#C85A28] cursor-pointer transition-colors">À Propos</a>
+  <a (click)="scrollTo('services')" class="block py-3 px-4 rounded-lg text-gray-800 hover:bg-[#FEF7F4] hover:text-[#C85A28] cursor-pointer transition-colors">Nos Services</a>
+  <a (click)="scrollTo('process')" class="block py-3 px-4 rounded-lg text-gray-800 hover:bg-[#FEF7F4] hover:text-[#C85A28] cursor-pointer transition-colors">Notre Processus</a>
+  <a (click)="scrollTo('portfolio')" class="block py-3 px-4 rounded-lg text-gray-800 hover:bg-[#FEF7F4] hover:text-[#C85A28] cursor-pointer transition-colors">Nos Réalisations</a>
+  <a (click)="navigateTo('contact')" class="block py-3 px-4 rounded-lg text-gray-800 hover:bg-[#FEF7F4] hover:text-[#C85A28] cursor-pointer transition-colors">Nous Contacter</a>
+</div>
+
+    <!-- Overlay sombre derrière le menu -->
+<div class="fixed inset-0 bg-black z-40 md:hidden transition-opacity duration-300"
+     [class.opacity-40]="isMenuOpen()"
+     [class.opacity-0]="!isMenuOpen()"
+     [class.pointer-events-none]="!isMenuOpen()"
+     (click)="toggleMenu()">
+</div>
   </header>
 
   @if (activeView() === 'main') {
