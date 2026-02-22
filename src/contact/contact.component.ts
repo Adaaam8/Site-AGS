@@ -2,7 +2,6 @@ import { Component, ChangeDetectionStrategy, signal, computed, output, OnInit, O
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { RouterLink } from '@angular/router';
 
 declare var libphonenumber: any;
 
@@ -21,7 +20,7 @@ interface AnimatedParticle {
   templateUrl: './contact.component.html',
   styleUrl: './contact.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [ReactiveFormsModule, CommonModule, RouterLink],
+  imports: [ReactiveFormsModule, CommonModule],
 })
 export class ContactComponent implements OnInit, OnDestroy {
   backToHome = output<void>();
