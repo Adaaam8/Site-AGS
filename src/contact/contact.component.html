@@ -47,8 +47,8 @@
                         </svg>
                     </div>
                     <div>
-                        <h4 class="font-bold text-gray-900">Disponibilité</h4>
-                        <p class="text-gray-600">24h/24 - 7j/7</p>
+                        <h4 class="font-bold text-gray-900">Temps de réponse</h4>
+                        <p class="text-gray-600">Réponse garantie sous 24-48h</p>
                     </div>
                 </div>
             </div>
@@ -63,60 +63,104 @@
                 <div class="grid md:grid-cols-2 gap-x-8 gap-y-6">
                     <!-- Nom complet -->
                     <div>
-                        <label for="fullName" class="text-sm font-medium text-gray-700">Nom complet</label>
-                        <input type="text" id="fullName" formControlName="fullName" 
+                        <label for="fullName" class="text-sm font-medium text-gray-700">Nom complet <span class="text-red-500">*</span></label>
+                        <input type="text" id="fullName" formControlName="fullName"
+                               placeholder="Jean Dupont"
+                               aria-label="Nom complet"
+                               aria-required="true"
+                               [attr.aria-invalid]="submitted() && fullName?.invalid"
+                               aria-describedby="fullName-error"
                                class="mt-1 block w-full rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-[#E06732] focus:border-transparent transition"
-                               [class]="(fullName?.valid && fullName?.value) ? 'bg-slate-200 border-2 border-[#E06732] text-gray-800' : 'bg-white border border-gray-400'">
+                               [class]="(fullName?.valid && fullName?.value) ? 'bg-green-50 border-2 border-green-400 text-gray-800' : (submitted() && fullName?.invalid) ? 'bg-red-50 border-2 border-red-400' : 'bg-white border border-gray-400'">
                         @if (submitted() && fullName?.invalid) {
-                            <p class="text-red-500 text-xs mt-1">Le nom complet est requis.</p>
+                            <p id="fullName-error" class="text-red-600 text-xs mt-1 flex items-center gap-1">
+                                <span>⚠️</span>
+                                <span>Merci d'entrer votre nom complet</span>
+                            </p>
                         }
                     </div>
                     <!-- Société -->
                     <div>
-                        <label for="company" class="text-sm font-medium text-gray-700">Société</label>
+                        <label for="company" class="text-sm font-medium text-gray-700">Société <span class="text-red-500">*</span></label>
                         <input type="text" id="company" formControlName="company"
+                               placeholder="ex: Acme Inc."
+                               aria-label="Nom de la société"
+                               aria-required="true"
+                               [attr.aria-invalid]="submitted() && company?.invalid"
+                               aria-describedby="company-error"
                                class="mt-1 block w-full rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-[#E06732] focus:border-transparent transition"
-                               [class]="(company?.valid && company?.value) ? 'bg-slate-200 border-2 border-[#E06732] text-gray-800' : 'bg-white border border-gray-400'">
+                               [class]="(company?.valid && company?.value) ? 'bg-green-50 border-2 border-green-400 text-gray-800' : (submitted() && company?.invalid) ? 'bg-red-50 border-2 border-red-400' : 'bg-white border border-gray-400'">
                         @if (submitted() && company?.invalid) {
-                            <p class="text-red-500 text-xs mt-1">Le nom de la société est requis.</p>
+                            <p id="company-error" class="text-red-600 text-xs mt-1 flex items-center gap-1">
+                                <span>⚠️</span>
+                                <span>Veuillez entrer le nom de votre société</span>
+                            </p>
                         }
                     </div>
                     <!-- Email -->
                     <div>
-                        <label for="email" class="text-sm font-medium text-gray-700">Email</label>
+                        <label for="email" class="text-sm font-medium text-gray-700">Email <span class="text-red-500">*</span></label>
                         <input type="email" id="email" formControlName="email"
+                               placeholder="jean@societe.fr"
+                               aria-label="Adresse email"
+                               aria-required="true"
+                               [attr.aria-invalid]="submitted() && email?.invalid"
+                               aria-describedby="email-error"
                                class="mt-1 block w-full rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-[#E06732] focus:border-transparent transition"
-                               [class]="(email?.valid && email?.value) ? 'bg-slate-200 border-2 border-[#E06732] text-gray-800' : 'bg-white border border-gray-400'">
+                               [class]="(email?.valid && email?.value) ? 'bg-green-50 border-2 border-green-400 text-gray-800' : (submitted() && email?.invalid) ? 'bg-red-50 border-2 border-red-400' : 'bg-white border border-gray-400'">
                         @if (submitted() && email?.invalid) {
-                            <p class="text-red-500 text-xs mt-1">Un email valide est requis.</p>
+                            <p id="email-error" class="text-red-600 text-xs mt-1 flex items-center gap-1">
+                                <span>⚠️</span>
+                                <span>Entrez une adresse email valide (ex: jean@societe.fr)</span>
+                            </p>
                         }
                     </div>
                     <!-- Téléphone -->
                     <div>
-                        <label for="phone" class="text-sm font-medium text-gray-700">Téléphone</label>
+                        <label for="phone" class="text-sm font-medium text-gray-700">Téléphone <span class="text-red-500">*</span></label>
                         <input type="tel" id="phone" formControlName="phone" (blur)="formatPhoneNumber()"
+                               placeholder="+33 6 XX XX XX XX"
+                               aria-label="Numéro de téléphone"
+                               aria-required="true"
+                               [attr.aria-invalid]="submitted() && phone?.invalid"
+                               aria-describedby="phone-error"
                                class="mt-1 block w-full rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-[#E06732] focus:border-transparent transition"
-                               [class]="(phone?.valid && phone?.value) ? 'bg-slate-200 border-2 border-[#E06732] text-gray-800' : 'bg-white border border-gray-400'">
+                               [class]="(phone?.valid && phone?.value) ? 'bg-green-50 border-2 border-green-400 text-gray-800' : (submitted() && phone?.invalid) ? 'bg-red-50 border-2 border-red-400' : 'bg-white border border-gray-400'">
                         @if (submitted() && phone?.invalid) {
-                            <p class="text-red-500 text-xs mt-1">Le numéro de téléphone est requis.</p>
+                            <p id="phone-error" class="text-red-600 text-xs mt-1 flex items-center gap-1">
+                                <span>⚠️</span>
+                                <span>Entrez un numéro valide (ex: +33 6 12 34 56 78)</span>
+                            </p>
                         }
                     </div>
                     <!-- Code Postal -->
                     <div>
-                        <label for="postalCode" class="text-sm font-medium text-gray-700">Code Postal</label>
+                        <label for="postalCode" class="text-sm font-medium text-gray-700">Code Postal <span class="text-red-500">*</span></label>
                         <input type="text" id="postalCode" formControlName="postalCode"
+                               placeholder="75001"
+                               aria-label="Code postal"
+                               aria-required="true"
+                               [attr.aria-invalid]="submitted() && postalCode?.invalid"
+                               aria-describedby="postalCode-error"
                                class="mt-1 block w-full rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-[#E06732] focus:border-transparent transition"
-                               [class]="(postalCode?.valid && postalCode?.value) ? 'bg-slate-200 border-2 border-[#E06732] text-gray-800' : 'bg-white border border-gray-400'">
+                               [class]="(postalCode?.valid && postalCode?.value) ? 'bg-green-50 border-2 border-green-400 text-gray-800' : (submitted() && postalCode?.invalid) ? 'bg-red-50 border-2 border-red-400' : 'bg-white border border-gray-400'">
                         @if (submitted() && postalCode?.invalid) {
-                            <p class="text-red-500 text-xs mt-1">Le code postal est requis.</p>
+                            <p id="postalCode-error" class="text-red-600 text-xs mt-1 flex items-center gap-1">
+                                <span>⚠️</span>
+                                <span>Code postal requis (5 chiffres pour la France)</span>
+                            </p>
                         }
                     </div>
                     <!-- Pays -->
                     <div>
-                        <label for="country" class="text-sm font-medium text-gray-700">Pays</label>
+                        <label for="country" class="text-sm font-medium text-gray-700">Pays <span class="text-red-500">*</span></label>
                         <select id="country" formControlName="country"
+                                aria-label="Pays"
+                                aria-required="true"
+                                [attr.aria-invalid]="submitted() && country?.invalid"
+                                aria-describedby="country-error"
                                 class="mt-1 block w-full rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-[#E06732] focus:border-transparent transition"
-                                [class]="(country?.valid && country?.value) ? 'bg-slate-200 border-2 border-[#E06732] text-gray-800' : 'bg-white border border-gray-400'">
+                                [class]="(country?.valid && country?.value) ? 'bg-green-50 border-2 border-green-400 text-gray-800' : (submitted() && country?.invalid) ? 'bg-red-50 border-2 border-red-400' : 'bg-white border border-gray-400'">
                             <option value="" disabled>Sélectionner un pays</option>
                             @for (country of countries(); track country.code) {
                                 <option [value]="country.name">{{ country.name }}</option>
@@ -124,7 +168,10 @@
                             <option value="Autre">Autre</option>
                         </select>
                         @if (submitted() && country?.invalid) {
-                            <p class="text-red-500 text-xs mt-1">Le pays est requis.</p>
+                            <p id="country-error" class="text-red-600 text-xs mt-1 flex items-center gap-1">
+                                <span>⚠️</span>
+                                <span>Veuillez sélectionner un pays</span>
+                            </p>
                         }
                     </div>
                 </div>
@@ -135,15 +182,20 @@
     <!-- FORMULAIRE (disparaît après complétion) -->
     @if (!formCompleted()) {
         <div [class]="formFading() ? 'animate-fade-out' : ''">
-            <h3 class="text-xl font-bold text-gray-900 mb-2">Parlez-nous de votre projet</h3>
+            <h3 class="text-xl font-bold text-gray-900 mb-1">🎯 Parlez-nous de votre projet</h3>
+            <p class="text-sm text-gray-500 mb-4">4 questions rapides pour mieux comprendre vos besoins</p>
 
             <!-- Barre de progression -->
             <div class="flex items-center gap-2 mb-6">
                 @for (step of [0, 1, 2, 3]; track step) {
                     <div class="h-1.5 flex-1 rounded-full transition-all duration-500"
-                         [class]="step <= currentStep() ? 'bg-[#E06732]' : 'bg-gray-300'"></div>
+                         [class]="step <= currentStep() ? 'bg-[#E06732]' : 'bg-gray-300'"
+                         role="progressbar"
+                         [attr.aria-valuenow]="currentStep() + 1"
+                         aria-valuemin="1"
+                         [attr.aria-valuemax]="totalSteps"></div>
                 }
-                <span class="text-xs text-gray-500 ml-2">{{ currentStep() + 1 }}/{{ totalSteps }}</span>
+                <span class="text-xs text-gray-500 ml-2" aria-label="Progression du questionnaire">{{ currentStep() + 1 }}/{{ totalSteps }}</span>
             </div>
 
             <!-- Container des slides -->
@@ -152,7 +204,7 @@
                 <!-- Step 0 : Type de projet -->
                 @if (currentStep() === 0) {
                     <div class="animate-slide-in">
-                        <p class="text-sm font-medium text-gray-700 mb-4">Quel type de projet avez-vous en tête ?</p>
+                        <p class="text-sm font-medium text-gray-700 mb-4">Quel type de projet avez-vous en tête ? <span class="text-gray-500 text-xs">(plusieurs choix possibles)</span></p>
                         <div class="space-y-3">
                             @for (option of ['Site vitrine', 'Site e-commerce', 'Refonte de site existant', 'Identité visuelle / Logo', 'Référencement SEO']; track option) {
                                 <label class="flex items-center gap-3 cursor-pointer group p-2 rounded-lg hover:bg-white transition-colors">
@@ -169,7 +221,7 @@
                 <!-- Step 1 : Budget -->
                 @if (currentStep() === 1) {
                     <div class="animate-slide-in">
-                        <p class="text-sm font-medium text-gray-700 mb-4">Quel est votre budget estimé ?</p>
+                        <p class="text-sm font-medium text-gray-700 mb-4">Quel est votre budget estimé ? <span class="text-gray-500 text-xs">(choix unique)</span></p>
                         <div class="space-y-3">
                             @for (option of ['Moins de 1 000€', '1 000€ - 3 000€', '3 000€ - 5 000€', 'Plus de 5 000€', 'Je ne sais pas encore']; track option) {
                                 <label class="flex items-center gap-3 cursor-pointer group p-2 rounded-lg hover:bg-white transition-colors">
@@ -186,7 +238,7 @@
                 <!-- Step 2 : Délai -->
                 @if (currentStep() === 2) {
                     <div class="animate-slide-in">
-                        <p class="text-sm font-medium text-gray-700 mb-4">Quel est votre délai souhaité ?</p>
+                        <p class="text-sm font-medium text-gray-700 mb-4">Quel est votre délai souhaité ? <span class="text-gray-500 text-xs">(choix unique)</span></p>
                         <div class="space-y-3">
                             @for (option of ['1 à 2 semaines', '2 à 4 semaines', '1 à 2 mois', '2 à 3 mois', 'Pas de contrainte']; track option) {
                                 <label class="flex items-center gap-3 cursor-pointer group p-2 rounded-lg hover:bg-white transition-colors">
@@ -203,7 +255,7 @@
                 <!-- Step 3 : Éléments existants -->
                 @if (currentStep() === 3) {
                     <div class="animate-slide-in">
-                        <p class="text-sm font-medium text-gray-700 mb-4">Avez-vous déjà... (facultatif)</p>
+                        <p class="text-sm font-medium text-gray-700 mb-4">Avez-vous des éléments existants ? <span class="text-gray-500 text-xs">(optionnel - cochez ce qui s'applique)</span></p>
                         <div class="space-y-3">
                             @for (option of ['Un site web existant', 'Un logo / charte graphique', 'Du contenu prêt (textes, photos)', 'Un nom de domaine', 'Rien']; track option) {
                                 <label class="flex items-center gap-3 cursor-pointer group p-2 rounded-lg hover:bg-white transition-colors">
@@ -220,7 +272,10 @@
 
             <!-- Message d'erreur -->
             @if (stepError()) {
-                <p class="text-red-500 text-sm mt-3">{{ stepError() }}</p>
+                <p class="text-red-600 text-sm mt-3 flex items-center gap-2">
+                    <span>⚠️</span>
+                    <span>{{ stepError() }}</span>
+                </p>
             }
 
             <!-- Navigation des slides -->
@@ -268,32 +323,48 @@
                 </div>
             </div>
             <h3 class="text-xl font-bold text-gray-900 mb-2 animate-fade-up" style="animation-delay: 0.4s;">
-                Formulaire complété avec succès
+                ✨ Questionnaire complété !
             </h3>
+            <p class="text-sm text-gray-600 animate-fade-up" style="animation-delay: 0.5s;">
+                Il ne vous reste plus qu'à finaliser votre demande ci-dessous.
+            </p>
         </div>
     }
 </div>
 
                 <!-- Description -->
                 <div>
-                    <label for="description" class="text-sm font-medium text-gray-700">Des précisions supplémentaires ? (facultatif)</label>
+                    <label for="description" class="text-sm font-medium text-gray-700">Des précisions supplémentaires ? <span class="text-gray-400 text-xs">optionnel</span></label>
                     <textarea id="description" formControlName="description" rows="4"
+                              placeholder="Parlez-nous librement de votre projet, vos objectifs, vos idées, vos contraintes..."
+                              aria-label="Description additionnelle du projet"
+                              aria-describedby="description-hint"
                               class="mt-1 block w-full rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-[#E06732] focus:border-transparent transition"
-                              [class]="(description?.value) ? 'bg-slate-200 border-2 border-[#E06732] text-gray-800' : 'bg-white border border-gray-400'"></textarea>
+                              [class]="(description?.value) ? 'bg-blue-50 border-2 border-blue-400 text-gray-800' : 'bg-white border border-gray-400'"></textarea>
+                    <p id="description-hint" class="text-gray-500 text-xs mt-1">💡 Plus vous en dites, mieux on comprend votre besoin</p>
                 </div>
 
                 <!-- Privacy Policy -->
                 <div class="pt-2">
                     <div class="flex items-start">
                         <div class="flex items-center h-5">
-                            <input id="privacyPolicy" formControlName="privacyPolicy" type="checkbox" class="focus:ring-[#E06732] h-4 w-4 bg-white border-gray-300 rounded">
+                            <input id="privacyPolicy" formControlName="privacyPolicy" type="checkbox"
+                                   aria-required="true"
+                                   [attr.aria-invalid]="submitted() && privacyPolicy?.invalid"
+                                   aria-describedby="privacy-error"
+                                   class="focus:ring-[#E06732] h-4 w-4 bg-white border-gray-300 rounded">
                         </div>
                         <div class="ml-3 text-sm">
-                            <label for="privacyPolicy" class="text-gray-600">J'accepte que mes données à caractère personnel soient collectées et traitées selon les conditions décrites à la page "Politique de confidentialité"</label>
+                            <label for="privacyPolicy" class="text-gray-600">
+                                J'accepte la <a href="#" class="text-[#E06732] hover:underline">politique de confidentialité</a> <span class="text-red-500">*</span>
+                            </label>
                         </div>
                     </div>
                     @if (submitted() && privacyPolicy?.invalid) {
-                        <p class="text-red-500 text-xs mt-1">Vous devez accepter la politique de confidentialité.</p>
+                        <p id="privacy-error" class="text-red-600 text-xs mt-2 flex items-center gap-1">
+                            <span>⚠️</span>
+                            <span>Veuillez accepter la politique de confidentialité pour continuer</span>
+                        </p>
                     }
                 </div>
 
@@ -301,11 +372,21 @@
                     <button type="button" (click)="goBack()" class="text-[#E06732] hover:text-[#C85A28] font-medium transition-colors">
                         Retour à l'accueil
                     </button>
-                    <button type="submit" [disabled]="isSending()" class="bg-[#E06732] text-white font-semibold px-6 py-2.5 rounded-md hover:bg-[#C85A28] transition-all duration-300 shadow-sm hover:shadow-md disabled:opacity-50 disabled:cursor-not-allowed">
+                    <button type="submit" [disabled]="isSending()"
+                            aria-label="Envoyer la demande de contact"
+                            [attr.aria-busy]="isSending()"
+                            class="bg-[#E06732] text-white font-semibold px-6 py-2.5 rounded-md hover:bg-[#C85A28] transition-all duration-300 shadow-sm hover:shadow-md disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2">
                         @if (isSending()) {
-                            Envoi en cours...
+                            <svg class="w-4 h-4 animate-spin" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                            </svg>
+                            <span>Envoi en cours...</span>
                         } @else {
-                            Envoyer
+                            <span>Envoyer ma demande</span>
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8m0 8h.01"/>
+                            </svg>
                         }
                     </button>
                 </div>
@@ -332,22 +413,49 @@
 
                             <!-- Message Content -->
                             <div class="p-8 text-center">
-                                <p class="text-gray-700 mb-6 leading-relaxed">
-                                    Votre demande a bien été reçue. Un email de confirmation vous a été adressé. Notre équipe examinera votre projet et vous contactera sous 24 à 48h. Merci !
+                                <p class="text-gray-700 mb-2 leading-relaxed">
+                                    ✅ Votre demande a bien été reçue !
+                                </p>
+                                <p class="text-gray-600 mb-6 text-sm leading-relaxed">
+                                    Un email de confirmation vous a été envoyé. Notre équipe examinera votre projet et vous contactera sous <strong>24 à 48h</strong> maximum. En attendant, vous pouvez nous appeler au <strong>+33 7 82 92 86 20</strong>.
                                 </p>
 
-                                <!-- OK Button -->
+                                <!-- Stats -->
+                                <div class="grid grid-cols-3 gap-4 mb-6 py-4 border-t border-b border-gray-200">
+                                    <div>
+                                        <p class="text-xl font-bold text-[#E06732]">0 €</p>
+                                        <p class="text-xs text-gray-500">Gratuit</p>
+                                    </div>
+                                    <div>
+                                        <p class="text-xl font-bold text-[#E06732]">24h</p>
+                                        <p class="text-xs text-gray-500">Délai maxi</p>
+                                    </div>
+                                    <div>
+                                        <p class="text-xl font-bold text-[#E06732]">∞</p>
+                                        <p class="text-xs text-gray-500">Confidentiel</p>
+                                    </div>
+                                </div>
+
+                                <!-- Close Button -->
                                 <button (click)="closeSuccessModal()"
+                                        aria-label="Fermer le message de succès"
                                         class="w-full bg-[#E06732] text-white font-bold py-3 rounded-lg hover:bg-[#C85A28] transition-all duration-300 transform hover:scale-105">
-                                    OK
+                                    Parfait, merci ! 👍
                                 </button>
                             </div>
                         </div>
                     </div>
                 }
                 @if (sendError()) {
-                    <div class="bg-red-50 border border-red-300 text-red-700 rounded-lg p-4 text-center">
-                        <p>{{ sendError() }}</p>
+                    <div class="bg-red-50 border-l-4 border-red-400 text-red-700 rounded-lg p-4">
+                        <div class="flex items-start gap-3">
+                            <span class="text-xl">⚠️</span>
+                            <div>
+                                <p class="font-semibold mb-1">Impossible d'envoyer votre demande</p>
+                                <p class="text-sm">{{ sendError() }}</p>
+                                <p class="text-xs mt-2 text-red-600">💡 Vous pouvez aussi nous contacter directement au +33 7 82 92 86 20</p>
+                            </div>
+                        </div>
                     </div>
                 }
             </form>
