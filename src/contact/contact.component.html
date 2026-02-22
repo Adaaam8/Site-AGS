@@ -261,7 +261,7 @@
                   <div class="grid grid-cols-3 gap-2">
                     @for (service of ['🌐 Site vitrine', '🛒 E-commerce', '🔄 Refonte', '🎨 Identité visuelle', '🔍 SEO Google', '☁️ Hébergement']; track service) {
                       <div class="opt cursor-pointer select-none" [class.selected]="isSelected('projectType', service.substring(2))"
-                           (click)="toggle('projectType', service.substring(2), $event.currentTarget as HTMLElement)"
+                           (click)="toggle('projectType', service.substring(2))"
                            data-f="projectType" [attr.data-v]="service.substring(2)">
                         <div class="opt-box w-4 h-4 border border-slate-300 rounded flex items-center justify-center flex-shrink-0 transition-all">
                           <svg class="hidden w-2 h-2" viewBox="0 0 10 8" fill="none"><path d="M1 4l2.5 2.5L9 1" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -285,7 +285,7 @@
                   <div class="space-y-2">
                     @for (option of ['🌱 Je démarre de zéro', '⚡ J\'ai un site à améliorer', '🚀 Me lancer en ligne', '👁 Plus de visibilité']; track option) {
                       <button type="button" class="pill w-full text-left"
-                              (click)="pickPill('situation', option, $event.currentTarget as HTMLElement)"
+                              (click)="pickPill('situation', option)"
                               [class.selected]="isSelected('situation', option)"
                               data-f="situation" [attr.data-v]="option">
                         {{option}}
@@ -304,7 +304,7 @@
                   <div class="space-y-2">
                     @for (option of ['Moins de 1 000 €', '1 000 – 3 000 €', '3 000 – 5 000 €', '5 000 € +', 'À définir ensemble']; track option) {
                       <button type="button" class="pill w-full text-left"
-                              (click)="pickPill('budget', option, $event.currentTarget as HTMLElement)"
+                              (click)="pickPill('budget', option)"
                               [class.selected]="isSelected('budget', option)"
                               data-f="budget" [attr.data-v]="option">
                         {{option}}
@@ -323,7 +323,7 @@
                   <div class="space-y-2">
                     @for (option of ['Urgent (< 2 sem.)', '1 – 2 mois', '2 – 3 mois', 'Pas de contrainte']; track option) {
                       <button type="button" class="pill w-full text-left"
-                              (click)="pickPill('deadline', option, $event.currentTarget as HTMLElement)"
+                              (click)="pickPill('deadline', option)"
                               [class.selected]="isSelected('deadline', option)"
                               data-f="deadline" [attr.data-v]="option">
                         {{option}}

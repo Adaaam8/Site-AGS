@@ -231,8 +231,7 @@ export class ContactComponent implements OnInit, OnDestroy {
     }
   }
 
-  toggle(field: string, value: string, element: HTMLElement): void {
-    element.classList.toggle('selected');
+  toggle(field: string, value: string): void {
     const arr = this.contactForm.get(field)?.value as string[];
     const idx = arr.indexOf(value);
     if (idx > -1) {
@@ -243,9 +242,7 @@ export class ContactComponent implements OnInit, OnDestroy {
     this.contactForm.get(field)?.setValue([...arr]);
   }
 
-  pickPill(field: string, value: string, element: HTMLElement): void {
-    document.querySelectorAll(`[data-f="${field}"]`).forEach(el => el.classList.remove('selected'));
-    element.classList.add('selected');
+  pickPill(field: string, value: string): void {
     this.contactForm.get(field)?.setValue([value]);
   }
 
