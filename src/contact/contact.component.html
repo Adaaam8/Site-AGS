@@ -264,9 +264,9 @@
                            [class.selected]="isSelected('projectType', service.substring(2))"
                            (click)="toggle('projectType', service.substring(2))"
                            data-f="projectType" [attr.data-v]="service.substring(2)">
-                        <div class="opt-box w-4 h-4 border border-slate-300 rounded flex items-center justify-center flex-shrink-0 transition-all">
-                          <svg class="hidden w-2 h-2" viewBox="0 0 10 8" fill="none">
-                            <path d="M1 4l2.5 2.5L9 1" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        <div class="opt-box w-5 h-5 border-2 border-slate-300 rounded flex items-center justify-center flex-shrink-0 transition-all">
+                          <svg class="hidden w-2.5 h-2.5" viewBox="0 0 10 8" fill="none">
+                            <path d="M1 4l2.5 2.5L9 1" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                           </svg>
                         </div>
                         <span class="text-sm text-muted font-medium">{{service}}</span>
@@ -285,18 +285,21 @@
                   <div class="text-sm text-orange font-bold mb-3">✨ Bonne sélection !</div>
                   <p class="text-base font-semibold text-navy mb-2">Où en êtes-vous actuellement ?</p>
                   <p class="text-sm text-muted mb-5">Choisissez la situation la plus proche</p>
-                  <div class="space-y-2">
+                  <div class="space-y-3">
                     @for (option of [
                       '🌱 Je démarre de zéro',
                       '⚡ J\'ai un site à améliorer',
                       '🔄 Je veux une refonte complète',
                       '👁 Je veux plus de visibilité'
                     ]; track option) {
-                      <button type="button" class="pill w-full text-left"
+                      <button type="button" class="pill w-full text-left flex items-center justify-between"
                               (click)="pickPill('situation', option)"
                               [class.selected]="isSelected('situation', option)"
                               data-f="situation" [attr.data-v]="option">
-                        {{option}}
+                        <span>{{option}}</span>
+                        @if (isSelected('situation', option)) {
+                          <svg class="w-5 h-5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                        }
                       </button>
                     }
                   </div>
@@ -309,7 +312,7 @@
                   <div class="text-sm text-orange font-bold mb-3">👌 On prend note !</div>
                   <p class="text-base font-semibold text-navy mb-2">Qu'est-ce qui compte le plus pour vous ?</p>
                   <p class="text-sm text-muted mb-5">Cela nous aide à personnaliser notre approche</p>
-                  <div class="space-y-2">
+                  <div class="space-y-3">
                     @for (option of [
                       '✨ Un design qui impressionne',
                       '💰 Générer des ventes',
@@ -317,11 +320,14 @@
                       '⚡ Une livraison rapide',
                       '🤝 Un accompagnement sur le long terme'
                     ]; track option) {
-                      <button type="button" class="pill w-full text-left"
+                      <button type="button" class="pill w-full text-left flex items-center justify-between"
                               (click)="pickPill('priority', option)"
                               [class.selected]="isSelected('priority', option)"
                               data-f="priority" [attr.data-v]="option">
-                        {{option}}
+                        <span>{{option}}</span>
+                        @if (isSelected('priority', option)) {
+                          <svg class="w-5 h-5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                        }
                       </button>
                     }
                   </div>
@@ -334,7 +340,7 @@
                   <div class="text-sm text-orange font-bold mb-3">🎯 Super !</div>
                   <p class="text-base font-semibold text-navy mb-2">À qui s'adresse votre projet ?</p>
                   <p class="text-sm text-muted mb-5">Votre audience cible</p>
-                  <div class="space-y-2">
+                  <div class="space-y-3">
                     @for (option of [
                       '👤 Des particuliers',
                       '🏢 Des TPE / PME',
@@ -343,11 +349,14 @@
                       '🌍 Un public international',
                       '🤷 Je ne sais pas encore'
                     ]; track option) {
-                      <button type="button" class="pill w-full text-left"
+                      <button type="button" class="pill w-full text-left flex items-center justify-between"
                               (click)="pickPill('target', option)"
                               [class.selected]="isSelected('target', option)"
                               data-f="target" [attr.data-v]="option">
-                        {{option}}
+                        <span>{{option}}</span>
+                        @if (isSelected('target', option)) {
+                          <svg class="w-5 h-5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                        }
                       </button>
                     }
                   </div>
@@ -360,18 +369,21 @@
                   <div class="text-sm text-orange font-bold mb-3">⏱ On y est presque !</div>
                   <p class="text-base font-semibold text-navy mb-2">Quel est votre délai souhaité ?</p>
                   <p class="text-sm text-muted mb-5">On planifie selon vos contraintes</p>
-                  <div class="space-y-2">
+                  <div class="space-y-3">
                     @for (option of [
                       '🔥 Urgent (moins de 2 semaines)',
                       '📅 1 à 2 mois',
                       '🗓 2 à 3 mois',
                       '😌 Pas de contrainte particulière'
                     ]; track option) {
-                      <button type="button" class="pill w-full text-left"
+                      <button type="button" class="pill w-full text-left flex items-center justify-between"
                               (click)="pickPill('deadline', option)"
                               [class.selected]="isSelected('deadline', option)"
                               data-f="deadline" [attr.data-v]="option">
-                        {{option}}
+                        <span>{{option}}</span>
+                        @if (isSelected('deadline', option)) {
+                          <svg class="w-5 h-5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                        }
                       </button>
                     }
                   </div>

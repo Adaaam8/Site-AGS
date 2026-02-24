@@ -104,19 +104,19 @@
 
 /* Form styles */
 .opt {
-  @apply flex items-center gap-3 px-3 py-3 border border-slate-300 rounded-2xl cursor-pointer transition-all user-select-none bg-white hover:border-orange/40 hover:bg-orange-light;
+  @apply flex items-center gap-3 px-3 py-3 border-2 border-slate-300 rounded-2xl cursor-pointer transition-all user-select-none bg-white hover:border-orange/60 hover:bg-orange-light hover:shadow-md;
 }
 
 .opt.selected {
-  @apply border-orange bg-orange-light;
+  @apply border-orange border-2 bg-orange-light shadow-md;
 }
 
 .opt-box {
-  @apply w-4 h-4 border border-slate-400 rounded flex items-center justify-center flex-shrink-0 transition-all;
+  @apply w-5 h-5 border-2 border-slate-400 rounded flex items-center justify-center flex-shrink-0 transition-all;
 }
 
 .opt.selected .opt-box {
-  @apply bg-orange border-orange;
+  @apply bg-orange border-orange border-2;
 }
 
 .opt-box svg {
@@ -137,11 +137,11 @@
 
 /* Pills */
 .pill {
-  @apply px-5 py-3 border border-slate-300 rounded-full text-base font-semibold font-syne cursor-pointer transition-all bg-white text-muted user-select-none hover:border-orange hover:text-orange hover:bg-orange-light;
+  @apply px-5 py-3 border-2 border-slate-300 rounded-full text-base font-semibold font-syne cursor-pointer transition-all bg-white text-muted user-select-none hover:border-orange/60 hover:text-orange hover:bg-orange-light hover:shadow-md;
 }
 
 .pill.selected {
-  @apply bg-orange border-orange text-white;
+  @apply bg-orange border-orange border-2 text-white shadow-lg;
 }
 
 .btn-prev {
