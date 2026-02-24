@@ -292,12 +292,11 @@
                       '🔄 Je veux une refonte complète',
                       '👁 Je veux plus de visibilité'
                     ]; track option) {
-                      <button type="button" class="pill w-full text-left flex items-center justify-between"
+                      <button type="button" class="pill w-full text-left"
                               (click)="pickPill('situation', option)"
                               [class.selected]="isSelected('situation', option)"
                               data-f="situation" [attr.data-v]="option">
-                        <span>{{option}}</span>
-                        <span class="pill-checkmark">✓</span>
+                        {{option}}
                       </button>
                     }
                   </div>
@@ -318,12 +317,11 @@
                       '⚡ Une livraison rapide',
                       '🤝 Un accompagnement sur le long terme'
                     ]; track option) {
-                      <button type="button" class="pill w-full text-left flex items-center justify-between"
+                      <button type="button" class="pill w-full text-left"
                               (click)="pickPill('priority', option)"
                               [class.selected]="isSelected('priority', option)"
                               data-f="priority" [attr.data-v]="option">
-                        <span>{{option}}</span>
-                        <span class="pill-checkmark">✓</span>
+                        {{option}}
                       </button>
                     }
                   </div>
@@ -345,12 +343,11 @@
                       '🌍 Un public international',
                       '🤷 Je ne sais pas encore'
                     ]; track option) {
-                      <button type="button" class="pill w-full text-left flex items-center justify-between"
+                      <button type="button" class="pill w-full text-left"
                               (click)="pickPill('target', option)"
                               [class.selected]="isSelected('target', option)"
                               data-f="target" [attr.data-v]="option">
-                        <span>{{option}}</span>
-                        <span class="pill-checkmark">✓</span>
+                        {{option}}
                       </button>
                     }
                   </div>
@@ -370,12 +367,11 @@
                       '🗓 2 à 3 mois',
                       '😌 Pas de contrainte particulière'
                     ]; track option) {
-                      <button type="button" class="pill w-full text-left flex items-center justify-between"
+                      <button type="button" class="pill w-full text-left"
                               (click)="pickPill('deadline', option)"
                               [class.selected]="isSelected('deadline', option)"
                               data-f="deadline" [attr.data-v]="option">
-                        <span>{{option}}</span>
-                        <span class="pill-checkmark">✓</span>
+                        {{option}}
                       </button>
                     }
                   </div>
