@@ -303,7 +303,7 @@
                 <div class="animate-stepIn">
                   <div class="text-sm text-orange font-bold mb-3">👌 On prend note !</div>
                   <p class="text-base font-semibold text-navy mb-2">Qu'est-ce qui compte le plus pour vous ?</p>
-                  <p class="text-sm text-muted mb-5">Cela nous aide à personnaliser notre approche</p>
+                  <p class="text-sm text-muted mb-5">Plusieurs choix possibles</p>
                   <div class="space-y-3">
                     @for (option of [
                       '✨ Un design qui impressionne',
@@ -313,7 +313,7 @@
                       '🤝 Un accompagnement sur le long terme'
                     ]; track option) {
                       <button type="button" class="pill w-full text-left"
-                              (click)="pickPill('priority', option)"
+                              (click)="toggle('priority', option)"
                               [class.selected]="isSelected('priority', option)"
                               data-f="priority" [attr.data-v]="option">
                         {{option}}
