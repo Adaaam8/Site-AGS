@@ -104,11 +104,30 @@
 
 /* Form styles */
 .opt {
-  @apply flex items-center gap-3 px-3 py-3 border-2 border-slate-300 rounded-2xl cursor-pointer transition-all user-select-none bg-white hover:border-orange/60 hover:bg-orange-light hover:shadow-md;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  border: 2px solid #cbd5e1;
+  border-radius: 1rem;
+  cursor: pointer;
+  transition: all 150ms ease;
+  user-select: none;
+  background-color: white;
+  color: #64748b;
+}
+
+.opt:hover {
+  border-color: rgba(224, 103, 50, 0.6);
+  background-color: #FDF0EA;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .opt.selected {
-  @apply border-2 border-orange bg-orange text-white shadow-md;
+  border: 2px solid #E06732;
+  background-color: #E06732;
+  color: white;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .opt-box {
@@ -137,11 +156,35 @@
 
 /* Pills */
 .pill {
-  @apply px-5 py-3 border-2 border-slate-300 rounded-full text-base font-semibold font-syne cursor-pointer transition-all bg-white text-muted user-select-none hover:border-orange/60 hover:text-orange hover:bg-orange-light hover:shadow-md;
+  padding: 0.75rem 1.25rem;
+  border: 2px solid #cbd5e1;
+  border-radius: 9999px;
+  font-size: 1rem;
+  font-weight: 600;
+  font-family: 'Syne', sans-serif;
+  cursor: pointer;
+  transition: all 150ms ease;
+  background-color: white;
+  color: #64748b;
+  user-select: none;
+  display: inline-block;
+  width: 100%;
+  text-align: left;
+}
+
+.pill:hover {
+  border-color: rgba(224, 103, 50, 0.6);
+  color: #E06732;
+  background-color: #FDF0EA;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .pill.selected {
-  @apply bg-orange border-2 border-orange text-white shadow-lg font-bold;
+  background-color: #E06732;
+  border: 2px solid #E06732;
+  color: white;
+  box-shadow: 0 10px 15px rgba(224, 103, 50, 0.3);
+  font-weight: 700;
 }
 
 .btn-prev {
@@ -153,7 +196,29 @@
 }
 
 .btn-next-step {
-  @apply bg-navy text-white border-none px-5 py-2.5 rounded-full font-syne text-sm font-bold cursor-pointer flex items-center gap-1 transition-all hover:bg-orange hover:translate-x-0.5;
+  background-color: #0F172A;
+  color: white;
+  border: none;
+  padding: 0.625rem 1.25rem;
+  border-radius: 9999px;
+  font-family: 'Syne', sans-serif;
+  font-size: 0.875rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  transition: all 200ms ease;
+}
+
+.btn-next-step:hover:not(:disabled) {
+  background-color: #E06732;
+  transform: translateX(2px);
+}
+
+.btn-next-step:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
 }
 
 .btn-redo {
