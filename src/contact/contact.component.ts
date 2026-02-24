@@ -24,6 +24,7 @@ interface AnimatedParticle {
 })
 export class ContactComponent implements OnInit, OnDestroy {
   backToHome = output<void>();
+  currentYear = new Date().getFullYear();
 
   @ViewChild('bgCanvas') canvasRef!: ElementRef<HTMLCanvasElement>;
 
@@ -35,12 +36,14 @@ export class ContactComponent implements OnInit, OnDestroy {
     firstName: ['', Validators.required],
     lastName: ['', Validators.required],
     email: ['', [Validators.required, Validators.email]],
-    phone: ['', Validators.required],
+    phone: [''],
     company: [''],
     projectType: [[] as string[], Validators.required],
     situation: [[] as string[], Validators.required],
-    budget: [[] as string[], Validators.required],
+    priority: [[] as string[], Validators.required],
+    target: [[] as string[], Validators.required],
     deadline: [[] as string[], Validators.required],
+    description: [''],
     message: [''],
     privacy: [false, Validators.requiredTrue]
   });
@@ -62,8 +65,8 @@ export class ContactComponent implements OnInit, OnDestroy {
   private t = 0;
   private mouse = { x: -999, y: -999 };
 
-  totalSteps = 4;
-  encouragements = ['', '✨ Bonne sélection !', '👌 On prend note !', '🎯 Dernière étape !'];
+  totalSteps = 6;
+  encouragements = ['👋 Bienvenue !', '✨ Bonne sélection !', '👌 On prend note !', '🎯 Super !', '⏱ On y est presque !', '🎉 Dernière étape !'];
 
   countries = signal([
     { name: 'France', code: 'FR' },
@@ -242,6 +245,11 @@ export class ContactComponent implements OnInit, OnDestroy {
     this.contactForm.get(field)?.setValue([...arr]);
   }
 
+  isSelected(field: string, value: string): boolean {
+    const arr = this.contactForm.get(field)?.value as string[];
+    return arr ? arr.includes(value) : false;
+  }
+
   pickPill(field: string, value: string): void {
     this.contactForm.get(field)?.setValue([value]);
   }
@@ -249,13 +257,23 @@ export class ContactComponent implements OnInit, OnDestroy {
   updateStepper(): void {
     const s = this.step();
     this.contactForm.get('projectType')?.updateValueAndValidity();
-    this.contactForm.get('budget')?.updateValueAndValidity();
+    this.contactForm.get('situation')?.updateValueAndValidity();
+    this.contactForm.get('priority')?.updateValueAndValidity();
+    this.contactForm.get('target')?.updateValueAndValidity();
     this.contactForm.get('deadline')?.updateValueAndValidity();
+    this.contactForm.get('description')?.updateValueAndValidity();
   }
 
   validateStep(s: number): boolean {
     this.stepError.set('');
-    const fields = ['projectType', 'situation', 'budget', 'deadline'];
+    const fields = ['projectType', 'situation', 'priority', 'target', 'deadline', 'description'];
+
+    // Pour l'étape 5 (description), ce n'est pas obligatoire
+    if (s === 5) {
+      return true;
+    }
+
+    // Pour les autres étapes
     if ((this.contactForm.get(fields[s])?.value as string[]).length === 0) {
       this.stepError.set('Veuillez sélectionner une option.');
       return false;
@@ -313,8 +331,10 @@ export class ContactComponent implements OnInit, OnDestroy {
       company: this.contactForm.value.company,
       projectType: this.contactForm.value.projectType,
       situation: this.contactForm.value.situation,
-      budget: this.contactForm.value.budget,
+      priority: this.contactForm.value.priority,
+      target: this.contactForm.value.target,
       deadline: this.contactForm.value.deadline,
+      description: this.contactForm.value.description || '',
       message: this.contactForm.value.message || '',
     };
 
@@ -326,8 +346,10 @@ export class ContactComponent implements OnInit, OnDestroy {
           privacy: false,
           projectType: [],
           situation: [],
-          budget: [],
+          priority: [],
+          target: [],
           deadline: [],
+          description: '',
         });
         this.submitted.set(false);
         this.step.set(0);
@@ -350,8 +372,10 @@ export class ContactComponent implements OnInit, OnDestroy {
       privacy: false,
       projectType: [],
       situation: [],
-      budget: [],
+      priority: [],
+      target: [],
       deadline: [],
+      description: '',
     });
     this.backToHome.emit();
   }
@@ -368,8 +392,10 @@ export class ContactComponent implements OnInit, OnDestroy {
   get company() { return this.contactForm.get('company'); }
   get projectType() { return this.contactForm.get('projectType'); }
   get situation() { return this.contactForm.get('situation'); }
-  get budget() { return this.contactForm.get('budget'); }
+  get priority() { return this.contactForm.get('priority'); }
+  get target() { return this.contactForm.get('target'); }
   get deadline() { return this.contactForm.get('deadline'); }
+  get description() { return this.contactForm.get('description'); }
   get message() { return this.contactForm.get('message'); }
   get privacy() { return this.contactForm.get('privacy'); }
 }
