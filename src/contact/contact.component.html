@@ -250,7 +250,7 @@
                    id="progressFill"></div>
             </div>
 
-            <div class="relative overflow-hidden min-h-72 pb-6">
+            <div class="relative overflow-hidden min-h-72 pb-6 flex flex-col">
 
               <!-- Step 0: Service -->
               @if (step() === 0 && !stepperDone()) {
@@ -392,7 +392,7 @@
 
             <!-- Completed state -->
             @if (stepperDone()) {
-              <div class="flex flex-col items-center justify-center min-h-72 py-12 animate-popIn">
+              <div class="flex flex-col items-center justify-center flex-1 py-12 animate-popIn">
                 <div class="w-16 h-16 rounded-full bg-gradient-to-br from-orange-light to-orange/20 border-2 border-orange flex items-center justify-center mx-auto mb-6 animate-popIn" style="animation-delay: 0.2s">
                   <svg class="w-8 h-8 text-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
                 </div>
