@@ -161,7 +161,6 @@
   border-radius: 9999px;
   font-size: 1rem;
   font-weight: 600;
-  font-family: 'Syne', sans-serif;
   cursor: pointer;
   transition: all 150ms ease;
   background-color: white;
@@ -201,7 +200,6 @@
   border: none;
   padding: 0.625rem 1.25rem;
   border-radius: 9999px;
-  font-family: 'Syne', sans-serif;
   font-size: 0.875rem;
   font-weight: 700;
   cursor: pointer;
