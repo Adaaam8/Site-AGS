@@ -258,19 +258,14 @@
                   <div class="text-sm text-orange font-bold mb-3">👋 Bienvenue !</div>
                   <p class="text-base font-semibold text-navy mb-2">Quel(s) service(s) vous intéresse(nt) ?</p>
                   <p class="text-sm text-muted mb-5">Plusieurs choix possibles</p>
-                  <div class="grid grid-cols-3 gap-3">
+                  <div class="grid grid-cols-2 gap-3">
                     @for (service of ['🌐 Site vitrine', '🛒 E-commerce', '🚀 Landing page', '🎨 Identité visuelle', '🔍 SEO Google', '☁️ Hébergement']; track service) {
-                      <div class="opt cursor-pointer select-none"
-                           [class.selected]="isSelected('projectType', service.substring(2))"
-                           (click)="toggle('projectType', service.substring(2))"
-                           data-f="projectType" [attr.data-v]="service.substring(2)">
-                        <div class="opt-box w-5 h-5 border-2 border-slate-300 rounded flex items-center justify-center flex-shrink-0 transition-all">
-                          <svg class="hidden w-2.5 h-2.5" viewBox="0 0 10 8" fill="none">
-                            <path d="M1 4l2.5 2.5L9 1" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                          </svg>
-                        </div>
-                        <span class="text-sm text-muted font-medium">{{service}}</span>
-                      </div>
+                      <button type="button" class="pill text-center"
+                              (click)="toggle('projectType', service.substring(2))"
+                              [class.selected]="isSelected('projectType', service.substring(2))"
+                              data-f="projectType" [attr.data-v]="service.substring(2)">
+                        {{service}}
+                      </button>
                     }
                   </div>
                   <p class="text-red-600 text-xs mt-3 hidden" id="err0">
