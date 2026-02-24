@@ -252,6 +252,20 @@ export class ContactComponent implements OnInit, OnDestroy {
     return arr ? arr.includes(value) : false;
   }
 
+  isCurrentStepValid(): boolean {
+    const s = this.step();
+    const fields = ['projectType', 'situation', 'priority', 'target', 'deadline', 'description'];
+
+    // Step 5 (description) est optionnel
+    if (s === 5) {
+      return true;
+    }
+
+    // Pour les autres étapes
+    const fieldValue = this.contactForm.get(fields[s])?.value as string[];
+    return fieldValue && fieldValue.length > 0;
+  }
+
   pickPill(field: string, value: string): void {
     this.contactForm.get(field)?.setValue([value]);
     this.cdr.markForCheck();
