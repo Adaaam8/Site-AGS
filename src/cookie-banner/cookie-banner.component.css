@@ -7,14 +7,22 @@
   --navy2: #1E293B;
   --muted: #64748B;
   --white: #ffffff;
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   position: fixed;
   inset: 0;
   pointer-events: none;
   z-index: 99;
 }
 
-.cookie-banner-overlay,
+.cookie-banner-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 99;
+  pointer-events: auto;
+}
+
 .cookie-banner {
   pointer-events: auto;
 }
@@ -73,10 +81,6 @@
 
 /* Pop-up modal */
 .cookie-banner {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
   background: var(--white);
   border-radius: 1.5rem;
   box-shadow: 0 25px 60px rgba(15, 23, 42, 0.3);
