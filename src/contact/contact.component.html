@@ -392,14 +392,14 @@
 
             <!-- Completed state -->
             @if (stepperDone()) {
-              <div class="text-center py-6 animate-fadeIn">
-                <div class="w-12 h-12 rounded-full bg-orange-light border border-orange/30 flex items-center justify-center mx-auto mb-3">
-                  <svg class="w-5 h-5 text-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+              <div class="text-center py-12 animate-popIn">
+                <div class="w-16 h-16 rounded-full bg-gradient-to-br from-orange-light to-orange/20 border-2 border-orange flex items-center justify-center mx-auto mb-6 animate-popIn" style="animation-delay: 0.2s">
+                  <svg class="w-8 h-8 text-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
                 </div>
-                <div class="font-bold text-sm text-navy ">Questionnaire complété 🎉</div>
-                <p class="text-xs text-muted mb-3">On a tout ce qu'il faut pour vous répondre.</p>
-                <div class="flex flex-wrap gap-1 justify-center mb-3" id="completedTags"></div>
-                <button type="button" class="btn-redo text-xs" (click)="resetStepper()">✏️ Modifier</button>
+                <div class="font-bold text-2xl text-navy mb-2 animate-fadeUp" style="animation-delay: 0.3s">Questionnaire complété 🎉</div>
+                <p class="text-base text-muted mb-6 animate-fadeUp" style="animation-delay: 0.4s">On a tout ce qu'il faut pour vous répondre sous 24h.</p>
+                <div class="flex flex-wrap gap-2 justify-center mb-8 animate-fadeUp" id="completedTags" style="animation-delay: 0.5s"></div>
+                <button type="button" class="btn-redo text-sm px-6 py-2 animate-fadeUp" (click)="resetStepper()" style="animation-delay: 0.6s">✏️ Modifier les réponses</button>
               </div>
             }
 
