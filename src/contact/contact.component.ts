@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, signal, computed, output, OnInit, OnDestroy, NgZone, ViewChild, ElementRef } from '@angular/core';
+import { Component, ChangeDetectionStrategy, signal, computed, output, OnInit, OnDestroy, NgZone, ViewChild, ElementRef, ChangeDetectorRef } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
@@ -79,7 +79,8 @@ export class ContactComponent implements OnInit, OnDestroy {
   constructor(
     private fb: FormBuilder,
     private http: HttpClient,
-    private ngZone: NgZone
+    private ngZone: NgZone,
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
@@ -243,6 +244,7 @@ export class ContactComponent implements OnInit, OnDestroy {
       arr.push(value);
     }
     this.contactForm.get(field)?.setValue([...arr]);
+    this.cdr.markForCheck();
   }
 
   isSelected(field: string, value: string): boolean {
@@ -252,6 +254,7 @@ export class ContactComponent implements OnInit, OnDestroy {
 
   pickPill(field: string, value: string): void {
     this.contactForm.get(field)?.setValue([value]);
+    this.cdr.markForCheck();
   }
 
   updateStepper(): void {
