@@ -253,7 +253,7 @@
             <div class="relative overflow-hidden min-h-72 pb-6">
 
               <!-- Step 0: Service -->
-              @if (step() === 0) {
+              @if (step() === 0 && !stepperDone()) {
                 <div class="animate-stepIn">
                   <div class="text-sm text-orange font-bold mb-3">👋 Bienvenue !</div>
                   <p class="text-base font-semibold text-navy mb-2">Quel(s) service(s) vous intéresse(nt) ?</p>
@@ -275,7 +275,7 @@
               }
 
               <!-- Step 1: Situation -->
-              @if (step() === 1) {
+              @if (step() === 1 && !stepperDone()) {
                 <div class="animate-stepIn">
                   <div class="text-sm text-orange font-bold mb-3">✨ Bonne sélection !</div>
                   <p class="text-base font-semibold text-navy mb-2">Où en êtes-vous actuellement ?</p>
@@ -299,7 +299,7 @@
               }
 
               <!-- Step 2: Priorité -->
-              @if (step() === 2) {
+              @if (step() === 2 && !stepperDone()) {
                 <div class="animate-stepIn">
                   <div class="text-sm text-orange font-bold mb-3">👌 On prend note !</div>
                   <p class="text-base font-semibold text-navy mb-2">Qu'est-ce qui compte le plus pour vous ?</p>
@@ -324,7 +324,7 @@
               }
 
               <!-- Step 3: Cible -->
-              @if (step() === 3) {
+              @if (step() === 3 && !stepperDone()) {
                 <div class="animate-stepIn">
                   <div class="text-sm text-orange font-bold mb-3">🎯 Super !</div>
                   <p class="text-base font-semibold text-navy mb-2">À qui s'adresse votre projet ?</p>
@@ -350,7 +350,7 @@
               }
 
               <!-- Step 4: Délai -->
-              @if (step() === 4) {
+              @if (step() === 4 && !stepperDone()) {
                 <div class="animate-stepIn">
                   <div class="text-sm text-orange font-bold mb-3">⏱ On y est presque !</div>
                   <p class="text-base font-semibold text-navy mb-2">Quel est votre délai souhaité ?</p>
@@ -374,7 +374,7 @@
               }
 
               <!-- Step 5: Description -->
-              @if (step() === 5) {
+              @if (step() === 5 && !stepperDone()) {
                 <div class="animate-stepIn">
                   <div class="text-sm text-orange font-bold mb-3">🎉 Dernière étape !</div>
                   <p class="text-base font-semibold text-navy mb-2">Décrivez votre projet en quelques mots</p>
