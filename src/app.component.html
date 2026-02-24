@@ -1,15 +1,30 @@
 <style>
   @keyframes fadeSlideUp {
-    from { opacity: 0; transform: translateY(35px); }
+    from { opacity: 0; transform: translateY(20px); }
     to   { opacity: 1; transform: translateY(0); }
   }
   .animate-fade-up {
     opacity: 0;
-    animation: fadeSlideUp 1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    animation: fadeSlideUp 1.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
   }
   .delay-1 { animation-delay: 0.2s; }
   .delay-2 { animation-delay: 0.5s; }
   .delay-3 { animation-delay: 0.8s; }
+
+  /* Service Card Expandable Content Animation */
+  .service-expandable {
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: max-height 0.7s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.7s ease-out;
+    pointer-events: none;
+  }
+
+  .service-expandable.expanded {
+    max-height: 600px;
+    opacity: 1;
+    pointer-events: auto;
+  }
 </style>
 
 <div class="relative bg-white text-gray-800">
@@ -89,7 +104,7 @@
       </section>
 
       <!-- About Section -->
-      <section id="about" class="py-20 md:py-32">
+      <section id="about" class="py-24 md:py-40">
         <div class="container mx-auto px-6">
           <div class="grid md:grid-cols-2 gap-8 md:gap-6 items-center">
             <div class="flex justify-center order-2 md:order-1">
@@ -109,138 +124,148 @@
         </div>
       </section>
 
-      <div class="bg-white">
-  <div class="container mx-auto px-6 py-16">
-    <div class="h-px bg-gradient-to-r from-transparent via-[#E06732] to-transparent 
-      opacity-50 mb-8"></div>
-    <div class="flex justify-center mb-8">
-      <div class="text-[#E06732] opacity-75">
-        <svg class="w-6 h-6 animate-bounce" fill="currentColor">
-          <path d="M19 14l-7 7m0 0l-7-7m7 7V3" stroke-width="2" stroke-linecap="round"/>
-        </svg>
+<!-- Services & Packs Section (Unified Background) -->
+<div id="services" class="relative bg-gradient-to-b from-gray-900 to-gray-800 text-white overflow-hidden">
+  <!-- Gradient Background Blob -->
+  <div class="absolute top-0 right-0 w-96 md:w-[600px] h-96 md:h-[600px] bg-[#E06732]/10 rounded-full blur-[120px] translate-x-1/2 -translate-y-1/2"></div>
+
+  <!-- Services Premium Section -->
+  <section class="relative py-12 md:py-16">
+    <div class="relative z-10 container mx-auto px-6">
+      <!-- Header -->
+      <div class="flex flex-col md:flex-row justify-between items-end mb-12 md:mb-20 gap-6">
+        <div class="animate-fade-up">
+          <h2 class="text-xl md:text-2xl font-bold uppercase text-[#E06732] mb-2">Nos Services Premium</h2>
+          <h3 class="text-3xl md:text-5xl font-bold text-white">Expertise À la Carte</h3>
+        </div>
+        <div class="animate-fade-up delay-1">
+          <p class="text-white/60 max-w-md font-light text-base md:text-lg">
+            Des solutions sur-mesure pour les entreprises qui visent l'excellence.
+          </p>
+        </div>
+      </div>
+
+      <!-- Service Cards -->
+      <div class="space-y-px bg-white/5 border border-white/10 rounded-2xl md:rounded-3xl overflow-hidden">
+        @for (service of serviceCards(); track $index; let i = $index) {
+          <div
+            class="group relative p-6 md:p-8 lg:p-10 bg-gray-900 hover:bg-white/[0.03] transition-colors duration-500 cursor-pointer border-b border-white/5 last:border-b-0"
+            (click)="toggleService(i)"
+            (mouseenter)="expandedServiceIndex.set(i)"
+            (mouseleave)="expandedServiceIndex.set(null)"
+          >
+            <div class="grid md:grid-cols-12 gap-6 md:gap-8 items-start">
+              <!-- Service Title & Description -->
+              <div class="md:col-span-4">
+                <h3 class="text-xl md:text-2xl font-bold mb-2 group-hover:text-[#E06732] transition-colors text-white">
+                  {{ service.title }}
+                </h3>
+                <p class="text-white/40 font-light text-sm md:text-base">{{ service.desc }}</p>
+              </div>
+
+              <!-- Expandable Details -->
+              <div class="md:col-span-8">
+                <div class="service-expandable" [class.expanded]="expandedServiceIndex() === i">
+                  <div class="grid md:grid-cols-2 gap-6 md:gap-8 pb-2">
+                    <div>
+                      <p class="text-base md:text-lg text-white/80 font-light mb-4">{{ service.detail }}</p>
+                      <div class="flex flex-wrap gap-2">
+                        @for (tag of service.tags; track tag) {
+                          <span class="px-3 py-1 text-xs border border-white/10 rounded-full text-white/60 hover:text-[#E06732] hover:border-[#E06732]/50 transition-colors">
+                            {{ tag }}
+                          </span>
+                        }
+                      </div>
+                    </div>
+                    <div class="flex flex-col justify-center items-end border-l border-white/10 pl-6">
+                      <span class="text-xs text-white/40 uppercase tracking-widest mb-2">Investissement</span>
+                      <span class="text-2xl md:text-3xl font-bold text-[#E06732] mb-4">{{ service.price }}</span>
+                      <button (click)="navigateTo('contact')" class="bg-[#E06732] text-white font-semibold py-2 px-6 rounded-lg hover:bg-[#C85A28] transition-all duration-300 text-sm">
+                        Discuter du Projet
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                @if (expandedServiceIndex() !== i) {
+                  <div class="flex justify-end">
+                    <div class="text-white/40 group-hover:text-[#E06732] transition-colors">
+                      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7-7m0 0l-7 7"></path>
+                      </svg>
+                    </div>
+                  </div>
+                }
+              </div>
+            </div>
+          </div>
+        }
       </div>
     </div>
-  </div>
+  </section>
+
+  <!-- Packs Section -->
+  <section class="relative py-12 md:py-16">
+    <div class="relative z-10 container mx-auto px-6">
+      <!-- Header -->
+      <div class="text-center mb-16 md:mb-24">
+        <span class="text-[#E06732] text-xs tracking-widest uppercase mb-4 block font-bold">Offres Packagées</span>
+        <h2 class="text-3xl md:text-5xl font-bold text-white mb-6">Nos Packs Stratégiques</h2>
+        <p class="text-white/60 max-w-2xl mx-auto font-light text-base md:text-lg">
+          Des solutions clés en main pour démarrer fort ou accélérer brutalement.
+        </p>
+      </div>
+
+      <!-- Packs Grid -->
+      <div class="grid md:grid-cols-3 gap-6">
+        @for (pack of packs(); track $index; let i = $index) {
+          <div class="animate-fade-up" [style.animation-delay]="(i * 0.1) + 's'">
+            <div [class]="'relative h-full p-8 rounded-2xl border flex flex-col transition-all duration-300 ' + (pack.popular ? 'bg-white/5 border-[#E06732] shadow-2xl shadow-[#E06732]/10' : 'bg-transparent border-white/10 hover:border-white/20')">
+
+              <!-- Recommandé Badge -->
+              @if (pack.popular) {
+                <div class="absolute -top-4 left-1/2 transform -translate-x-1/2 px-4 py-1 bg-[#E06732] text-white text-xs font-bold uppercase tracking-widest rounded-full">
+                  Recommandé
+                </div>
+              }
+
+              <!-- Pack Header -->
+              <div class="mb-8">
+                <h3 class="text-2xl font-bold text-white mb-3">{{ pack.name }}</h3>
+                <div class="text-4xl font-bold text-[#E06732] mb-4">{{ pack.price }}</div>
+                <p class="text-white/50 text-sm leading-relaxed">{{ pack.desc }}</p>
+              </div>
+
+              <!-- Features List -->
+              <ul class="space-y-4 mb-8 flex-1">
+                @for (feature of pack.features; track feature) {
+                  <li class="flex items-start gap-3 text-sm text-white/80">
+                    <svg class="w-5 h-5 text-[#E06732] shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                    </svg>
+                    <span>{{ feature }}</span>
+                  </li>
+                }
+              </ul>
+
+              <!-- CTA Button -->
+              <button (click)="scrollTo('contact')" [class]="'w-full py-3 px-6 rounded-lg font-semibold transition-all duration-300 text-sm uppercase tracking-widest ' + (pack.popular ? 'bg-[#E06732] text-white hover:bg-[#C85A28] shadow-lg' : 'border-2 border-white/20 text-white hover:bg-white hover:text-gray-900')">
+                {{ pack.cta }}
+              </button>
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+  </section>
 </div>
 
-<!-- Services Section - Layout Alternant (Version Icônes Personnalisées) -->
-<section id="services" class="py-4 md:py-8 bg-white">
-  <div class="container mx-auto px-6">
-    <!-- Header -->
-    <div class="text-center mb-16">
-      <h2 class="text-xl md:text-2xl font-bold uppercase text-[#E06732] mb-3">Nos Services</h2>
-      <h3 class="text-2xl md:text-3xl font-bold text-gray-900">Des solutions complètes pour votre succès digital.</h3>
-    </div>
-
-    <!-- Service 1: Image Left, Text Right -->
-    <div class="mb-16 md:mb-20">
-      <div class="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
-        <!-- Image -->
-        <div class="order-2 md:order-1">
-          <img
-            src="assets/web-design-template-copy-space-concept.jpg"
-            alt="Création de Sites Web Modernes"
-            class="w-full h-auto max-h-96 object-contain rounded-lg shadow-lg hover:shadow-2xl transition-all duration-500 ease-out transform hover:-translate-y-2"
-          >
-        </div>
-        <!-- Text -->
-        <div class="order-1 md:order-2">
-          <!-- Icon Circle -->
-          <div class="flex items-center justify-center h-20 w-20 rounded-full bg-[#FDF0EA] text-[#E06732] mb-6 mx-0 md:mx-0">
-            <svg class="w-10 h-10" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M21 2H3c-1.1 0-2 .9-2 2v18c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 18H3V4h18v16z"/>
-            </svg>
-          </div>
-          <h4 class="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
-            <span class="text-[#E06732]">Création de Sites Web</span> Modernes
-          </h4>
-          <p class="text-gray-700 text-base md:text-lg leading-relaxed">
-            Nous concevons des sites web vitrines et e-commerce sur mesure, rapides, responsives et optimisés pour une expérience utilisateur exceptionnelle.
-          </p>
-        </div>
-      </div>
-    </div>
-
-    <!-- Service 2: Text Left, Image Right -->
-    <div class="mb-16 md:mb-20">
-      <div class="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
-        <!-- Text -->
-        <div class="order-1">
-          <!-- Icon Circle -->
-          <div class="flex items-center justify-center h-20 w-20 rounded-full bg-[#FDF0EA] text-[#E06732] mb-6">
-            <svg class="w-10 h-10" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
-            </svg>
-          </div>
-          <h4 class="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
-            <span class="text-[#E06732]">Image de Marque &</span> Identité Visuelle
-          </h4>
-          <p class="text-gray-700 text-base md:text-lg leading-relaxed">
-            De la création de votre logo à la charte graphique complète, nous forgeons une identité de marque forte et cohérente qui vous démarque de la concurrence.
-          </p>
-        </div>
-        <!-- Image -->
-        <div class="order-2">
-          <img 
-            src="assets/service-visu.png" 
-            alt="Image de Marque & Identité Visuelle"
-            class="w-full h-auto max-h-96 object-contain rounded-lg shadow-lg hover:shadow-2xl transition-all duration-500 ease-out transform hover:-translate-y-2"
-          >
-        </div>
-      </div>
-    </div>
-
-    <!-- Service 3: Image Left, Text Right -->
-    <div>
-      <div class="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
-        <!-- Image -->
-        <div class="order-2 md:order-1">
-          <img 
-            src="assets/service-seo.png" 
-            alt="Visibilité & Hébergement Google"
-            class="w-full h-auto max-h-96 object-contain rounded-lg shadow-lg hover:shadow-2xl transition-all duration-500 ease-out transform hover:-translate-y-2"
-          >
-        </div>
-        <!-- Text -->
-        <div class="order-1 md:order-2">
-          <!-- Icon Circle -->
-          <div class="flex items-center justify-center h-20 w-20 rounded-full bg-[#FDF0EA] text-[#E06732] mb-6">
-            <svg class="w-10 h-10" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm3.5-9c.83 0 1.5-.67 1.5-1.5S16.33 8 15.5 8 14 8.67 14 9.5s.67 1.5 1.5 1.5zm-7 0c.83 0 1.5-.67 1.5-1.5S9.33 8 8.5 8 7 8.67 7 9.5 7.67 11 8.5 11zm3.5 6.5c2.33 0 4.31-1.46 5.11-3.5H6.89c.8 2.04 2.78 3.5 5.11 3.5z"/>
-            </svg>
-          </div>
-          <h4 class="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
-            <span class="text-[#E06732]">Visibilité &</span> Hébergement Google
-          </h4>
-          <p class="text-gray-700 text-base md:text-lg leading-relaxed">
-            Nous optimisons votre référencement naturel (SEO) et assurons un hébergement fiable et performant pour garantir une visibilité maximale sur Google.
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<div class="bg-white">
-  <div class="container mx-auto px-6 py-16">
-    <div class="h-px bg-gradient-to-r from-transparent via-[#E06732] to-transparent 
-      opacity-50 mb-8"></div>
-    <div class="flex justify-center mb-8">
-      <div class="text-[#E06732] opacity-75">
-        <svg class="w-6 h-6 animate-bounce" fill="currentColor">
-          <path d="M19 14l-7 7m0 0l-7-7m7 7V3" stroke-width="2" stroke-linecap="round"/>
-        </svg>
-      </div>
-    </div>
-  </div>
-</div>
-      
       <!-- Process Section -->
-      <section id="process" class="py-4 md:py-8">
+      <section id="process" class="py-24 md:py-40 bg-orange-50">
         <div class="container mx-auto px-6">
-          <div class="text-center mb-12 md:mb-16">
-            <h2 class="text-xl md:text-2xl font-bold uppercase text-[#E06732] mb-2 tracking-wider">NOTRE PROCESSUS</h2>
-            <h3 class="text-2xl md:text-3xl font-bold text-gray-900">Un parcours en 4 étapes vers l'excellence.</h3>
+          <div class="text-center mb-16 md:mb-24">
+            <h2 class="text-xl md:text-2xl font-bold uppercase text-[#E06732] mb-3 tracking-wider">NOTRE PROCESSUS</h2>
+            <h3 class="text-2xl md:text-4xl font-bold text-gray-900">Un parcours en 4 étapes vers l'excellence.</h3>
           </div>
           
           <div class="flex overflow-x-auto snap-x snap-mandatory md:grid md:grid-cols-4 md:gap-8 md:overflow-visible pb-4 md:pb-0 -mx-6 px-6 md:mx-0 md:px-0 space-x-6 md:space-x-0">
@@ -258,57 +283,18 @@
         </div>
       </section>
 
-      <!-- Portfolio Section -->
-      <section id="portfolio" class="py-16 md:py-32 bg-gray-50">
-          <div class="container mx-auto px-6">
-              <div class="text-center mb-8 md:mb-12">
-                  <h2 class="text-xl md:text-2xl font-bold uppercase text-[#E06732] mb-2 tracking-wider">NOS RÉALISATIONS</h2>
-                  <h3 class="text-2xl md:text-3xl font-bold text-gray-900">Découvrez nos réalisations</h3>
-              </div>
-
-              <div class="relative max-w-4xl mx-auto">
-                  <!-- Slider container -->
-                  <div class="overflow-hidden rounded-lg shadow-2xl">
-                      <div class="flex transition-transform duration-500 ease-in-out" [style.transform]="'translateX(-' + currentProjectIndex() * 100 + '%)'">
-                          @for (project of projects(); track project.title) {
-                              <div class="flex-shrink-0 w-full">
-                                  <div class="bg-white">
-                                      <img [ngSrc]="project.image" width="800" height="600" [alt]="project.title" class="w-full h-48 sm:h-64 md:h-80 object-cover object-top">
-                                      <div class="p-4 md:p-6">
-                                          <p class="text-xs md:text-sm text-[#C85A28] font-semibold">{{ project.category }}</p>
-                                          <h4 class="text-lg md:text-xl font-bold text-gray-900 mt-1">{{ project.title }}</h4>
-                                      </div>
-                                  </div>
-                              </div>
-                          }
-                      </div>
-                  </div>
-
-                  <!-- Prev/Next Buttons -->
-                  <button (click)="prevProject()" class="absolute top-1/2 left-0 md:-left-16 transform -translate-y-1/2 bg-white/80 hover:bg-white rounded-full p-2 transition shadow-md z-10">
-                      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 md:h-6 md:w-6 text-gray-800" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
-                  </button>
-                  <button (click)="nextProject()" class="absolute top-1/2 right-0 md:-right-16 transform -translate-y-1/2 bg-white/80 hover:bg-white rounded-full p-2 transition shadow-md z-10">
-                      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 md:h-6 md:w-6 text-gray-800" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
-                  </button>
-
-                  <!-- Pagination dots -->
-                  <div class="flex justify-center space-x-2 mt-6">
-                      @for (project of projects(); track $index; let i = $index) {
-                          <button (click)="goToProject(i)" class="w-3 h-3 rounded-full transition" [class.bg-[#E06732]]="i === currentProjectIndex()" [class.bg-gray-300]="i !== currentProjectIndex()"></button>
-                      }
-                  </div>
-              </div>
-          </div>
+      <!-- Portfolio Section V2 -->
+      <section id="portfolio">
+        <app-portfolio-v2></app-portfolio-v2>
       </section>
     </main>
 
     <!-- CTA Section -->
-    <section class="container mx-auto px-6 relative z-10">
+    <section class="container mx-auto px-6 relative z-10 pt-20 md:pt-32">
       <div class="bg-[#E06732] rounded-lg shadow-xl p-6 md:p-12 text-center -mb-20 md:-mb-32 max-w-4xl mx-auto">
         <h2 class="text-2xl md:text-4xl font-bold text-white mb-3 md:mb-4">Nous contacter</h2>
         <p class="text-sm md:text-lg text-[#FFF0E9] max-w-3xl mx-auto mb-6 md:mb-8">
-          Des questions, des idées ou simplement envie d’échanger ? On est là pour vous répondre et discuter des sujets qui vous intéressent.
+          Des questions, des idées ou simplement envie d'échanger ? On est là pour vous répondre et discuter des sujets qui vous intéressent.
         </p>
         <button (click)="navigateTo(&quot;contact&quot;)" class="bg-transparent border-2 border-white text-white font-semibold px-6 md:px-8 py-2 md:py-3 rounded-lg hover:bg-white hover:text-[#E06732] transition-all duration-300 text-sm md:text-base">
           Nous contacter

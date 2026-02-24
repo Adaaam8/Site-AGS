@@ -1,7 +1,8 @@
 import { Component, ChangeDetectionStrategy, signal, effect, PLATFORM_ID, Inject, AfterViewChecked } from '@angular/core';
-import { isPlatformBrowser, NgOptimizedImage, CommonModule } from '@angular/common';
+import { isPlatformBrowser, CommonModule, NgOptimizedImage } from '@angular/common';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { ContactComponent } from './contact/contact.component';
+import { PortfolioV2Component } from './portfolio/portfolio.component';
 
 interface Service {
   icon: string;
@@ -9,6 +10,23 @@ interface Service {
   titleHighlight: string;
   description: string;
   image: string;
+}
+
+interface ServiceCard {
+  title: string;
+  desc: string;
+  detail: string;
+  price: string;
+  tags: string[];
+}
+
+interface Pack {
+  name: string;
+  price: string;
+  desc: string;
+  features: string[];
+  cta: string;
+  popular?: boolean;
 }
 
 interface ProcessStep {
@@ -27,7 +45,7 @@ interface Project {
   selector: 'app-root',
   templateUrl: './app.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [NgOptimizedImage, CommonModule, ContactComponent]
+  imports: [CommonModule, NgOptimizedImage, ContactComponent, PortfolioV2Component]
 })
 export class AppComponent implements AfterViewChecked{
   isMenuOpen = signal(false);
@@ -80,6 +98,81 @@ export class AppComponent implements AfterViewChecked{
       step: '04',
       title: 'Déploiement & Suivi',
       description: 'Nous mettons votre site en ligne, assurons sa maintenance et analysons ses performances pour une amélioration continue.'
+    }
+  ]);
+
+  serviceCards = signal<ServiceCard[]>([
+    {
+      title: "Site Vitrine Haut de Gamme",
+      desc: "Pour les consultants, cabinets et marques de luxe.",
+      detail: "Design immersif, storytelling captivant, crédibilité instantanée. Une vitrine qui travaille pour vous 24/7.",
+      price: "À partir de 500€",
+      tags: ["Web Design", "Copywriting", "Direction Artistique"]
+    },
+    {
+      title: "E-commerce & Conversion",
+      desc: "Pour les marques qui veulent scaler.",
+      detail: "Expérience d'achat fluide, optimisation du panier moyen, rapidité. Transformez vos visiteurs en clients fidèles.",
+      price: "À partir de 800€",
+      tags: ["Shopify/WooCommerce", "CRO", "Paiement"]
+    },
+    {
+      title: "Branding & Identité",
+      desc: "Pour ceux qui veulent être inoubliables.",
+      detail: "Logos, chartes graphiques, ton de marque, univers visuel complet. Créez une marque qui résonne.",
+      price: "À partir de 200€",
+      tags: ["Logo", "Charte", "Brand Book"]
+    },
+    {
+      title: "SEO & Visibilité",
+      desc: "Pour dominer votre marché.",
+      detail: "Stratégie de contenu, référencement technique, acquisition qualifiée. Soyez visible là où vos clients cherchent.",
+      price: "À partir de 20€/mois",
+      tags: ["SEO", "Content", "Analytics"]
+    }
+  ]);
+
+  expandedServiceIndex = signal<number | null>(null);
+
+  packs = signal<Pack[]>([
+    {
+      name: "Essentiel",
+      price: "700€",
+      desc: "L'indispensable pour démarrer avec une image forte.",
+      features: [
+        "Identité Visuelle (Logo + Charte)",
+        "Site Vitrine (5 pages)",
+        "Optimisation Mobile",
+        "Formation prise en main"
+      ],
+      cta: "Choisir l'Essentiel"
+    },
+    {
+      name: "Performance",
+      price: "1 100€",
+      desc: "Pour les entreprises qui veulent accélérer leur croissance.",
+      features: [
+        "Tout du pack Essentiel",
+        "Stratégie SEO Avancée",
+        "Blog / Content Marketing",
+        "Intégration CRM",
+        "Lead Magnet Setup"
+      ],
+      cta: "Choisir la Performance",
+      popular: true
+    },
+    {
+      name: "E-Commerce Elite",
+      price: "2 000€",
+      desc: "Une boutique en ligne conçue pour la conversion massive.",
+      features: [
+        "Shopify ou WooCommerce",
+        "Design UX/UI Sur-mesure",
+        "Système de paiement optimisé",
+        "Automatisations E-mail",
+        "Dashboard Analytics"
+      ],
+      cta: "Lancer mon E-commerce"
     }
   ]);
 
@@ -187,6 +280,12 @@ ngAfterViewChecked(): void {
 
   goToProject(index: number): void {
     this.currentProjectIndex.set(index);
+  }
+
+  toggleService(index: number): void {
+    this.expandedServiceIndex.set(
+      this.expandedServiceIndex() === index ? null : index
+    );
   }
 
   callPhone(): void {

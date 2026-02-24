@@ -1,0 +1,88 @@
+<div id="portfolio-v2" class="portfolio-v2">
+
+  <!-- Header -->
+  <div class="pf-header">
+    <div>
+      <p class="pf-label">Nos Réalisations</p>
+      <h2 class="pf-title">
+        Décou<em>vrez</em><br>nos projets.
+      </h2>
+    </div>
+    <p class="pf-subtitle">
+      Chaque projet raconte une histoire unique. Voici les créations dont nous sommes le plus fiers.
+    </p>
+  </div>
+
+  <!-- Ticker -->
+  <div class="pf-ticker">
+    <div class="pf-ticker-inner">
+      <span>Site Vitrine</span><span class="accent">✦</span>
+      <span>E-commerce</span><span class="accent">✦</span>
+      <span>Image de Marque</span><span class="accent">✦</span>
+      <span>Hébergement</span><span class="accent">✦</span>
+      <span>SEO & Visibilité</span><span class="accent">✦</span>
+      <span>Application Web</span><span class="accent">✦</span>
+      <span>Site Vitrine</span><span class="accent">✦</span>
+      <span>E-commerce</span><span class="accent">✦</span>
+      <span>Image de Marque</span><span class="accent">✦</span>
+      <span>Hébergement</span><span class="accent">✦</span>
+      <span>SEO & Visibilité</span><span class="accent">✦</span>
+      <span>Application Web</span><span class="accent">✦</span>
+    </div>
+  </div>
+
+  <!-- Stage -->
+  <div class="pf-stage">
+
+    <!-- Image zone -->
+    <div class="pf-image-zone" [class.transitioning]="isTransitioning()">
+      <img [src]="currentProject.image" [alt]="currentProject.title" loading="lazy">
+      <div class="pf-image-overlay"></div>
+      <div class="pf-big-number">{{ bigNumber }}</div>
+      <div class="pf-image-tag">{{ currentProject.category }}</div>
+    </div>
+
+    <!-- Side panel -->
+    <div class="pf-panel">
+      <ul class="pf-project-list">
+        @for (project of projects(); track $index; let i = $index) {
+          <li class="pf-project-item" [class.active]="isActive(i)" (click)="onItemClick(i)">
+            <span class="item-num">{{ (i + 1) | number: '2.0-0' }}</span>
+            <div class="item-info">
+              <p class="item-cat">{{ project.category }}</p>
+              <p class="item-title">{{ project.title }}</p>
+            </div>
+            <svg class="item-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </li>
+        }
+      </ul>
+      <div class="pf-panel-footer">
+        <p>Intéressé par ce projet ?</p>
+        <a href="#contact" class="pf-cta">
+          Discutons-en
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Bottom bar -->
+  <div class="pf-bottom">
+    <div class="pf-progress">
+      <div class="pf-progress-bar">
+        <div class="pf-progress-fill" [style.width.%]="progressPercentage"></div>
+      </div>
+      <span class="pf-progress-text">{{ progressText }}</span>
+    </div>
+    <div class="pf-nav-btns">
+      <button class="pf-nav-btn" (click)="prev()" aria-label="Précédent">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+      </button>
+      <button class="pf-nav-btn" (click)="next()" aria-label="Suivant">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+      </button>
+    </div>
+  </div>
+
+</div>
