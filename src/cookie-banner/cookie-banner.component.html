@@ -1,0 +1,51 @@
+@if (isVisible()) {
+  <div class="cookie-banner-overlay" (click)="rejectCookies()"></div>
+
+  <div class="cookie-banner animate-slideUp">
+    <!-- Header du bandeau -->
+    <div class="cookie-header">
+      <div class="cookie-content">
+        <h3 class="cookie-title">🍪 Nous respectons votre vie privée</h3>
+        <p class="cookie-description">
+          Nous utilisons des cookies pour améliorer votre expérience, analyser le trafic et afficher des contenus personnalisés.
+        </p>
+
+        <!-- Section détails (repliable) -->
+        @if (showDetails()) {
+          <div class="cookie-details animate-expandDown">
+            <div class="details-section">
+              <h4 class="details-title">Types de cookies utilisés:</h4>
+              <ul class="details-list">
+                <li><strong>Essentiels:</strong> Nécessaires au fonctionnement du site</li>
+                <li><strong>Analytiques:</strong> Pour comprendre l'utilisation du site (Google Analytics)</li>
+                <li><strong>Marketing:</strong> Pour personaliser et améliorer vos expériences</li>
+              </ul>
+            </div>
+            <div class="details-section">
+              <h4 class="details-title">Vos droits:</h4>
+              <p class="details-text">
+                Vous pouvez retirer votre consentement à tout moment en consultant notre
+                <a href="#" class="details-link">politique de confidentialité</a>.
+              </p>
+            </div>
+          </div>
+        }
+
+        <!-- Bouton "En savoir plus" -->
+        <button (click)="toggleDetails()" class="cookie-details-btn">
+          <span>{{ showDetails() ? '▼ Masquer les détails' : '▶ En savoir plus' }}</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Actions -->
+    <div class="cookie-actions">
+      <button (click)="rejectCookies()" class="btn btn-secondary">
+        Refuser
+      </button>
+      <button (click)="acceptCookies()" class="btn btn-primary">
+        Accepter
+      </button>
+    </div>
+  </div>
+}

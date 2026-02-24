@@ -3,6 +3,7 @@ import { isPlatformBrowser, CommonModule, NgOptimizedImage } from '@angular/comm
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { ContactComponent } from './contact/contact.component';
 import { PortfolioV2Component } from './portfolio/portfolio.component';
+import { CookieBannerComponent } from './cookie-banner/cookie-banner.component';
 
 interface Service {
   icon: string;
@@ -45,7 +46,7 @@ interface Project {
   selector: 'app-root',
   templateUrl: './app.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [CommonModule, NgOptimizedImage, ContactComponent, PortfolioV2Component]
+  imports: [CommonModule, NgOptimizedImage, ContactComponent, PortfolioV2Component, CookieBannerComponent]
 })
 export class AppComponent implements AfterViewChecked{
   isMenuOpen = signal(false);
