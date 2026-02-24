@@ -104,7 +104,7 @@
 
 /* Form styles */
 .opt {
-  @apply flex items-center gap-2 px-2 py-2 border border-slate-300 rounded-2xl cursor-pointer transition-all user-select-none bg-white hover:border-orange/40 hover:bg-orange-light;
+  @apply flex items-center gap-3 px-3 py-3 border border-slate-300 rounded-2xl cursor-pointer transition-all user-select-none bg-white hover:border-orange/40 hover:bg-orange-light;
 }
 
 .opt.selected {
@@ -137,7 +137,7 @@
 
 /* Pills */
 .pill {
-  @apply px-4 py-2 border border-slate-300 rounded-full text-sm font-semibold font-syne cursor-pointer transition-all bg-white text-muted user-select-none hover:border-orange hover:text-orange hover:bg-orange-light;
+  @apply px-5 py-3 border border-slate-300 rounded-full text-base font-semibold font-syne cursor-pointer transition-all bg-white text-muted user-select-none hover:border-orange hover:text-orange hover:bg-orange-light;
 }
 
 .pill.selected {
@@ -153,7 +153,7 @@
 }
 
 .btn-next-step {
-  @apply bg-navy text-white border-none px-4 py-2 rounded-full font-syne text-xs font-bold cursor-pointer flex items-center gap-1 transition-all hover:bg-orange hover:translate-x-0.5;
+  @apply bg-navy text-white border-none px-5 py-2.5 rounded-full font-syne text-sm font-bold cursor-pointer flex items-center gap-1 transition-all hover:bg-orange hover:translate-x-0.5;
 }
 
 .btn-redo {

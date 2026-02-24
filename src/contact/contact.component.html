@@ -236,12 +236,12 @@
           </div>
 
           <!-- STEPPER -->
-          <div class="bg-slate-50 border border-slate-300 rounded-3xl p-4 relative overflow-hidden mt-6">
+          <div class="bg-slate-50 border border-slate-300 rounded-3xl p-6 relative overflow-hidden mt-6">
             <div class="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-orange to-orange-300"></div>
 
             <div class="flex items-center justify-between mb-3">
               <span class="font-bold text-sm  text-navy" id="stepperLabel">🎯 Votre projet</span>
-              <span class="text-xs font-bold text-orange bg-orange-light border border-orange/20 px-2 py-1 rounded-full" id="stepperCount">1 / 6</span>
+              <span class="text-xs font-bold text-orange bg-orange-light border border-orange/20 px-2 py-1 rounded-full" id="stepperCount">{{ step() + 1 }} / {{ totalSteps }}</span>
             </div>
 
             <div class="w-full h-0.5 bg-slate-300 rounded mb-4 overflow-hidden">
@@ -250,15 +250,15 @@
                    id="progressFill"></div>
             </div>
 
-            <div class="relative overflow-hidden min-h-56">
+            <div class="relative overflow-hidden min-h-72">
 
               <!-- Step 0: Service -->
               @if (step() === 0) {
                 <div class="animate-stepIn">
-                  <div class="text-xs text-orange font-bold mb-2">👋 Bienvenue !</div>
-                  <p class="text-sm font-semibold text-navy mb-1">Quel(s) service(s) vous intéresse(nt) ?</p>
-                  <p class="text-xs text-muted mb-4">Plusieurs choix possibles</p>
-                  <div class="grid grid-cols-3 gap-2">
+                  <div class="text-sm text-orange font-bold mb-3">👋 Bienvenue !</div>
+                  <p class="text-base font-semibold text-navy mb-2">Quel(s) service(s) vous intéresse(nt) ?</p>
+                  <p class="text-sm text-muted mb-5">Plusieurs choix possibles</p>
+                  <div class="grid grid-cols-3 gap-3">
                     @for (service of ['🌐 Site vitrine', '🛒 E-commerce', '🚀 Landing page', '🎨 Identité visuelle', '🔍 SEO Google', '☁️ Hébergement']; track service) {
                       <div class="opt cursor-pointer select-none"
                            [class.selected]="isSelected('projectType', service.substring(2))"
@@ -269,7 +269,7 @@
                             <path d="M1 4l2.5 2.5L9 1" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                           </svg>
                         </div>
-                        <span class="text-xs text-muted font-medium">{{service}}</span>
+                        <span class="text-sm text-muted font-medium">{{service}}</span>
                       </div>
                     }
                   </div>
@@ -282,9 +282,9 @@
               <!-- Step 1: Situation -->
               @if (step() === 1) {
                 <div class="animate-stepIn">
-                  <div class="text-xs text-orange font-bold mb-2">✨ Bonne sélection !</div>
-                  <p class="text-sm font-semibold text-navy mb-1">Où en êtes-vous actuellement ?</p>
-                  <p class="text-xs text-muted mb-4">Choisissez la situation la plus proche</p>
+                  <div class="text-sm text-orange font-bold mb-3">✨ Bonne sélection !</div>
+                  <p class="text-base font-semibold text-navy mb-2">Où en êtes-vous actuellement ?</p>
+                  <p class="text-sm text-muted mb-5">Choisissez la situation la plus proche</p>
                   <div class="space-y-2">
                     @for (option of [
                       '🌱 Je démarre de zéro',
@@ -306,9 +306,9 @@
               <!-- Step 2: Priorité -->
               @if (step() === 2) {
                 <div class="animate-stepIn">
-                  <div class="text-xs text-orange font-bold mb-2">👌 On prend note !</div>
-                  <p class="text-sm font-semibold text-navy mb-1">Qu'est-ce qui compte le plus pour vous ?</p>
-                  <p class="text-xs text-muted mb-4">Cela nous aide à personnaliser notre approche</p>
+                  <div class="text-sm text-orange font-bold mb-3">👌 On prend note !</div>
+                  <p class="text-base font-semibold text-navy mb-2">Qu'est-ce qui compte le plus pour vous ?</p>
+                  <p class="text-sm text-muted mb-5">Cela nous aide à personnaliser notre approche</p>
                   <div class="space-y-2">
                     @for (option of [
                       '✨ Un design qui impressionne',
@@ -331,9 +331,9 @@
               <!-- Step 3: Cible -->
               @if (step() === 3) {
                 <div class="animate-stepIn">
-                  <div class="text-xs text-orange font-bold mb-2">🎯 Super !</div>
-                  <p class="text-sm font-semibold text-navy mb-1">À qui s'adresse votre projet ?</p>
-                  <p class="text-xs text-muted mb-4">Votre audience cible</p>
+                  <div class="text-sm text-orange font-bold mb-3">🎯 Super !</div>
+                  <p class="text-base font-semibold text-navy mb-2">À qui s'adresse votre projet ?</p>
+                  <p class="text-sm text-muted mb-5">Votre audience cible</p>
                   <div class="space-y-2">
                     @for (option of [
                       '👤 Des particuliers',
@@ -357,9 +357,9 @@
               <!-- Step 4: Délai -->
               @if (step() === 4) {
                 <div class="animate-stepIn">
-                  <div class="text-xs text-orange font-bold mb-2">⏱ On y est presque !</div>
-                  <p class="text-sm font-semibold text-navy mb-1">Quel est votre délai souhaité ?</p>
-                  <p class="text-xs text-muted mb-4">On planifie selon vos contraintes</p>
+                  <div class="text-sm text-orange font-bold mb-3">⏱ On y est presque !</div>
+                  <p class="text-base font-semibold text-navy mb-2">Quel est votre délai souhaité ?</p>
+                  <p class="text-sm text-muted mb-5">On planifie selon vos contraintes</p>
                   <div class="space-y-2">
                     @for (option of [
                       '🔥 Urgent (moins de 2 semaines)',
@@ -381,16 +381,16 @@
               <!-- Step 5: Description -->
               @if (step() === 5) {
                 <div class="animate-stepIn">
-                  <div class="text-xs text-orange font-bold mb-2">🎉 Dernière étape !</div>
-                  <p class="text-sm font-semibold text-navy mb-1">Décrivez votre projet en quelques mots</p>
-                  <p class="text-xs text-muted mb-4">Votre vision, vos inspirations, vos contraintes… tout est utile !</p>
+                  <div class="text-sm text-orange font-bold mb-3">🎉 Dernière étape !</div>
+                  <p class="text-base font-semibold text-navy mb-2">Décrivez votre projet en quelques mots</p>
+                  <p class="text-sm text-muted mb-5">Votre vision, vos inspirations, vos contraintes… tout est utile !</p>
                   <textarea
                     formControlName="description"
-                    class="w-full text-xs text-navy border border-slate-200 rounded-xl p-3 resize-none focus:outline-none focus:border-orange transition-colors"
-                    rows="5"
+                    class="w-full text-sm text-navy border border-slate-200 rounded-xl p-4 resize-none focus:outline-none focus:border-orange transition-colors"
+                    rows="6"
                     placeholder="Ex : Je vends des bijoux faits main et j'aimerais un site élégant qui reflète mon univers artisanal. J'ai quelques photos mais pas encore de logo...">
                   </textarea>
-                  <p class="text-xs text-muted mt-2">💡 Plus vous êtes précis, plus notre réponse sera adaptée.</p>
+                  <p class="text-sm text-muted mt-3">💡 Plus vous êtes précis, plus notre réponse sera adaptée.</p>
                 </div>
               }
             </div>
