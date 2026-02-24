@@ -56,6 +56,7 @@ export class ContactComponent implements OnInit, OnDestroy {
   isSending = signal(false);
   sendSuccess = signal(false);
   sendError = signal('');
+  showStepError = signal(false);
 
   // === Canvas animation ===
   private animationFrameId: number | null = null;
@@ -244,6 +245,7 @@ export class ContactComponent implements OnInit, OnDestroy {
       arr.push(value);
     }
     this.contactForm.get(field)?.setValue([...arr]);
+    this.showStepError.set(false);
     this.cdr.markForCheck();
   }
 
@@ -268,6 +270,7 @@ export class ContactComponent implements OnInit, OnDestroy {
 
   pickPill(field: string, value: string): void {
     this.contactForm.get(field)?.setValue([value]);
+    this.showStepError.set(false);
     this.cdr.markForCheck();
   }
 
@@ -299,7 +302,11 @@ export class ContactComponent implements OnInit, OnDestroy {
   }
 
   nextStep(): void {
-    if (!this.validateStep(this.step())) return;
+    if (!this.validateStep(this.step())) {
+      this.showStepError.set(true);
+      return;
+    }
+    this.showStepError.set(false);
     if (this.step() < this.totalSteps - 1) {
       this.step.set(this.step() + 1);
       this.updateStepper();

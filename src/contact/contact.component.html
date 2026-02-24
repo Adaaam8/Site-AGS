@@ -404,8 +404,8 @@
             }
 
             <!-- Error message -->
-            @if (!isCurrentStepValid() && step() !== 5) {
-              <div class="bg-red-50 border-l-4 border-red-400 text-red-700 rounded p-3 mb-4">
+            @if (showStepError()) {
+              <div class="bg-red-50 border-l-4 border-red-400 text-red-700 rounded p-3 mb-4 animate-fadeIn">
                 <p class="text-sm font-semibold">⚠️ Veuillez sélectionner une option.</p>
               </div>
             }
