@@ -27,37 +27,40 @@
   }
 </style>
 
-<div class="relative bg-white text-gray-800">
+<!-- Hero Section (EN DEHORS du div blanc) -->
+@if (activeView() === 'main') {
+  <app-hero (contactClick)="navigateTo('contact')" (portfolioClick)="scrollTo('portfolio')"></app-hero>
+}
 
-  <!-- Header -->
-  <header [class.shadow-md]="isScrolled()" [style.background-color]="isScrolled() ? 'rgba(255,255,255,0.7)' : 'white'" [style.backdrop-filter]="isScrolled() ? 'blur(12px)' : 'none'" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
-    <div class="container mx-auto px-6 py-3 md:py-4">
-      <div class="flex items-center justify-between">
-       <div (click)="scrollTo('hero')" class="flex items-center gap-2 md:gap-3 text-2xl md:text-3xl font-bold text-gray-900 cursor-pointer">
-        <img src="assets/logo.png" class="h-10 md:h-12 w-auto">
-        AGS<span class="text-[#E06732] -ml-1">Concept</span>
+<!-- Header (fixe, au-dessus du hero) -->
+<header [class.shadow-md]="isScrolled()" [style.background-color]="isScrolled() ? 'rgba(255,255,255,0.7)' : 'white'" [style.backdrop-filter]="isScrolled() ? 'blur(12px)' : 'none'" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+  <div class="container mx-auto px-6 py-3 md:py-4">
+    <div class="flex items-center justify-between">
+     <div (click)="scrollTo('hero')" class="flex items-center gap-2 md:gap-3 text-2xl md:text-3xl font-bold text-gray-900 cursor-pointer">
+      <img src="assets/logo.png" class="h-10 md:h-12 w-auto">
+      AGS<span class="text-[#E06732] -ml-1">Concept</span>
+    </div>
+      <div class="hidden md:flex items-center space-x-8">
+        <a (click)="scrollTo('about')" class="text-base text-gray-800 hover:text-[#E06732] transition-colors duration-200 cursor-pointer">À Propos</a>
+        <a (click)="scrollTo('services')" class="text-base text-gray-800 hover:text-[#E06732] transition-colors duration-200 cursor-pointer">Nos Services</a>
+        <a (click)="scrollTo('process')" class="text-base text-gray-800 hover:text-[#E06732] transition-colors duration-200 cursor-pointer">Notre Méthode</a>
+        <a (click)="scrollTo('portfolio')" class="text-base text-gray-800 hover:text-[#E06732] transition-colors duration-200 cursor-pointer">Nos Réalisations</a>
+        <button (click)="navigateTo('contact')" class="text-base bg-[#E06732] text-white font-semibold px-5 py-2 rounded-lg hover:bg-[#C85A28] transition-all duration-300 shadow-sm hover:shadow-md">
+          Nous Contacter
+        </button>
       </div>
-        <div class="hidden md:flex items-center space-x-8">
-          <a (click)="scrollTo('about')" class="text-base text-gray-800 hover:text-[#E06732] transition-colors duration-200 cursor-pointer">À Propos</a>
-          <a (click)="scrollTo('services')" class="text-base text-gray-800 hover:text-[#E06732] transition-colors duration-200 cursor-pointer">Nos Services</a>
-          <a (click)="scrollTo('process')" class="text-base text-gray-800 hover:text-[#E06732] transition-colors duration-200 cursor-pointer">Notre Méthode</a>
-          <a (click)="scrollTo('portfolio')" class="text-base text-gray-800 hover:text-[#E06732] transition-colors duration-200 cursor-pointer">Nos Réalisations</a>
-          <button (click)="navigateTo('contact')" class="text-base bg-[#E06732] text-white font-semibold px-5 py-2 rounded-lg hover:bg-[#C85A28] transition-all duration-300 shadow-sm hover:shadow-md">
-            Nous Contacter
-          </button>
-        </div>
-        <div class="md:hidden">
-          <button (click)="toggleMenu()" class="text-gray-800 focus:outline-none">
-            @if (!isMenuOpen()) {
-              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
-            } @else {
-              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
-            }
-          </button>
-        </div>
+      <div class="md:hidden">
+        <button (click)="toggleMenu()" class="text-gray-800 focus:outline-none">
+          @if (!isMenuOpen()) {
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+          } @else {
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+          }
+        </button>
       </div>
     </div>
-    <!-- Mobile Menu -->
+  </div>
+  <!-- Mobile Menu -->
 <div class="md:hidden fixed top-0 right-0 h-auto w-60 bg-white/95 backdrop-blur-md shadow-2xl z-50 flex flex-col pt-20 px-6 gap-2 transition-transform duration-300 ease-in-out rounded-bl-2xl"
      [class.translate-x-0]="isMenuOpen()"
      [class.translate-x-full]="!isMenuOpen()">
@@ -68,19 +71,19 @@
   <a (click)="navigateTo('contact')" class="block py-3 px-4 rounded-lg text-gray-800 hover:bg-[#FEF7F4] hover:text-[#C85A28] cursor-pointer transition-colors">Nous Contacter</a>
 </div>
 
-    <!-- Overlay sombre derrière le menu -->
+  <!-- Overlay sombre derrière le menu -->
 <div class="fixed inset-0 bg-black z-40 md:hidden transition-opacity duration-300"
      [class.opacity-40]="isMenuOpen()"
      [class.opacity-0]="!isMenuOpen()"
      [class.pointer-events-none]="!isMenuOpen()"
      (click)="toggleMenu()">
 </div>
-  </header>
+</header>
+
+<div class="relative bg-white text-gray-800">
 
   @if (activeView() === 'main') {
     <main>
-      <!-- Hero Section -->
-      <app-hero (contactClick)="navigateTo('contact')" (portfolioClick)="scrollTo('portfolio')"></app-hero>
 
       <!-- About Section -->
       <section id="about" class="py-24 md:py-40">
