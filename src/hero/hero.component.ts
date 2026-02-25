@@ -9,18 +9,15 @@ import {
   EventEmitter,
   HostListener,
   PLATFORM_ID,
-  Inject
+  Inject,
+  OnDestroy
 } from '@angular/core';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
+import * as THREE from 'three';
 
-interface Particle {
-  x: number;
-  y: number;
-  vx: number;
-  vy: number;
-  size: number;
-  alpha: number;
-  color: string;
+interface Particle3D {
+  mesh: THREE.Mesh;
+  velocity: THREE.Vector3;
   life: number;
   maxLife: number;
 }
@@ -32,7 +29,7 @@ interface Particle {
   standalone: true,
   imports: [CommonModule]
 })
-export class HeroComponent implements OnInit, AfterViewInit {
+export class HeroComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('typedHeading') typedHeading: ElementRef | null = null;
   @ViewChild('typingCursor') typingCursor: ElementRef | null = null;
   @ViewChild('particlesCanvas') canvasRef: ElementRef<HTMLCanvasElement> | null = null;
@@ -52,14 +49,15 @@ export class HeroComponent implements OnInit, AfterViewInit {
   private isDeleting = false;
   private chars: HTMLElement[] = [];
 
-  private canvas: HTMLCanvasElement | null = null;
-  private ctx: CanvasRenderingContext2D | null = null;
-  private particles: Particle[] = [];
+  // Three.js properties
+  private scene: THREE.Scene | null = null;
+  private camera: THREE.PerspectiveCamera | null = null;
+  private renderer: THREE.WebGLRenderer | null = null;
+  private particles: Particle3D[] = [];
   private mouse = { x: 0, y: 0 };
   private W = 0;
   private H = 0;
   private animationFrameId: number | null = null;
-  private particleAnimationId: number | null = null;
 
   private ringX = 0;
   private ringY = 0;
@@ -80,9 +78,8 @@ export class HeroComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     if (isPlatformBrowser(this.platformId) && this.canvasRef) {
-      this.initCanvas();
-      this.initParticles();
-      this.animateParticles();
+      this.initThreeJS();
+      this.animate();
       this.setupHoverListeners();
     }
   }
@@ -121,121 +118,124 @@ export class HeroComponent implements OnInit, AfterViewInit {
     this.animationFrameId = requestAnimationFrame(() => this.animateRing());
   }
 
-  private initCanvas(): void {
+  private initThreeJS(): void {
     if (!this.canvasRef) return;
 
-    this.canvas = this.canvasRef.nativeElement;
-    this.ctx = this.canvas.getContext('2d');
+    const canvas = this.canvasRef.nativeElement;
+    this.W = window.innerWidth;
+    this.H = window.innerHeight;
 
-    this.W = this.canvas.width = window.innerWidth;
-    this.H = this.canvas.height = window.innerHeight;
+    // Scene
+    this.scene = new THREE.Scene();
 
-    this.mouse = { x: this.W / 2, y: this.H / 2 };
+    // Camera
+    this.camera = new THREE.PerspectiveCamera(75, this.W / this.H, 0.1, 1000);
+    this.camera.position.z = 100;
+
+    // Renderer with transparent background
+    this.renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+    this.renderer.setSize(this.W, this.H);
+    this.renderer.setPixelRatio(window.devicePixelRatio);
+    this.renderer.setClearColor(0x000000, 0); // Transparent background
+
+    // Create particles
+    this.createParticles3D();
+
+    // Handle resize
+    window.addEventListener('resize', () => this.onWindowResize());
   }
 
-  private initParticles(): void {
-    this.particles = [];
-    for (let i = 0; i < 120; i++) {
-      this.particles.push(this.createParticle(true));
+  private createParticles3D(): void {
+    if (!this.scene) return;
+
+    const particleCount = 150;
+
+    for (let i = 0; i < particleCount; i++) {
+      const isOrange = Math.random() > 0.6;
+      const color = isOrange ? 0xE06732 : 0xF7F4EF;
+      const emissive = color;
+
+      const geometry = new THREE.SphereGeometry(Math.random() * 0.8 + 0.4, 8, 8);
+      const material = new THREE.MeshStandardMaterial({
+        color: color,
+        emissive: emissive,
+        emissiveIntensity: 0.8,
+        metalness: 0.3,
+        roughness: 0.4
+      });
+
+      const mesh = new THREE.Mesh(geometry, material);
+
+      // Random position in 3D space
+      mesh.position.x = (Math.random() - 0.5) * 300;
+      mesh.position.y = (Math.random() - 0.5) * 300;
+      mesh.position.z = (Math.random() - 0.5) * 200;
+
+      this.scene.add(mesh);
+
+      const velocity = new THREE.Vector3(
+        (Math.random() - 0.5) * 0.3,
+        (Math.random() - 0.5) * 0.3,
+        (Math.random() - 0.5) * 0.3
+      );
+
+      this.particles.push({
+        mesh: mesh,
+        velocity: velocity,
+        life: 0,
+        maxLife: Math.random() * 300 + 200
+      });
     }
+
+    // Add ambient light
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
+    this.scene.add(ambientLight);
+
+    // Add point light
+    const pointLight = new THREE.PointLight(0xE06732, 1, 500);
+    pointLight.position.set(50, 50, 50);
+    this.scene.add(pointLight);
   }
 
-  private createParticle(random: boolean = false): Particle {
-    return {
-      x: random ? Math.random() * this.W : Math.random() * this.W,
-      y: random ? Math.random() * this.H : this.H + 10,
-      vx: (Math.random() - 0.5) * 0.3,
-      vy: -(Math.random() * 0.4 + 0.1),
-      size: Math.random() * 1.5 + 0.3,
-      alpha: Math.random() * 0.5 + 0.1,
-      color: Math.random() > 0.7 ? '#E06732' : '#F7F4EF',
-      life: 0,
-      maxLife: Math.random() * 300 + 200
-    };
-  }
+  private animate(): void {
+    this.animationFrameId = requestAnimationFrame(() => this.animate());
 
-  private animateParticles(): void {
-    if (!this.ctx || !this.canvas) return;
+    if (!this.renderer || !this.scene || !this.camera) return;
 
-    this.ctx.clearRect(0, 0, this.W, this.H);
-    this.drawConnections();
+    // Rotate camera slightly
+    this.camera.position.x = Math.sin(Date.now() * 0.0001) * 30;
+    this.camera.position.y = Math.cos(Date.now() * 0.00007) * 30;
+    this.camera.lookAt(0, 0, 0);
 
+    // Update particles
     this.particles.forEach((p) => {
-      this.updateParticle(p);
-      this.drawParticle(p);
+      p.mesh.position.add(p.velocity);
+
+      // Oscillate movement
+      p.mesh.position.y += Math.sin(Date.now() * 0.001 + p.mesh.position.x) * 0.01;
+
+      // Rotate particle
+      p.mesh.rotation.x += 0.002;
+      p.mesh.rotation.y += 0.003;
+
+      // Wrap around
+      if (Math.abs(p.mesh.position.x) > 150) p.velocity.x *= -1;
+      if (Math.abs(p.mesh.position.y) > 150) p.velocity.y *= -1;
+      if (Math.abs(p.mesh.position.z) > 100) p.velocity.z *= -1;
     });
 
-    this.particleAnimationId = requestAnimationFrame(() => this.animateParticles());
+    this.renderer.render(this.scene, this.camera);
   }
 
-  private updateParticle(p: Particle): void {
-    const dx = this.mouse.x - p.x;
-    const dy = this.mouse.y - p.y;
-    const dist = Math.sqrt(dx * dx + dy * dy);
+  private onWindowResize(): void {
+    if (!this.camera || !this.renderer) return;
 
-    if (dist < 300) {
-      p.vx += (dx / dist) * 0.025;
-      p.vy += (dy / dist) * 0.025;
-    }
+    this.W = window.innerWidth;
+    this.H = window.innerHeight;
 
-    p.x += p.vx;
-    p.y += p.vy;
-    p.life++;
-
-    const progress = p.life / p.maxLife;
-    if (progress < 0.1) p.alpha = progress * 5 * 0.6;
-    else if (progress > 0.8) p.alpha = (1 - progress) * 5 * 0.6;
-
-    if (p.life > p.maxLife || p.y < -10) {
-      const newP = this.createParticle(false);
-      p.x = newP.x;
-      p.y = newP.y;
-      p.vx = newP.vx;
-      p.vy = newP.vy;
-      p.size = newP.size;
-      p.alpha = newP.alpha;
-      p.color = newP.color;
-      p.life = newP.life;
-      p.maxLife = newP.maxLife;
-    }
-  }
-
-  private drawParticle(p: Particle): void {
-    if (!this.ctx) return;
-
-    this.ctx.save();
-    this.ctx.globalAlpha = p.alpha;
-    this.ctx.fillStyle = p.color;
-    this.ctx.shadowColor = p.color;
-    this.ctx.shadowBlur = p.color === '#E06732' ? 6 : 2;
-    this.ctx.beginPath();
-    this.ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-    this.ctx.fill();
-    this.ctx.restore();
-  }
-
-  private drawConnections(): void {
-    if (!this.ctx) return;
-
-    for (let i = 0; i < this.particles.length; i++) {
-      for (let j = i + 1; j < this.particles.length; j++) {
-        const dx = this.particles[i].x - this.particles[j].x;
-        const dy = this.particles[i].y - this.particles[j].y;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-
-        if (dist < 80) {
-          this.ctx.save();
-          this.ctx.globalAlpha = (1 - dist / 80) * 0.08;
-          this.ctx.strokeStyle = '#E06732';
-          this.ctx.lineWidth = 0.5;
-          this.ctx.beginPath();
-          this.ctx.moveTo(this.particles[i].x, this.particles[i].y);
-          this.ctx.lineTo(this.particles[j].x, this.particles[j].y);
-          this.ctx.stroke();
-          this.ctx.restore();
-        }
-      }
-    }
+    this.camera.aspect = this.W / this.H;
+    this.camera.updateProjectionMatrix();
+    this.renderer.setSize(this.W, this.H);
   }
 
   private startTyping(): void {
@@ -321,8 +321,21 @@ export class HeroComponent implements OnInit, AfterViewInit {
     if (this.animationFrameId !== null) {
       cancelAnimationFrame(this.animationFrameId);
     }
-    if (this.particleAnimationId !== null) {
-      cancelAnimationFrame(this.particleAnimationId);
+
+    // Cleanup Three.js resources
+    if (this.scene) {
+      this.scene.traverse((obj) => {
+        if (obj instanceof THREE.Mesh) {
+          obj.geometry?.dispose();
+          if (Array.isArray(obj.material)) {
+            obj.material.forEach((m) => m.dispose());
+          } else {
+            obj.material?.dispose();
+          }
+        }
+      });
     }
+
+    this.renderer?.dispose();
   }
 }
