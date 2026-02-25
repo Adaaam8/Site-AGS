@@ -41,7 +41,7 @@ export class HeroComponent implements OnInit, AfterViewInit, OnDestroy {
     'Nous créons des sites qui convertissent.',
     'Votre identité visuelle, réinventée.',
     'Visible sur Google. Partout.',
-    'AGS Concept L\'excellence digitale.'
+    'AGS Concept — L\'excellence digitale.'
   ];
 
   private phraseIndex = 0;
@@ -242,21 +242,35 @@ export class HeroComponent implements OnInit, AfterViewInit, OnDestroy {
     this.typeNext();
   }
 
+  private buildChars(text: string): void {
+    const heading = this.typedHeading?.nativeElement;
+    const cursor = this.typingCursor?.nativeElement;
+    if (!heading || !cursor) return;
+
+    this.chars.forEach(el => el.remove());
+    this.chars = [];
+    this.charIndex = 0;
+
+    [...text].forEach((char) => {
+      const span = document.createElement('span');
+      span.classList.add('typed-char');
+      if (char === ' ') span.classList.add('space');
+      span.textContent = char === ' ' ? '\u00A0' : char;
+      heading.insertBefore(span, cursor);
+      this.chars.push(span);
+    });
+  }
+
   private typeNext(): void {
     const text = this.phrases[this.phraseIndex];
-
     if (!this.isDeleting) {
       if (this.charIndex === 0) this.buildChars(text);
-
       if (this.charIndex < this.chars.length) {
         this.chars[this.charIndex].classList.add('visible');
         this.charIndex++;
         setTimeout(() => this.typeNext(), 55 + Math.random() * 30);
       } else {
-        setTimeout(() => {
-          this.isDeleting = true;
-          this.typeNext();
-        }, 2800);
+        setTimeout(() => { this.isDeleting = true; this.typeNext(); }, 2800);
       }
     } else {
       if (this.charIndex > 0) {
@@ -269,44 +283,6 @@ export class HeroComponent implements OnInit, AfterViewInit, OnDestroy {
         setTimeout(() => this.typeNext(), 400);
       }
     }
-  }
-
-  private buildChars(text: string): void {
-    if (!this.typedHeading) return;
-
-    // Supprimer les anciens caractères
-    this.chars.forEach((el) => el.remove());
-    this.chars = [];
-    this.charIndex = 0;
-
-    const words = text.split(' ');
-
-    words.forEach((word, wordIndex) => {
-      // Créer un span pour le mot avec inline-block et white-space: nowrap
-      const wordSpan = document.createElement('span');
-      wordSpan.style.display = 'inline-block';
-      wordSpan.style.whiteSpace = 'nowrap';
-
-      // Créer un span pour chaque lettre du mot
-      [...word].forEach((char) => {
-        const charSpan = document.createElement('span');
-        charSpan.classList.add('typed-char');
-        charSpan.textContent = char;
-        wordSpan.appendChild(charSpan);
-        this.chars.push(charSpan);
-      });
-
-      // Ajouter le span du mot au heading
-      this.typedHeading!.nativeElement.insertBefore(wordSpan, this.typingCursor?.nativeElement);
-
-      // Ajouter un espace entre les mots (sauf après le dernier mot)
-      if (wordIndex < words.length - 1) {
-        const spaceSpan = document.createElement('span');
-        spaceSpan.style.display = 'inline-block';
-        spaceSpan.innerHTML = '&nbsp;';
-        this.typedHeading!.nativeElement.insertBefore(spaceSpan, this.typingCursor?.nativeElement);
-      }
-    });
   }
 
   private setupHoverListeners(): void {
