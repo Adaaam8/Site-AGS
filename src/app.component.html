@@ -1,4 +1,15 @@
 <style>
+  /* Ensure hero background takes priority */
+  app-hero {
+    display: block;
+    width: 100%;
+    height: 100vh;
+    background: #0C0F14 !important;
+    overflow: hidden !important;
+    margin: 0;
+    padding: 0;
+  }
+
   @keyframes fadeSlideUp {
     from { opacity: 0; transform: translateY(20px); }
     to   { opacity: 1; transform: translateY(0); }
