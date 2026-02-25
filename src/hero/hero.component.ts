@@ -129,32 +129,27 @@ export class HeroComponent implements OnInit, AfterViewInit, OnDestroy {
 
   private buildChars(text: string): void {
     if (!this.wordsContainer) return;
-
-    // Vide les anciens caractères
     this.chars.forEach(el => el.remove());
     this.chars = [];
     this.charIndex = 0;
-
     [...text].forEach((char) => {
       const span = document.createElement('span');
       span.classList.add('typed-char');
       if (char === ' ') {
         span.classList.add('space');
-        span.textContent = '\u00A0'; // espace insécable
+        span.textContent = '\u00A0';
       } else {
         span.textContent = char;
       }
-      this.wordsContainer!.appendChild(span); // ← append DANS le container, AVANT le cursor
+      this.wordsContainer!.appendChild(span);
       this.chars.push(span);
     });
   }
 
   private typeNext(): void {
     const text = this.phrases[this.phraseIndex];
-
     if (!this.isDeleting) {
       if (this.charIndex === 0) this.buildChars(text);
-
       if (this.charIndex < this.chars.length) {
         this.chars[this.charIndex].classList.add('visible');
         this.charIndex++;
@@ -162,7 +157,6 @@ export class HeroComponent implements OnInit, AfterViewInit, OnDestroy {
       } else {
         setTimeout(() => { this.isDeleting = true; this.typeNext(); }, 2800);
       }
-
     } else {
       if (this.charIndex > 0) {
         this.charIndex--;
