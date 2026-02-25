@@ -75,6 +75,7 @@
   height: 100%;
   z-index: 0;
   display: block;
+  pointer-events: none;
 }
 
 /* ── HERO SECTION ── */
@@ -119,6 +120,7 @@
   text-align: center !important;
   padding: 0 2rem;
   max-width: 900px;
+  pointer-events: auto;
 }
 
 /* Label */
@@ -236,45 +238,45 @@
 
 .btn-primary {
   padding: 0.85rem 2rem;
-  background: var(--orange);
-  color: #fff;
+  background: #E06732;
+  color: #ffffff;
   font-size: 0.8rem;
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   border: none;
   border-radius: 100px;
-  cursor: none;
+  cursor: pointer;
   transition: all 0.3s ease;
   box-shadow: 0 0 30px rgba(224, 103, 50, 0.3);
   font-family: 'Syne', sans-serif;
 }
 
 .btn-primary:hover {
-  background: #fff;
-  color: var(--dark);
-  box-shadow: 0 0 50px rgba(224, 103, 50, 0.4);
+  background: #C85A28;
+  box-shadow: 0 0 50px rgba(224, 103, 50, 0.5);
   transform: translateY(-2px);
 }
 
 .btn-secondary {
   padding: 0.85rem 2rem;
   background: transparent;
-  color: var(--light);
+  color: #F7F4EF;
   font-size: 0.8rem;
   font-weight: 600;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  border: 1px solid rgba(247, 244, 239, 0.2);
+  border: 1.5px solid rgba(247, 244, 239, 0.4);
   border-radius: 100px;
-  cursor: none;
+  cursor: pointer;
   transition: all 0.3s ease;
   font-family: 'Syne', sans-serif;
 }
 
 .btn-secondary:hover {
-  border-color: var(--orange);
-  color: var(--orange);
+  border-color: #F7F4EF;
+  color: #F7F4EF;
+  background: rgba(247, 244, 239, 0.1);
 }
 
 /* Scroll indicator */
