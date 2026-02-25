@@ -1,0 +1,14 @@
+/* Header Dark Mode Styles */
+.header-dark {
+  background-color: rgba(255, 255, 255, 0.9) !important;
+  backdrop-filter: blur(12px);
+}
+
+.header-dark a,
+.header-dark span {
+  color: #1a1a1a !important;
+}
+
+.header-dark a:hover {
+  color: #E06732 !important;
+}

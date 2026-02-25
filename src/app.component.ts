@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, signal, effect, PLATFORM_ID, Inject, AfterViewChecked } from '@angular/core';
+import { Component, ChangeDetectionStrategy, signal, effect, PLATFORM_ID, Inject, AfterViewChecked, HostListener } from '@angular/core';
 import { isPlatformBrowser, CommonModule, NgOptimizedImage } from '@angular/common';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { ContactComponent } from './contact/contact.component';
@@ -46,12 +46,14 @@ interface Project {
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
+  styleUrl: './app.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [CommonModule, NgOptimizedImage, ContactComponent, PortfolioV2Component, CookieBannerComponent, HeroComponent]
 })
 export class AppComponent implements AfterViewChecked{
   isMenuOpen = signal(false);
   isScrolled = signal(false);
+  headerDark = signal(false);
   currentYear = new Date().getFullYear();
   activeView = signal<'main' | 'contact'>('main');
   private videoStarted = false;
@@ -292,5 +294,19 @@ ngAfterViewChecked(): void {
 
   callPhone(): void {
     window.location.href = 'tel:0782928620';
+  }
+
+  @HostListener('window:scroll')
+  onScroll(): void {
+    const scrollY = window.scrollY;
+    const heroHeight = window.innerHeight;
+
+    if (scrollY < heroHeight) {
+      // Sur le hero dark → texte blanc
+      this.headerDark.set(false);
+    } else {
+      // Sur les sections claires → texte foncé
+      this.headerDark.set(true);
+    }
   }
 }
