@@ -55,20 +55,12 @@ export class HeroComponent implements OnInit, AfterViewInit, OnDestroy {
   private renderer!: THREE.WebGLRenderer;
   private particles: Particle3D[] = [];
 
-  // ── Cursor ──
-  private cursorDot!: HTMLElement | null;
-  private cursorRing!: HTMLElement | null;
-  private ringX = 0; private ringY = 0;
-  private dotX  = 0; private dotY  = 0;
-
   private rafId: number | null = null;
-  private rafCursor: number | null = null;
 
   constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
 
   ngOnInit(): void {
     if (isPlatformBrowser(this.platformId)) {
-      this.initCursor();
       setTimeout(() => this.startTyping(), 600);
     }
   }
@@ -77,48 +69,11 @@ export class HeroComponent implements OnInit, AfterViewInit, OnDestroy {
     if (isPlatformBrowser(this.platformId)) {
       this.initThreeJS();
       this.animateThree();
-      this.setupHoverListeners();
     }
   }
 
   // ════════════════════════════════
-  // CURSOR
-  // ════════════════════════════════
-  private initCursor(): void {
-    this.cursorDot  = document.getElementById('cursor-dot');
-    this.cursorRing = document.getElementById('cursor-ring');
-    document.addEventListener('mousemove', (e) => {
-      this.dotX = e.clientX;
-      this.dotY = e.clientY;
-      if (this.cursorDot) {
-        this.cursorDot.style.left = this.dotX + 'px';
-        this.cursorDot.style.top  = this.dotY + 'px';
-      }
-    });
-    this.animateCursorRing();
-  }
-
-  private animateCursorRing(): void {
-    this.ringX += (this.dotX - this.ringX) * 0.12;
-    this.ringY += (this.dotY - this.ringY) * 0.12;
-    if (this.cursorRing) {
-      this.cursorRing.style.left = this.ringX + 'px';
-      this.cursorRing.style.top  = this.ringY + 'px';
-    }
-    this.rafCursor = requestAnimationFrame(() => this.animateCursorRing());
-  }
-
-  private setupHoverListeners(): void {
-    document.querySelectorAll('button, a').forEach(el => {
-      el.addEventListener('mouseenter', () => document.body.classList.add('hovering'));
-      el.addEventListener('mouseleave', () => document.body.classList.remove('hovering'));
-    });
-  }
-
-  // ════════════════════════════════
-  // TYPING — VERSION CORRIGÉE
-  // Le wordsContainer reçoit les chars
-  // Le cursor reste à la fin, fixe
+  // TYPING
   // ════════════════════════════════
   private startTyping(): void {
     const heading = this.typedHeading?.nativeElement;
@@ -260,8 +215,7 @@ export class HeroComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    if (this.rafId)     cancelAnimationFrame(this.rafId);
-    if (this.rafCursor) cancelAnimationFrame(this.rafCursor);
+    if (this.rafId) cancelAnimationFrame(this.rafId);
     this.scene?.traverse(obj => {
       if (obj instanceof THREE.Mesh) {
         obj.geometry?.dispose();
