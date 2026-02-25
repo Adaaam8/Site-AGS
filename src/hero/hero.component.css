@@ -116,7 +116,7 @@
 .hero-content {
   position: relative;
   z-index: 10;
-  text-align: center;
+  text-align: center !important;
   padding: 0 2rem;
   max-width: 900px;
 }
@@ -130,7 +130,7 @@
   font-weight: 700;
   letter-spacing: 0.3em;
   text-transform: uppercase;
-  color: var(--orange);
+  color: #F7F4EF !important;
   margin-bottom: 2.5rem;
   opacity: 0;
   animation: fadeUp 0.6s ease 0.2s forwards;
@@ -150,12 +150,12 @@
   font-family: 'Cormorant Garamond', serif;
   font-size: clamp(2.5rem, 5vw, 5rem);
   font-weight: 300;
-  color: var(--orange);
+  color: #F7F4EF !important;
   line-height: 1.05;
   letter-spacing: -0.02em;
   margin-bottom: 2rem;
   min-height: 1.2em;
-  text-align: center;
+  text-align: center !important;
 }
 
 .typed-char {
@@ -200,7 +200,7 @@
 /* Subtitle */
 .hero-sub {
   font-size: 1rem;
-  color: var(--light);
+  color: #F7F4EF !important;
   font-weight: 400;
   line-height: 1.7;
   max-width: 480px;
