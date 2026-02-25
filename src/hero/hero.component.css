@@ -177,21 +177,6 @@
   white-space: nowrap;
 }
 
-.typed-char {
-  display: inline-block;
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.3s ease, transform 0.3s ease;
-}
-
-.typed-char.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.typed-char.space {
-  width: 0.3em;
-}
 
 /* Cursor clignotant */
 .typing-cursor {

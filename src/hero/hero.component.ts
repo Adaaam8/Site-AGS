@@ -9,7 +9,8 @@ import {
   HostListener,
   PLATFORM_ID,
   Inject,
-  OnDestroy
+  OnDestroy,
+  ViewEncapsulation
 } from '@angular/core';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import * as THREE from 'three';
@@ -24,6 +25,7 @@ interface Particle3D {
   templateUrl: './hero.component.html',
   styleUrl: './hero.component.css',
   standalone: true,
+  encapsulation: ViewEncapsulation.None,
   imports: [CommonModule]
 })
 export class HeroComponent implements OnInit, AfterViewInit, OnDestroy {
