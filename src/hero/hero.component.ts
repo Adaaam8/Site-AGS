@@ -160,7 +160,7 @@ export class HeroComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   private createParticles(): void {
-    for (let i = 0; i < 150; i++) {
+    for (let i = 0; i < 400; i++) {
       const color    = 0xE06732;
       const geo      = new THREE.SphereGeometry(Math.random() * 0.5 + 0.1, 8, 8);
       const mat      = new THREE.MeshStandardMaterial({
