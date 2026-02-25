@@ -55,6 +55,7 @@ export class HeroComponent implements OnInit, AfterViewInit, OnDestroy {
   private renderer!: THREE.WebGLRenderer;
   private particles: Particle3D[] = [];
   private mouse: { x: number; y: number } = { x: 0, y: 0 };
+  private isMobile = false;
 
   private rafId: number | null = null;
 
@@ -135,13 +136,15 @@ export class HeroComponent implements OnInit, AfterViewInit, OnDestroy {
     const W = window.innerWidth;
     const H = window.innerHeight;
 
+    this.isMobile = W < 768;
+
     this.scene  = new THREE.Scene();
     this.camera = new THREE.PerspectiveCamera(75, W / H, 0.1, 1000);
     this.camera.position.z = 100;
 
     this.renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
     this.renderer.setSize(W, H);
-    this.renderer.setPixelRatio(window.devicePixelRatio);
+    this.renderer.setPixelRatio(this.isMobile ? 1 : window.devicePixelRatio);
     this.renderer.setClearColor(0x000000, 0);
 
     this.createParticles();
@@ -160,7 +163,8 @@ export class HeroComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   private createParticles(): void {
-    for (let i = 0; i < 800; i++) {
+    const particleCount = this.isMobile ? 250 : 800;
+    for (let i = 0; i < particleCount; i++) {
       const color    = 0xE06732;
       const geo      = new THREE.SphereGeometry(Math.random() * 0.5 + 0.1, 8, 8);
       const mat      = new THREE.MeshStandardMaterial({
@@ -197,12 +201,14 @@ export class HeroComponent implements OnInit, AfterViewInit, OnDestroy {
     const mouseY = -(this.mouse.y / window.innerHeight - 0.5) * 200;
 
     this.particles.forEach(p => {
-      const dx = p.mesh.position.x - mouseX;
-      const dy = p.mesh.position.y - mouseY;
-      const dist = Math.sqrt(dx * dx + dy * dy);
-      if (dist < 30) {
-        p.velocity.x += (dx / dist) * 0.5;
-        p.velocity.y += (dy / dist) * 0.5;
+      if (!this.isMobile) {
+        const dx = p.mesh.position.x - mouseX;
+        const dy = p.mesh.position.y - mouseY;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < 30) {
+          p.velocity.x += (dx / dist) * 0.5;
+          p.velocity.y += (dy / dist) * 0.5;
+        }
       }
       p.mesh.position.add(p.velocity);
       p.velocity.multiplyScalar(0.98);
