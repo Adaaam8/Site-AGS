@@ -173,9 +173,9 @@ export class HeroComponent implements OnInit, AfterViewInit {
     const dy = this.mouse.y - p.y;
     const dist = Math.sqrt(dx * dx + dy * dy);
 
-    if (dist < 200) {
-      p.vx += (dx / dist) * 0.008;
-      p.vy += (dy / dist) * 0.008;
+    if (dist < 300) {
+      p.vx += (dx / dist) * 0.025;
+      p.vy += (dy / dist) * 0.025;
     }
 
     p.x += p.vx;
