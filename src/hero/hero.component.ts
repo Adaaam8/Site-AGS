@@ -155,7 +155,7 @@ export class HeroComponent implements OnInit, AfterViewInit, OnDestroy {
       const color = isOrange ? 0xE06732 : 0xF7F4EF;
       const emissive = color;
 
-      const geometry = new THREE.SphereGeometry(Math.random() * 1.5 + 0.3, 8, 8);
+      const geometry = new THREE.SphereGeometry(Math.random() * 0.5 + 0.1, 8, 8);
       const material = new THREE.MeshStandardMaterial({
         color: color,
         emissive: emissive,
