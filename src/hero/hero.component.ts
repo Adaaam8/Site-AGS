@@ -31,7 +31,6 @@ interface Particle3D {
 export class HeroComponent implements OnInit, AfterViewInit, OnDestroy {
 
   @ViewChild('typedHeading') typedHeading!: ElementRef<HTMLElement>;
-  @ViewChild('typingCursor') typingCursor!: ElementRef<HTMLElement>;
   @ViewChild('particlesCanvas') canvasRef!: ElementRef<HTMLCanvasElement>;
 
   @Output() contactClick  = new EventEmitter<void>();
