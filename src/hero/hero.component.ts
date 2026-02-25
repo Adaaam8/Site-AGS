@@ -41,7 +41,7 @@ export class HeroComponent implements OnInit, AfterViewInit, OnDestroy {
     'Nous créons des sites qui convertissent.',
     'Votre identité visuelle, réinventée.',
     'Visible sur Google. Partout.',
-    'AGS Concept — L\'excellence digitale.'
+    'AGS Concept L\'excellence digitale.'
   ];
 
   private phraseIndex = 0;
@@ -155,7 +155,7 @@ export class HeroComponent implements OnInit, AfterViewInit, OnDestroy {
       const color = isOrange ? 0xE06732 : 0xF7F4EF;
       const emissive = color;
 
-      const geometry = new THREE.SphereGeometry(Math.random() * 0.8 + 0.4, 8, 8);
+      const geometry = new THREE.SphereGeometry(Math.random() * 1.5 + 0.3, 8, 8);
       const material = new THREE.MeshStandardMaterial({
         color: color,
         emissive: emissive,
