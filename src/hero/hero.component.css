@@ -150,7 +150,7 @@
   font-family: 'Cormorant Garamond', serif;
   font-size: clamp(2.5rem, 5vw, 5rem);
   font-weight: 300;
-  color: var(--light);
+  color: var(--orange);
   line-height: 1.05;
   letter-spacing: -0.02em;
   margin-bottom: 2rem;
@@ -199,7 +199,7 @@
 /* Subtitle */
 .hero-sub {
   font-size: 1rem;
-  color: var(--muted);
+  color: var(--light);
   font-weight: 400;
   line-height: 1.7;
   max-width: 480px;
