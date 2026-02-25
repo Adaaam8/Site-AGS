@@ -160,8 +160,10 @@
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
-  max-width: 95vw;
+  max-width: 90vw;
   word-break: keep-all;
+  hyphens: none;
+  overflow-wrap: normal;
 }
 
 .typed-char {
