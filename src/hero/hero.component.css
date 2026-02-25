@@ -161,6 +161,7 @@
   justify-content: center;
   flex-wrap: wrap;
   max-width: 95vw;
+  word-break: keep-all;
 }
 
 .typed-char {
