@@ -310,11 +310,7 @@ export class HeroComponent implements OnInit, AfterViewInit, OnDestroy {
 
   @HostListener('window:resize')
   onResize(): void {
-    if (this.canvasRef) {
-      this.W = this.canvasRef.nativeElement.width = window.innerWidth;
-      this.H = this.canvasRef.nativeElement.height = window.innerHeight;
-      this.initParticles();
-    }
+    this.onWindowResize();
   }
 
   ngOnDestroy(): void {
