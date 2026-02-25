@@ -54,6 +54,7 @@ export class HeroComponent implements OnInit, AfterViewInit, OnDestroy {
   private camera!: THREE.PerspectiveCamera;
   private renderer!: THREE.WebGLRenderer;
   private particles: Particle3D[] = [];
+  private mouse: { x: number; y: number } = { x: 0, y: 0 };
 
   private rafId: number | null = null;
 
@@ -152,12 +153,15 @@ export class HeroComponent implements OnInit, AfterViewInit, OnDestroy {
     this.scene.add(point);
 
     window.addEventListener('resize', () => this.onResize());
+    window.addEventListener('mousemove', (e) => {
+      this.mouse.x = e.clientX;
+      this.mouse.y = e.clientY;
+    });
   }
 
   private createParticles(): void {
     for (let i = 0; i < 150; i++) {
-      const isOrange = Math.random() > 0.6;
-      const color    = isOrange ? 0xE06732 : 0xF7F4EF;
+      const color    = 0xE06732;
       const geo      = new THREE.SphereGeometry(Math.random() * 0.5 + 0.1, 8, 8);
       const mat      = new THREE.MeshStandardMaterial({
         color, emissive: color, emissiveIntensity: 0.8,
@@ -189,11 +193,19 @@ export class HeroComponent implements OnInit, AfterViewInit, OnDestroy {
     this.camera.position.y = Math.cos(t * 0.00007) * 30;
     this.camera.lookAt(0, 0, 0);
 
+    const mouseX = (this.mouse.x / window.innerWidth - 0.5) * 200;
+    const mouseY = -(this.mouse.y / window.innerHeight - 0.5) * 200;
+
     this.particles.forEach(p => {
+      const dx = p.mesh.position.x - mouseX;
+      const dy = p.mesh.position.y - mouseY;
+      const dist = Math.sqrt(dx * dx + dy * dy);
+      if (dist < 30) {
+        p.velocity.x += (dx / dist) * 0.5;
+        p.velocity.y += (dy / dist) * 0.5;
+      }
       p.mesh.position.add(p.velocity);
-      p.mesh.position.y += Math.sin(t * 0.001 + p.mesh.position.x) * 0.01;
-      p.mesh.rotation.x += 0.002;
-      p.mesh.rotation.y += 0.003;
+      p.velocity.multiplyScalar(0.98);
       if (Math.abs(p.mesh.position.x) > 150) p.velocity.x *= -1;
       if (Math.abs(p.mesh.position.y) > 150) p.velocity.y *= -1;
       if (Math.abs(p.mesh.position.z) > 100) p.velocity.z *= -1;
