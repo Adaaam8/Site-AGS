@@ -166,6 +166,11 @@
   overflow-wrap: normal;
 }
 
+.hero-heading span {
+  display: inline-block;
+  white-space: nowrap;
+}
+
 .typed-char {
   display: inline-block;
   opacity: 0;
