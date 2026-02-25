@@ -1,0 +1,35 @@
+<!-- Custom cursor -->
+<div id="cursor"><div id="cursor-dot"></div></div>
+<div id="cursor-ring"></div>
+
+<!-- Hero -->
+<section class="hero">
+  <canvas #particlesCanvas id="particles-canvas"></canvas>
+
+  <div class="hero-content">
+
+    <div class="hero-label">
+      Agence Digitale Premium
+    </div>
+
+    <h1 class="hero-heading" #typedHeading id="typed-heading">
+      <span class="typing-cursor" #typingCursor id="typing-cursor"></span>
+    </h1>
+
+    <p class="hero-sub">
+      Des sites web qui captivent, convertissent et propulsent votre marque au sommet.
+    </p>
+
+    <div class="hero-cta">
+      <button class="btn-primary" (click)="onContactClick()" id="btn-contact">Démarrer un projet</button>
+      <button class="btn-secondary" (click)="onPortfolioClick()" id="btn-portfolio">Voir nos réalisations</button>
+    </div>
+
+  </div>
+
+  <div class="scroll-hint">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+
+</section>

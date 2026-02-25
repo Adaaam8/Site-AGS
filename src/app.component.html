@@ -80,28 +80,7 @@
   @if (activeView() === 'main') {
     <main>
       <!-- Hero Section -->
-      <section id="hero" class="relative min-h-screen flex items-center justify-center text-center overflow-hidden">
-        <div class="absolute inset-0 z-0">
-          <video src="/assets/hero-vid.mp4" autoplay muted loop playsinline class="absolute inset-0 w-full h-full object-cover"></video>
-          <div class="absolute inset-0 bg-white/80"></div>
-        </div>
-        <div class="relative z-10 container mx-auto px-6">
-          <h1 class="animate-fade-up delay-1 text-3xl sm:text-4xl md:text-6xl font-extrabold text-gray-900 leading-tight mb-4 md:mb-6">
-            Nous créons des <span class="text-[#E06732]">expériences digitales</span> qui inspirent.
-          </h1>
-          <p class="animate-fade-up delay-2 text-base sm:text-lg md:text-xl text-gray-700 max-w-3xl mx-auto mb-6 md:mb-8">
-            AGS Concept transforme vos idées en sites web performants et en images de marque inoubliables, pour propulser votre entreprise vers le succès.
-          </p>
-          <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <button (click)="scrollTo('services')" class="animate-fade-up delay-3 bg-[#E06732] text-white font-bold py-3 px-6 sm:px-8 rounded-lg text-base sm:text-lg hover:bg-[#C85A28] transition-all duration-300 transform hover:scale-105 shadow-lg">
-              Découvrir nos services
-            </button>
-            <button (click)="callPhone()" class="animate-fade-up delay-3 bg-[#E06732] text-white font-bold py-3 px-6 sm:px-8 rounded-lg text-base sm:text-lg hover:bg-[#C85A28] transition-all duration-300 transform hover:scale-105 shadow-lg">
-              +33 7 82 92 86 20
-            </button>
-          </div>
-        </div>
-      </section>
+      <app-hero (contactClick)="navigateTo('contact')" (portfolioClick)="scrollTo('portfolio')"></app-hero>
 
       <!-- About Section -->
       <section id="about" class="py-24 md:py-40">
