@@ -153,9 +153,14 @@
   color: #F7F4EF !important;
   line-height: 1.05;
   letter-spacing: -0.02em;
-  margin-bottom: 2rem;
+  margin: 0 auto 2rem auto;
   min-height: 1.2em;
   text-align: center !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  max-width: 95vw;
 }
 
 .typed-char {
