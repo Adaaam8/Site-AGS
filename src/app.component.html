@@ -47,15 +47,15 @@
 <header [class.shadow-md]="isScrolled()" [class.header-dark]="headerDark()" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
   <div class="container mx-auto px-6 py-3 md:py-4">
     <div class="flex items-center justify-between">
-     <div (click)="scrollTo('hero')" class="flex items-center gap-2 md:gap-3 text-2xl md:text-3xl font-bold header-nav-link cursor-pointer">
+     <div (click)="scrollTo('hero')" class="flex items-center gap-2 md:gap-3 text-2xl md:text-3xl font-bold cursor-pointer">
       <img src="assets/logo.png" class="h-10 md:h-12 w-auto">
-      AGS<span class="text-[#E06732] -ml-1">Concept</span>
+      <span class="text-[#E06732]">AGS</span><span class="text-[#E06732] -ml-1">Concept</span>
     </div>
       <div class="hidden md:flex items-center space-x-8">
-        <a (click)="scrollTo('about')" class="text-base header-nav-link hover:text-[#E06732] transition-colors duration-200 cursor-pointer">À Propos</a>
-        <a (click)="scrollTo('services')" class="text-base header-nav-link hover:text-[#E06732] transition-colors duration-200 cursor-pointer">Nos Services</a>
-        <a (click)="scrollTo('process')" class="text-base header-nav-link hover:text-[#E06732] transition-colors duration-200 cursor-pointer">Notre Méthode</a>
-        <a (click)="scrollTo('portfolio')" class="text-base header-nav-link hover:text-[#E06732] transition-colors duration-200 cursor-pointer">Nos Réalisations</a>
+        <a (click)="scrollTo('about')" class="text-base text-[#E06732] transition-colors duration-200 cursor-pointer">À Propos</a>
+        <a (click)="scrollTo('services')" class="text-base text-[#E06732] transition-colors duration-200 cursor-pointer">Nos Services</a>
+        <a (click)="scrollTo('process')" class="text-base text-[#E06732] transition-colors duration-200 cursor-pointer">Notre Méthode</a>
+        <a (click)="scrollTo('portfolio')" class="text-base text-[#E06732] transition-colors duration-200 cursor-pointer">Nos Réalisations</a>
         <button (click)="navigateTo('contact')" class="text-base bg-[#E06732] text-white font-semibold px-5 py-2 rounded-lg hover:bg-[#C85A28] transition-all duration-300 shadow-sm hover:shadow-md">
           Nous Contacter
         </button>
