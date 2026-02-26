@@ -1,14 +1,22 @@
-/* Header Dark Mode Styles */
-.header-dark {
-  background-color: rgba(255, 255, 255, 0.9) !important;
+/* Header Styles */
+header {
+  background-color: rgba(255, 255, 255, 0.08);
   backdrop-filter: blur(12px);
 }
 
-.header-dark a,
-.header-dark span {
+.header-dark {
+  background-color: rgba(255, 255, 255, 0.95) !important;
+  backdrop-filter: blur(12px);
+}
+
+.header-nav-link {
+  color: #F7F4EF;
+}
+
+.header-dark .header-nav-link {
   color: #1a1a1a !important;
 }
 
-.header-dark a:hover {
+.header-dark .header-nav-link:hover {
   color: #E06732 !important;
 }

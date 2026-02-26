@@ -44,24 +44,24 @@
 }
 
 <!-- Header (fixe, au-dessus du hero) -->
-<header [class.shadow-md]="isScrolled()" [style.background-color]="'rgba(255, 255, 255, 0.08)'" [style.backdrop-filter]="'blur(12px)'" [class.header-dark]="headerDark()" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+<header [class.shadow-md]="isScrolled()" [class.header-dark]="headerDark()" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
   <div class="container mx-auto px-6 py-3 md:py-4">
     <div class="flex items-center justify-between">
-     <div (click)="scrollTo('hero')" class="flex items-center gap-2 md:gap-3 text-2xl md:text-3xl font-bold text-[#F7F4EF] cursor-pointer">
+     <div (click)="scrollTo('hero')" class="flex items-center gap-2 md:gap-3 text-2xl md:text-3xl font-bold header-nav-link cursor-pointer">
       <img src="assets/logo.png" class="h-10 md:h-12 w-auto">
       AGS<span class="text-[#E06732] -ml-1">Concept</span>
     </div>
       <div class="hidden md:flex items-center space-x-8">
-        <a (click)="scrollTo('about')" class="text-base text-[#F7F4EF] hover:text-[#E06732] transition-colors duration-200 cursor-pointer">À Propos</a>
-        <a (click)="scrollTo('services')" class="text-base text-[#F7F4EF] hover:text-[#E06732] transition-colors duration-200 cursor-pointer">Nos Services</a>
-        <a (click)="scrollTo('process')" class="text-base text-[#F7F4EF] hover:text-[#E06732] transition-colors duration-200 cursor-pointer">Notre Méthode</a>
-        <a (click)="scrollTo('portfolio')" class="text-base text-[#F7F4EF] hover:text-[#E06732] transition-colors duration-200 cursor-pointer">Nos Réalisations</a>
+        <a (click)="scrollTo('about')" class="text-base header-nav-link hover:text-[#E06732] transition-colors duration-200 cursor-pointer">À Propos</a>
+        <a (click)="scrollTo('services')" class="text-base header-nav-link hover:text-[#E06732] transition-colors duration-200 cursor-pointer">Nos Services</a>
+        <a (click)="scrollTo('process')" class="text-base header-nav-link hover:text-[#E06732] transition-colors duration-200 cursor-pointer">Notre Méthode</a>
+        <a (click)="scrollTo('portfolio')" class="text-base header-nav-link hover:text-[#E06732] transition-colors duration-200 cursor-pointer">Nos Réalisations</a>
         <button (click)="navigateTo('contact')" class="text-base bg-[#E06732] text-white font-semibold px-5 py-2 rounded-lg hover:bg-[#C85A28] transition-all duration-300 shadow-sm hover:shadow-md">
           Nous Contacter
         </button>
       </div>
       <div class="md:hidden">
-        <button (click)="toggleMenu()" class="text-[#F7F4EF] focus:outline-none">
+        <button (click)="toggleMenu()" class="header-nav-link focus:outline-none">
           @if (!isMenuOpen()) {
             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
           } @else {
@@ -75,11 +75,11 @@
 <div class="md:hidden fixed top-0 right-0 h-auto w-60 bg-[rgba(255,255,255,0.1)] backdrop-blur-md shadow-2xl z-50 flex flex-col pt-20 px-6 gap-2 transition-transform duration-300 ease-in-out rounded-bl-2xl"
      [class.translate-x-0]="isMenuOpen()"
      [class.translate-x-full]="!isMenuOpen()">
-  <a (click)="scrollTo('about')" class="block py-3 px-4 rounded-lg text-[#F7F4EF] hover:bg-[rgba(255,255,255,0.2)] hover:text-[#E06732] cursor-pointer transition-colors">À Propos</a>
-  <a (click)="scrollTo('services')" class="block py-3 px-4 rounded-lg text-[#F7F4EF] hover:bg-[rgba(255,255,255,0.2)] hover:text-[#E06732] cursor-pointer transition-colors">Nos Services</a>
-  <a (click)="scrollTo('process')" class="block py-3 px-4 rounded-lg text-[#F7F4EF] hover:bg-[rgba(255,255,255,0.2)] hover:text-[#E06732] cursor-pointer transition-colors">Notre Méthode</a>
-  <a (click)="scrollTo('portfolio')" class="block py-3 px-4 rounded-lg text-sm sm:text-base text-[#F7F4EF] hover:bg-[rgba(255,255,255,0.2)] hover:text-[#E06732] cursor-pointer transition-colors">Nos Réalisations</a>
-  <a (click)="navigateTo('contact')" class="block py-3 px-4 rounded-lg text-[#F7F4EF] hover:bg-[rgba(255,255,255,0.2)] hover:text-[#E06732] cursor-pointer transition-colors">Nous Contacter</a>
+  <a (click)="scrollTo('about')" class="block py-3 px-4 rounded-lg header-nav-link hover:bg-[rgba(255,255,255,0.2)] hover:text-[#E06732] cursor-pointer transition-colors">À Propos</a>
+  <a (click)="scrollTo('services')" class="block py-3 px-4 rounded-lg header-nav-link hover:bg-[rgba(255,255,255,0.2)] hover:text-[#E06732] cursor-pointer transition-colors">Nos Services</a>
+  <a (click)="scrollTo('process')" class="block py-3 px-4 rounded-lg header-nav-link hover:bg-[rgba(255,255,255,0.2)] hover:text-[#E06732] cursor-pointer transition-colors">Notre Méthode</a>
+  <a (click)="scrollTo('portfolio')" class="block py-3 px-4 rounded-lg text-sm sm:text-base header-nav-link hover:bg-[rgba(255,255,255,0.2)] hover:text-[#E06732] cursor-pointer transition-colors">Nos Réalisations</a>
+  <a (click)="navigateTo('contact')" class="block py-3 px-4 rounded-lg header-nav-link hover:bg-[rgba(255,255,255,0.2)] hover:text-[#E06732] cursor-pointer transition-colors">Nous Contacter</a>
 </div>
 
   <!-- Overlay sombre derrière le menu -->
