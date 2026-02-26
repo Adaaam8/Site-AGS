@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, signal, effect, PLATFORM_ID, Inject, AfterViewChecked } from '@angular/core';
+import { Component, ChangeDetectionStrategy, signal, effect, PLATFORM_ID, Inject, AfterViewChecked, HostListener } from '@angular/core';
 import { isPlatformBrowser, CommonModule, NgOptimizedImage } from '@angular/common';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { ContactComponent } from './contact/contact.component';
@@ -227,21 +227,6 @@ ngAfterViewChecked(): void {
       this.videoStarted = true;
     }
   }
-
-  // IntersectionObserver pour détecter la couleur de fond des sections
-  if (isPlatformBrowser(this.platformId)) {
-    const sections = document.querySelectorAll('section, [id="hero"], [id="services"], .relative.bg-white');
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const bg = window.getComputedStyle(entry.target).backgroundColor;
-          this.headerDark.set(this.isLightColor(bg));
-        }
-      });
-    }, { threshold: 0.3 });
-
-    sections.forEach(s => observer.observe(s));
-  }
 }
   sanitizeHtml(html: string): SafeHtml {
     return this.sanitizer.bypassSecurityTrustHtml(html);
@@ -311,11 +296,25 @@ ngAfterViewChecked(): void {
     window.location.href = 'tel:0782928620';
   }
 
-  private isLightColor(rgb: string): boolean {
-    const values = rgb.match(/\d+/g);
-    if (!values || values.length < 3) return false;
-    const [r, g, b] = values.slice(0, 3).map(Number);
+  @HostListener('window:scroll')
+  onScroll(): void {
+    if (!isPlatformBrowser(this.platformId)) return;
+
+    const header = document.querySelector('header');
+    if (!header) return;
+
+    const headerBottom = header.getBoundingClientRect().bottom;
+    const elementBelow = document.elementFromPoint(window.innerWidth / 2, headerBottom + 1);
+
+    if (!elementBelow) return;
+
+    const bg = window.getComputedStyle(elementBelow).backgroundColor;
+    const values = bg.match(/\d+/g);
+
+    if (!values) return;
+
+    const [r, g, b] = values.map(Number);
     const luminance = 0.299 * r + 0.587 * g + 0.114 * b;
-    return luminance > 128; // clair = texte foncé
+    this.headerDark.set(luminance > 128);
   }
 }
