@@ -8,7 +8,7 @@
 }
 
 .portfolio-v2 {
-  background: var(--cream);
+  background: #FFF7ED;
   min-height: 100vh;
   font-family: 'Syne', 'Cormorant Garamond', sans-serif;
   overflow: hidden;
@@ -37,7 +37,7 @@
 
 .pf-label {
   font-size: 0.875rem;
-  font-weight: 700;
+  font-weight: 600;
   letter-spacing: 0.3em;
   text-transform: uppercase;
   color: var(--orange);
@@ -46,7 +46,7 @@
 
 .pf-title {
   font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(3.5rem, 8vw, 7rem);
+  font-size: clamp(3rem, 7vw, 5.5rem);
   font-weight: 300;
   line-height: 0.9;
   color: var(--ink);

@@ -1,5 +1,5 @@
 import { Component, ChangeDetectionStrategy, signal, effect, PLATFORM_ID, Inject, AfterViewChecked, HostListener } from '@angular/core';
-import { isPlatformBrowser, CommonModule, NgOptimizedImage } from '@angular/common';
+import { isPlatformBrowser, CommonModule } from '@angular/common';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { ContactComponent } from './contact/contact.component';
 import { PortfolioV2Component } from './portfolio/portfolio.component';
@@ -48,7 +48,7 @@ interface Project {
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [CommonModule, NgOptimizedImage, ContactComponent, PortfolioV2Component, CookieBannerComponent, HeroComponent]
+  imports: [CommonModule, ContactComponent, PortfolioV2Component, CookieBannerComponent, HeroComponent]
 })
 export class AppComponent implements AfterViewChecked{
   isMenuOpen = signal(false);

@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, signal, effect } from '@angular/core';
+import { Component, OnInit, OnDestroy, signal, effect, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 interface Project {
@@ -15,6 +15,8 @@ interface Project {
   imports: [CommonModule]
 })
 export class PortfolioV2Component implements OnInit, OnDestroy {
+  @Output() contactClick = new EventEmitter<void>();
+
   projects = signal<Project[]>([
     {
       title: "Agence Martin & Co.",
@@ -109,5 +111,9 @@ export class PortfolioV2Component implements OnInit, OnDestroy {
 
   onItemClick(index: number): void {
     this.goTo(index);
+  }
+
+  onContactClick(): void {
+    this.contactClick.emit();
   }
 }

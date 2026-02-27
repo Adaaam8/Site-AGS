@@ -27,14 +27,24 @@
     max-height: 0;
     opacity: 0;
     overflow: hidden;
-    transition: max-height 0.7s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.7s ease-out;
     pointer-events: none;
+    transform: translateY(-10px);
+    transition: max-height 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                opacity 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   }
 
   .service-expandable.expanded {
     max-height: 600px;
     opacity: 1;
     pointer-events: auto;
+    transform: translateY(0);
+  }
+
+  /* Syne font for section titles */
+  .font-syne {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
   }
 </style>
 
@@ -97,14 +107,14 @@
     <main>
 
       <!-- About Section -->
-      <section id="about" class="py-24 md:py-40">
+      <section id="about" class="py-24 md:py-40 bg-orange-50">
         <div class="container mx-auto px-6">
           <div class="grid md:grid-cols-2 gap-8 md:gap-6 items-center">
             <div class="flex justify-center order-2 md:order-1">
               <img src="assets/About-bg.jpg" alt="Équipe AGS Concept en réunion" class="rounded-lg shadow-2xl h-auto w-full max-h-full md:max-w-2xl object-cover">
             </div>
             <div class="text-left order-1 md:order-2 md:pl-4">
-              <span class="text-[#E06732] text-sm tracking-widest uppercase mb-4 block font-bold">À Propos de Nous</span>
+              <span class="text-[#E06732] text-sm tracking-widest uppercase mb-4 block font-semibold font-syne">À Propos de Nous</span>
               <h2 class="text-3xl md:text-5xl font-bold text-gray-900 mb-6">Votre partenaire pour une présence en ligne réussie.</h2>
               <p class="text-base md:text-lg text-gray-800 mb-4">
                 Nous créons des sites web performants et des identités de marque conçus pour attirer, convaincre et convertir.
@@ -126,9 +136,9 @@
   <section class="relative py-12 md:py-16">
     <div class="relative z-10 container mx-auto px-6">
       <!-- Header -->
-      <div class="flex flex-col md:flex-row justify-between items-end mb-12 md:mb-20 gap-6">
+      <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 md:mb-20 gap-6">
         <div class="animate-fade-up">
-          <span class="text-[#E06732] text-sm tracking-widest uppercase mb-4 block font-bold">Nos Services Premium</span>
+          <span class="text-[#E06732] text-sm tracking-widest uppercase mb-4 block font-semibold font-syne">Nos Services Premium</span>
           <h2 class="text-3xl md:text-5xl font-bold text-white">Expertise À la Carte</h2>
         </div>
         <div class="animate-fade-up delay-1">
@@ -202,7 +212,7 @@
     <div class="relative z-10 container mx-auto px-6">
       <!-- Header -->
       <div class="text-center mb-16 md:mb-24">
-        <span class="text-[#E06732] text-sm tracking-widest uppercase mb-4 block font-bold">Offres Packagées</span>
+        <span class="text-[#E06732] text-sm tracking-widest uppercase mb-4 block font-semibold font-syne">Offres Packagées</span>
         <h2 class="text-3xl md:text-5xl font-bold text-white mb-6">Nos Packs Stratégiques</h2>
         <p class="text-white/60 max-w-2xl mx-auto font-light text-base md:text-lg">
           Des solutions clés en main pour démarrer fort ou accélérer brutalement.
@@ -257,7 +267,7 @@
       <section id="process" class="py-24 md:py-40 bg-orange-50">
         <div class="container mx-auto px-6">
           <div class="text-center mb-16 md:mb-24">
-            <span class="text-[#E06732] text-sm tracking-widest uppercase mb-4 block font-bold">Notre Méthode</span>
+            <span class="text-[#E06732] text-sm tracking-widest uppercase mb-4 block font-semibold font-syne">Notre Méthode</span>
             <h2 class="text-3xl md:text-5xl font-bold text-gray-900">Un parcours en 4 étapes vers l'excellence.</h2>
           </div>
           
@@ -276,9 +286,21 @@
         </div>
       </section>
 
+      <!-- Elegant Separator -->
+      <div class="relative h-32 md:h-48 bg-gradient-to-b from-orange-50 to-[#F7F4EF] overflow-hidden flex items-center justify-center">
+        <svg class="absolute w-full h-full opacity-10" preserveAspectRatio="none" viewBox="0 0 1440 200" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0,50 Q360,0 720,50 T1440,50 L1440,200 L0,200 Z" fill="#E06732"/>
+        </svg>
+        <div class="relative z-10 flex flex-col items-center gap-3">
+          <div class="w-1 h-1 bg-[#E06732] rounded-full opacity-60"></div>
+          <div class="w-8 h-0.5 bg-gradient-to-r from-transparent via-[#E06732] to-transparent"></div>
+          <div class="w-1 h-1 bg-[#E06732] rounded-full opacity-60"></div>
+        </div>
+      </div>
+
       <!-- Portfolio Section V2 -->
       <section id="portfolio">
-        <app-portfolio-v2></app-portfolio-v2>
+        <app-portfolio-v2 (contactClick)="navigateTo('contact')"></app-portfolio-v2>
       </section>
     </main>
 
