@@ -29,7 +29,7 @@
 /* ── HERO ── */
 .page-hero {
   background: var(--dark) !important;
-  padding: 8rem 2rem 6rem;
+  padding: 3rem 2rem 2rem !important;
   text-align: center;
   position: relative;
   overflow: hidden;
@@ -66,12 +66,12 @@
 
 .page-hero h1 {
   font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(3rem, 7vw, 6rem);
+  font-size: 3.5rem !important;
   font-weight: 300;
   color: var(--light);
   line-height: 1.05;
   position: relative;
-  margin-bottom: 1.5rem;
+  margin-bottom: 0.75rem;
 }
 
 .page-hero h1 em {
@@ -80,7 +80,7 @@
 }
 
 .page-hero p {
-  font-size: 1.1rem;
+  font-size: 0.95rem;
   color: rgba(247,244,239,0.5);
   max-width: 520px;
   margin: 0 auto;
