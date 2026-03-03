@@ -101,7 +101,7 @@
 </div>
 </header>
 
-<div class="relative bg-white text-gray-800">
+<div [class]="'relative text-gray-800 ' + (activeView() === 'services' ? '' : 'bg-white')">
 
   @if (activeView() === 'main') {
     <main>

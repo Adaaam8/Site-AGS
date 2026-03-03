@@ -1,10 +1,11 @@
-import { Component, AfterViewInit, Output, EventEmitter, PLATFORM_ID, Inject } from '@angular/core';
+import { Component, AfterViewInit, Output, EventEmitter, PLATFORM_ID, Inject, ViewEncapsulation } from '@angular/core';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'app-services',
   templateUrl: './services.component.html',
   styleUrl: './services.component.css',
+  encapsulation: ViewEncapsulation.None,
   imports: [CommonModule],
   standalone: true
 })

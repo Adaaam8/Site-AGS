@@ -1,3 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,600&family=Syne:wght@400;500;600;700;800&display=swap');
+
+:host {
+  display: block;
+}
+
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
@@ -10,11 +16,19 @@
   --border: rgba(224, 103, 50, 0.15);
 }
 
-html { scroll-behavior: smooth; }
+.services-wrapper {
+  font-family: 'Syne', sans-serif;
+  background: var(--light) !important;
+  color: var(--dark);
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+  width: 100%;
+  display: block;
+}
 
 /* ── HERO ── */
 .page-hero {
-  background: var(--dark);
+  background: var(--dark) !important;
   padding: 8rem 2rem 6rem;
   text-align: center;
   position: relative;
@@ -288,7 +302,7 @@ html { scroll-behavior: smooth; }
 .service-right {}
 
 .price-card {
-  background: var(--dark);
+  background: var(--dark) !important;
   border-radius: 24px;
   padding: 2.5rem;
   position: sticky;
@@ -364,7 +378,7 @@ html { scroll-behavior: smooth; }
 
 /* ── PACKS SECTION ── */
 .packs-section {
-  background: var(--dark);
+  background: var(--dark) !important;
   padding: 8rem 2rem;
 }
 
@@ -540,7 +554,7 @@ html { scroll-behavior: smooth; }
 
 /* ── CTA FINAL ── */
 .final-cta {
-  background: var(--orange);
+  background: var(--orange) !important;
   padding: 6rem 2rem;
   text-align: center;
 }
