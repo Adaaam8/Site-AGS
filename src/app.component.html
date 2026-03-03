@@ -63,7 +63,7 @@
     </div>
       <div class="hidden md:flex items-center space-x-8">
         <a (click)="scrollTo('about')" class="text-base text-[#E06732] transition-colors duration-200 cursor-pointer">À Propos</a>
-        <a (click)="scrollTo('services')" class="text-base text-[#E06732] transition-colors duration-200 cursor-pointer">Nos Services</a>
+        <a (click)="navigateTo('services')" class="text-base text-[#E06732] transition-colors duration-200 cursor-pointer">Nos Services</a>
         <a (click)="scrollTo('process')" class="text-base text-[#E06732] transition-colors duration-200 cursor-pointer">Notre Méthode</a>
         <a (click)="scrollTo('portfolio')" class="text-base text-[#E06732] transition-colors duration-200 cursor-pointer">Nos Réalisations</a>
         <button (click)="navigateTo('contact')" class="text-base bg-[#E06732] text-white font-semibold px-5 py-2 rounded-lg hover:bg-[#C85A28] transition-all duration-300 shadow-sm hover:shadow-md">
@@ -86,7 +86,7 @@
      [class.translate-x-0]="isMenuOpen()"
      [class.translate-x-full]="!isMenuOpen()">
   <a (click)="scrollTo('about')" class="block py-3 px-4 rounded-lg header-nav-link hover:bg-[rgba(255,255,255,0.2)] hover:text-[#E06732] cursor-pointer transition-colors">À Propos</a>
-  <a (click)="scrollTo('services')" class="block py-3 px-4 rounded-lg header-nav-link hover:bg-[rgba(255,255,255,0.2)] hover:text-[#E06732] cursor-pointer transition-colors">Nos Services</a>
+  <a (click)="navigateTo('services')" class="block py-3 px-4 rounded-lg header-nav-link hover:bg-[rgba(255,255,255,0.2)] hover:text-[#E06732] cursor-pointer transition-colors">Nos Services</a>
   <a (click)="scrollTo('process')" class="block py-3 px-4 rounded-lg header-nav-link hover:bg-[rgba(255,255,255,0.2)] hover:text-[#E06732] cursor-pointer transition-colors">Notre Méthode</a>
   <a (click)="scrollTo('portfolio')" class="block py-3 px-4 rounded-lg text-sm sm:text-base header-nav-link hover:bg-[rgba(255,255,255,0.2)] hover:text-[#E06732] cursor-pointer transition-colors">Nos Réalisations</a>
   <a (click)="navigateTo('contact')" class="block py-3 px-4 rounded-lg header-nav-link hover:bg-[rgba(255,255,255,0.2)] hover:text-[#E06732] cursor-pointer transition-colors">Nous Contacter</a>
@@ -317,7 +317,9 @@
       </div>
     </section>
 
-    } @else {
+    } @else if (activeView() === 'services') {
+    <app-services (navigateToContact)="navigateTo('contact')"></app-services>
+  } @else {
     <app-contact (backToHome)="navigateTo('main')"></app-contact>
   }
 

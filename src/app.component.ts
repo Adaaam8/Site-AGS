@@ -5,6 +5,7 @@ import { ContactComponent } from './contact/contact.component';
 import { PortfolioV2Component } from './portfolio/portfolio.component';
 import { CookieBannerComponent } from './cookie-banner/cookie-banner.component';
 import { HeroComponent } from './hero/hero.component';
+import { ServicesComponent } from './services/services.component';
 
 interface Service {
   icon: string;
@@ -48,14 +49,14 @@ interface Project {
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [CommonModule, ContactComponent, PortfolioV2Component, CookieBannerComponent, HeroComponent]
+  imports: [CommonModule, ContactComponent, PortfolioV2Component, CookieBannerComponent, HeroComponent, ServicesComponent]
 })
 export class AppComponent implements AfterViewChecked{
   isMenuOpen = signal(false);
   isScrolled = signal(false);
   headerDark = signal(false);
   currentYear = new Date().getFullYear();
-  activeView = signal<'main' | 'contact'>('main');
+  activeView = signal<'main' | 'contact' | 'services'>('main');
   private videoStarted = false;
 
   services = signal<Service[]>([
@@ -259,7 +260,7 @@ ngAfterViewChecked(): void {
     }
   }
   
-  navigateTo(view: 'main' | 'contact'): void {
+  navigateTo(view: 'main' | 'contact' | 'services'): void {
     this.activeView.set(view);
     this.videoStarted = false; // Reset video state to allow replay when returning to main view
     if (isPlatformBrowser(this.platformId)) {
