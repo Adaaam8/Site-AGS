@@ -232,3 +232,56 @@
 .bg-gradient-radial {
   background: radial-gradient(circle, rgba(224,103,50,0.06) 0%, transparent 70%);
 }
+
+/* Page Hero */
+.page-hero {
+  background: #0F1923 !important;
+  padding: 3rem 2rem 2rem !important;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.page-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 60% 60% at 50% 100%, rgba(224,103,50,0.12) 0%, transparent 70%);
+}
+
+.page-hero-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: #E06732;
+  margin-bottom: 1.5rem;
+  position: relative;
+}
+
+.page-hero h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 3.5rem;
+  font-weight: 300;
+  color: #F7F4EF;
+  line-height: 1.05;
+  position: relative;
+  margin-bottom: 0.75rem;
+}
+
+.page-hero h1 em {
+  font-style: italic;
+  color: #E06732;
+}
+
+.page-hero p {
+  font-size: 0.95rem;
+  color: rgba(247,244,239,0.5);
+  max-width: 520px;
+  margin: 0 auto;
+  line-height: 1.7;
+  position: relative;
+}
