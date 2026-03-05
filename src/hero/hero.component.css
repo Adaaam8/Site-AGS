@@ -9,8 +9,8 @@
 :root {
   --orange: #E06732;
   --orange-dim: rgba(224, 103, 50, 0.15);
-  --dark: #0C0F14;
-  --dark-2: #111520;
+  --dark:#0F1923;
+  --dark-2: #1a2332;
   --light: #F7F4EF;
   --muted: rgba(247, 244, 239, 0.4);
 }
@@ -19,7 +19,7 @@
   display: block;
   width: 100%;
   height: 100vh;
-  background: #0C0F14 !important;
+  background: #0F1923 !important;
   overflow: hidden !important;
   margin: 0;
   padding: 0;
@@ -49,7 +49,7 @@
   content: '';
   position: absolute;
   inset: 0;
-  background: radial-gradient(ellipse 60% 50% at 50% 60%, rgba(224,103,50,0.08) 0%, transparent 70%);
+  background: radial-gradient(ellipse 60% 60% at 50% 100%, rgba(224,103,50,0.12) 0%, transparent 70%);
   z-index: 1;
   pointer-events: none;
 }
