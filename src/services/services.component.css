@@ -117,7 +117,7 @@
   font-weight: 600;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: #6B7280;
+  color: #9CA3AF;
   cursor: pointer;
   border: 1.5px solid #D1D5DB;
   transition: all 0.25s ease;
@@ -130,9 +130,9 @@
 
 .nav-item:hover,
 .nav-item.active {
-  color: #ffffff;
-  background: var(--orange);
-  border-color: #E06732;
+  color: #FF6B00;
+  background: transparent;
+  border-color: #FF6B00;
 }
 
 /* ── LAYOUT ── */
