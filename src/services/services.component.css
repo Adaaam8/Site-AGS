@@ -95,7 +95,6 @@
   z-index: 100;
   background: rgba(247,244,239,0.95);
   backdrop-filter: blur(12px);
-  border-bottom: 1px solid var(--border);
   padding: 0 2rem;
 }
 
