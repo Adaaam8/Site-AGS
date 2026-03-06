@@ -277,7 +277,7 @@
 
 /* Page Hero */
 .page-hero {
-  height: 6rem;
+  min-height: 6rem;
   background: #0F1923 !important;
   padding: 6rem 2rem 2rem !important;
   text-align: center;
