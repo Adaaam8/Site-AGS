@@ -111,28 +111,28 @@ export class AppComponent implements AfterViewChecked{
       title: "Site Vitrine Haut de Gamme",
       desc: "Pour les consultants, cabinets et marques de luxe.",
       detail: "Design immersif, storytelling captivant, crédibilité instantanée. Une vitrine qui travaille pour vous 24/7.",
-      price: "À partir de 500€",
+      price: "À partir de 650€",
       tags: ["Web Design", "Copywriting", "Direction Artistique"]
     },
     {
       title: "E-commerce & Conversion",
       desc: "Pour les marques qui veulent scaler.",
       detail: "Expérience d'achat fluide, optimisation du panier moyen, rapidité. Transformez vos visiteurs en clients fidèles.",
-      price: "À partir de 800€",
+      price: "À partir de 1000€",
       tags: ["Shopify/WooCommerce", "CRO", "Paiement"]
     },
     {
       title: "Branding & Identité",
       desc: "Pour ceux qui veulent être inoubliables.",
       detail: "Logos, chartes graphiques, ton de marque, univers visuel complet. Créez une marque qui résonne.",
-      price: "À partir de 200€",
+      price: "À partir de 400€",
       tags: ["Logo", "Charte", "Brand Book"]
     },
     {
       title: "SEO & Visibilité",
       desc: "Pour dominer votre marché.",
       detail: "Stratégie de contenu, référencement technique, acquisition qualifiée. Soyez visible là où vos clients cherchent.",
-      price: "À partir de 20€/mois",
+      price: "À partir de 150€/mois",
       tags: ["SEO", "Content", "Analytics"]
     }
   ]);
@@ -142,7 +142,7 @@ export class AppComponent implements AfterViewChecked{
   packs = signal<Pack[]>([
     {
       name: "Essentiel",
-      price: "700€",
+      price: "900€",
       desc: "L'indispensable pour démarrer avec une image forte.",
       features: [
         "Identité Visuelle (Logo + Charte)",
@@ -154,7 +154,7 @@ export class AppComponent implements AfterViewChecked{
     },
     {
       name: "Performance",
-      price: "1 100€",
+      price: "1 400€",
       desc: "Pour les entreprises qui veulent accélérer leur croissance.",
       features: [
         "Tout du pack Essentiel",
@@ -168,7 +168,7 @@ export class AppComponent implements AfterViewChecked{
     },
     {
       name: "E-Commerce Elite",
-      price: "2 000€",
+      price: "2 500€",
       desc: "Une boutique en ligne conçue pour la conversion massive.",
       features: [
         "Shopify ou WooCommerce",

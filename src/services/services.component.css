@@ -68,7 +68,7 @@
 
 .page-hero h1 {
   font-family: 'Cormorant Garamond', serif;
-  font-size: 6rem !important;
+  font-size: 6rem;
   font-weight: 300;
   color: var(--light);
   line-height: 1.05;
