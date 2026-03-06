@@ -128,11 +128,15 @@
   font-family: inherit;
 }
 
-.nav-item:hover,
-.nav-item.active {
+.nav-item:hover {
   color: #FF6B00;
   background: transparent;
   border-color: #FF6B00;
+}
+
+.nav-item.active {
+  color: #9CA3AF;
+  border-color: #D1D5DB;
 }
 
 /* ── LAYOUT ── */
