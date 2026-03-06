@@ -117,9 +117,9 @@
   font-weight: 600;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: #9CA3AF;
+  color: #6B7280;
   cursor: pointer;
-  border: 1.5px solid #D1D5DB;
+  border: 1.5px solid #9CA3AF;
   transition: all 0.25s ease;
   border-radius: 0.5rem;
   white-space: nowrap;
@@ -135,8 +135,8 @@
 }
 
 .nav-item.active {
-  color: #9CA3AF;
-  border-color: #D1D5DB;
+  color: #6B7280;
+  border-color: #9CA3AF;
 }
 
 /* ── LAYOUT ── */
