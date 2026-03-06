@@ -93,7 +93,7 @@
 @keyframes navTakeoff {
   0% {
     opacity: 0;
-    transform: translateY(-80px);
+    transform: translateY(-150px);
   }
   50% {
     opacity: 0.7;
