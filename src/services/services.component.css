@@ -319,6 +319,10 @@
   flex-wrap: wrap;
 }
 
+
+.service-right {
+  margin-top: 3rem;
+}
 .btn-orange {
   padding: 0.85rem 2rem;
   background: var(--orange);
