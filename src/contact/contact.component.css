@@ -75,9 +75,9 @@
   --orange: #E06732;
   --orange-dark: #C85A28;
   --orange-light: #FDF0EA;
-  --dark: #0F172A;
+  --dark: #0F1923;
   --light: #F7F4EF;
-  --navy: #0F172A;
+  --navy: #0F1923;
   --navy2: #1E293B;
   --muted: #64748B;
   --white: #ffffff;
@@ -347,4 +347,57 @@
 }
 .hero {
   background-color: #F7F4EF;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .page-hero {
+    padding: 4rem 1.5rem 2rem !important;
+  }
+
+  .page-hero-label {
+    font-size: 0.6rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .page-hero h1 {
+    font-size: 2.5rem !important;
+    margin-top: 0 !important;
+    margin-bottom: 0.5rem;
+  }
+
+  .page-hero p {
+    font-size: 0.85rem;
+  }
+
+  .hero {
+    padding: 4rem 1.5rem 2rem !important;
+    gap: 2rem !important;
+  }
+
+  .hero-left {
+    padding: 0 !important;
+  }
+
+  .hero-right {
+    padding: 0 !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .page-hero {
+    padding: 3rem 1rem 1.5rem !important;
+  }
+
+  .page-hero h1 {
+    font-size: 1.75rem !important;
+  }
+
+  .page-hero p {
+    font-size: 0.8rem;
+  }
+
+  .hero {
+    padding: 2rem 1rem !important;
+  }
 }
