@@ -112,7 +112,6 @@
   z-index: 1;
   margin-top: -20px;
   background: var(--light);
-  animation: navTakeoff 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.3s forwards;
 }
 .services-nav-inner {
   position: relative;
@@ -157,6 +156,26 @@
 .nav-item.active {
   color: #6B7280;
   border-color: #6B7280;
+
+.nav-item:nth-child(1) {
+  animation: navTakeoff 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.3s forwards;
+}
+
+.nav-item:nth-child(2) {
+  animation: navTakeoff 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.45s forwards;
+}
+
+.nav-item:nth-child(3) {
+  animation: navTakeoff 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.6s forwards;
+}
+
+.nav-item:nth-child(4) {
+  animation: navTakeoff 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.75s forwards;
+}
+
+.nav-item:nth-child(5) {
+  animation: navTakeoff 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.9s forwards;
+}
 }
 
 /* ── LAYOUT ── */
