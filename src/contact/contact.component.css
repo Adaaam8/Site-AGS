@@ -277,7 +277,7 @@
 
 /* Page Hero */
 .page-hero {
-  background: #0F1923 !important;
+  background: var(--dark) !important;
   padding: 6rem 2rem 2rem !important;
   text-align: center;
   position: relative;
@@ -301,7 +301,7 @@
   font-weight: 700;
   letter-spacing: 0.3em;
   text-transform: uppercase;
-  color: var(--orange);
+  color: #E06732 !important;
   margin-bottom: 1.5rem;
   position: relative;
 }
