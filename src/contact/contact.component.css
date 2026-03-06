@@ -305,6 +305,7 @@
   color: #E06732 !important;
   margin-bottom: 1.5rem;
   position: relative;
+  font-family: 'Syne', sans-serif;
 }
 
 .page-hero-label::before,
