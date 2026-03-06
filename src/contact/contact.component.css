@@ -305,6 +305,7 @@
   color: #E06732 !important;
   margin-bottom: 0.75rem;
   position: relative;
+  z-index: 2;
   font-family: 'Syne', sans-serif;
 }
 
@@ -324,6 +325,7 @@
   color: #F7F4EF;
   line-height: 1.05;
   position: relative;
+  z-index: 2;
   margin-bottom: 0.75rem;
   margin-top: -4rem;
 }
