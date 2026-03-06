@@ -277,7 +277,7 @@
 
 /* Page Hero */
 .page-hero {
-  background: var(--dark) !important;
+  background: #0F1923 !important;
   padding: 6rem 2rem 2rem !important;
   text-align: center;
   position: relative;
