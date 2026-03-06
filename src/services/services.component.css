@@ -91,18 +91,22 @@
 /* ── NAV STICKY SERVICES ── */
 /* ── NAV ANIMATION ── */
 @keyframes navTakeoff {
-  from {
+  0% {
     opacity: 0;
-    transform: translateY(-30px);
+    transform: translateY(-80px);
   }
-  to {
+  50% {
+    opacity: 0.7;
+  }
+  100% {
     opacity: 1;
     transform: translateY(0);
   }
 }
 
+
 .services-nav {
-  animation: navTakeoff 0.6s ease-out 0.4s forwards;
+  animation: navTakeoff 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.3s forwards;
   position: sticky;
   top: 0;
   z-index: 100;
@@ -110,7 +114,6 @@
   backdrop-filter: blur(12px);
   padding: 1rem 2rem;
 }
-
 .services-nav-inner {
   max-width: 1100px;
   margin: 0 auto;
