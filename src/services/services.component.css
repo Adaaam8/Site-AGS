@@ -189,6 +189,7 @@
 
 /* ── SERVICE BLOCK ── */
 .service-block {
+  scroll-margin-top: 100px;
   padding: 7rem 0;
   border-bottom: 1px solid rgba(15,25,35,0.08);
   opacity: 0;
