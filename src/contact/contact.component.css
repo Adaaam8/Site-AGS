@@ -131,7 +131,7 @@
 
 .opt.selected {
   border: 2px solid #E06732;
-  background-color: #E06732;
+  background-color: var(--orange);
   color: white;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
@@ -191,13 +191,13 @@
 
 .pill:hover {
   border-color: rgba(224, 103, 50, 0.6);
-  color: #E06732;
+  color: var(--orange);
   background-color: #FDF0EA;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .pill.selected {
-  background-color: #E06732;
+  background-color: var(--orange);
   border: 2px solid #E06732;
   color: white;
   box-shadow: 0 10px 15px rgba(224, 103, 50, 0.3);
@@ -243,7 +243,7 @@
 }
 
 .btn-next-step:hover:not(:disabled) {
-  background-color: #E06732;
+  background-color: var(--orange);
   transform: translateX(2px);
 }
 
@@ -275,8 +275,8 @@
 
 /* Page Hero */
 .page-hero {
-  background: #0F1923 !important;
-  padding: 3rem 2rem 2rem !important;
+  background: var(--dark) !important;
+  padding: 4rem 2rem 2rem !important;
   text-align: center;
   position: relative;
   overflow: hidden;
@@ -297,16 +297,25 @@
   font-weight: 700;
   letter-spacing: 0.3em;
   text-transform: uppercase;
-  color: #E06732;
+  color: var(--orange);
   margin-bottom: 1.5rem;
   position: relative;
 }
 
+.page-hero-label::before,
+.page-hero-label::after {
+  content: '';
+  width: 40px;
+  height: 1px;
+  background: var(--orange);
+  opacity: 0.4;
+}
+
 .page-hero h1 {
   font-family: 'Cormorant Garamond', serif;
-  font-size: 3.5rem;
+  font-size: 5.5rem !important;
   font-weight: 300;
-  color: #F7F4EF;
+  color: var(--light);
   line-height: 1.05;
   position: relative;
   margin-bottom: 0.75rem;
@@ -314,7 +323,7 @@
 
 .page-hero h1 em {
   font-style: italic;
-  color: #E06732;
+  color: var(--orange);
 }
 
 .page-hero p {
