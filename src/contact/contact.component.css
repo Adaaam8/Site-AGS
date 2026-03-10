@@ -350,9 +350,17 @@
 }
 
 /* Mobile Responsive */
+@media (max-width: 1024px) {
+  .hero {
+    grid-template-columns: 1fr !important;
+    padding: 3rem 1.5rem 2rem !important;
+  }
+}
+
 @media (max-width: 768px) {
   .page-hero {
-    padding: 4rem 1.5rem 2rem !important;
+    padding: 3rem 1.5rem 2rem !important;
+    min-height: auto;
   }
 
   .page-hero-label {
@@ -361,7 +369,7 @@
   }
 
   .page-hero h1 {
-    font-size: 2.5rem !important;
+    font-size: clamp(1.5rem, 5vw, 2.5rem) !important;
     margin-top: 0 !important;
     margin-bottom: 0.5rem;
   }
@@ -371,7 +379,7 @@
   }
 
   .hero {
-    padding: 4rem 1.5rem 2rem !important;
+    padding: 2rem 1.5rem !important;
     gap: 2rem !important;
   }
 
@@ -382,15 +390,20 @@
   .hero-right {
     padding: 0 !important;
   }
+
+  .bg-white {
+    border-radius: 1.5rem !important;
+    padding: 1.5rem !important;
+  }
 }
 
 @media (max-width: 480px) {
   .page-hero {
-    padding: 3rem 1rem 1.5rem !important;
+    padding: 2.5rem 1rem 1.5rem !important;
   }
 
   .page-hero h1 {
-    font-size: 1.75rem !important;
+    font-size: clamp(1.25rem, 4vw, 2rem) !important;
   }
 
   .page-hero p {
@@ -398,6 +411,22 @@
   }
 
   .hero {
-    padding: 2rem 1rem !important;
+    padding: 1.5rem 1rem !important;
+    gap: 1.5rem !important;
+  }
+
+  .bg-white {
+    border-radius: 1.25rem !important;
+    padding: 1.25rem !important;
+  }
+
+  .pill {
+    padding: 0.65rem 1rem;
+    font-size: 0.9rem;
+  }
+
+  .tag {
+    gap: 0.5rem;
+    padding: 0.4rem 0.8rem;
   }
 }

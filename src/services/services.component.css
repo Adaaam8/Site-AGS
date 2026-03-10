@@ -655,8 +655,47 @@
     gap: 3rem;
   }
   .service-inner.reverse { direction: ltr; }
-  .price-card { position: static; }
+  .price-card {
+    position: static;
+    top: auto;
+  }
   .packs-grid { grid-template-columns: 1fr; }
-  .page-hero { padding: 6rem 1.5rem 4rem; }
-  .service-block { padding: 4rem 0; }
+  .page-hero {
+    padding: 4rem 1.5rem 2rem;
+    min-height: auto;
+  }
+  .service-block { padding: 3rem 0; }
+  .service-number {
+    font-size: 3rem;
+    margin-bottom: -0.5rem;
+  }
+  .service-title {
+    font-size: clamp(1.5rem, 4vw, 2rem);
+  }
+  .page-hero h1 {
+    font-size: clamp(2rem, 5vw, 3rem);
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  .service-block { padding: 2rem 0; }
+  .page-hero {
+    padding: 3rem 1rem 1.5rem;
+  }
+  .page-hero h1 {
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
+  }
+  .service-right {
+    margin-top: 2rem;
+  }
+  .packs-section {
+    padding: 4rem 1rem;
+  }
+  .final-cta {
+    padding: 4rem 1rem;
+  }
 }

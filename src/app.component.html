@@ -82,7 +82,7 @@
     </div>
   </div>
   <!-- Mobile Menu -->
-<div class="md:hidden fixed top-0 right-0 h-auto w-60 bg-[rgba(255,255,255,0.1)] backdrop-blur-md shadow-2xl z-50 flex flex-col pt-20 px-6 gap-2 transition-transform duration-300 ease-in-out rounded-bl-2xl"
+<div class="md:hidden fixed top-0 right-0 h-auto w-full sm:w-72 bg-[rgba(255,255,255,0.1)] backdrop-blur-md shadow-2xl z-50 flex flex-col pt-20 px-6 gap-2 transition-transform duration-300 ease-in-out rounded-bl-2xl"
      [class.translate-x-0]="isMenuOpen()"
      [class.translate-x-full]="!isMenuOpen()">
   <a (click)="scrollTo('about')" class="block py-3 px-4 rounded-lg header-nav-link hover:bg-[rgba(255,255,255,0.2)] hover:text-[#E06732] cursor-pointer transition-colors">À Propos</a>
@@ -107,19 +107,19 @@
     <main>
 
       <!-- About Section -->
-      <section id="about" class="py-24 md:py-40 bg-orange-50">
-        <div class="container mx-auto px-6">
-          <div class="grid md:grid-cols-2 gap-8 md:gap-6 items-center">
+      <section id="about" class="py-12 sm:py-20 md:py-40 bg-orange-50">
+        <div class="container mx-auto px-4 sm:px-6">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 md:gap-6 items-center">
             <div class="flex justify-center order-2 md:order-1">
               <img src="assets/About-bg.jpg" alt="Équipe AGS Concept en réunion" class="rounded-lg shadow-2xl h-auto w-full max-h-full md:max-w-2xl object-cover">
             </div>
             <div class="text-left order-1 md:order-2 md:pl-4">
-              <span class="text-[#E06732] text-sm tracking-widest uppercase mb-4 block font-semibold font-syne">À Propos de Nous</span>
-              <h2 class="text-3xl md:text-5xl font-bold text-gray-900 mb-6">Votre partenaire pour une présence en ligne réussie.</h2>
-              <p class="text-base md:text-lg text-gray-800 mb-4">
+              <span class="text-[#E06732] text-xs sm:text-sm tracking-widest uppercase mb-2 sm:mb-4 block font-semibold font-syne">À Propos de Nous</span>
+              <h2 class="text-2xl sm:text-3xl md:text-5xl font-bold text-gray-900 mb-4 sm:mb-6 leading-tight">Votre partenaire pour une présence en ligne réussie.</h2>
+              <p class="text-sm sm:text-base md:text-lg text-gray-800 mb-3 sm:mb-4 leading-relaxed">
                 Nous créons des sites web performants et des identités de marque conçus pour attirer, convaincre et convertir.
               </p>
-              <p class="text-base md:text-lg text-gray-800">
+              <p class="text-sm sm:text-base md:text-lg text-gray-800 leading-relaxed">
                 Chez AGS Concept, nous aidons les entreprises à se démarquer dans un environnement digital saturé. Nous concevons des sites web performants et des identités de marque puissantes, pensés pour attirer l’attention, inspirer confiance et générer des résultats concrets.
               </p>
             </div>
@@ -130,19 +130,19 @@
 <!-- Services & Packs Section (Unified Background) -->
 <div id="services" class="relative bg-gradient-to-b from-gray-900 to-gray-800 text-white overflow-hidden">
   <!-- Gradient Background Blob -->
-  <div class="absolute top-0 right-0 w-96 md:w-[600px] h-96 md:h-[600px] bg-[#E06732]/10 rounded-full blur-[120px] translate-x-1/2 -translate-y-1/2"></div>
+  <div class="absolute top-0 right-0 w-64 sm:w-96 md:w-[600px] h-64 sm:h-96 md:h-[600px] bg-[#E06732]/10 rounded-full blur-[120px] translate-x-1/2 -translate-y-1/2"></div>
 
   <!-- Services Premium Section -->
-  <section class="relative py-12 md:py-16">
-    <div class="relative z-10 container mx-auto px-6">
+  <section class="relative py-8 sm:py-12 md:py-16">
+    <div class="relative z-10 container mx-auto px-4 sm:px-6">
       <!-- Header -->
-      <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 md:mb-20 gap-6">
+      <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-8 sm:mb-12 md:mb-20 gap-4 sm:gap-6">
         <div class="animate-fade-up">
-          <span class="text-[#E06732] text-sm tracking-widest uppercase mb-4 block font-semibold font-syne">Nos Services Premium</span>
-          <h2 class="text-3xl md:text-5xl font-bold text-white">Expertise À la Carte</h2>
+          <span class="text-[#E06732] text-xs sm:text-sm tracking-widest uppercase mb-2 sm:mb-4 block font-semibold font-syne">Nos Services Premium</span>
+          <h2 class="text-2xl sm:text-3xl md:text-5xl font-bold text-white leading-tight">Expertise À la Carte</h2>
         </div>
         <div class="animate-fade-up delay-1">
-          <p class="text-white/60 max-w-md font-light text-base md:text-lg">
+          <p class="text-white/60 max-w-md font-light text-xs sm:text-base md:text-lg leading-relaxed">
             Des solutions sur-mesure pour les entreprises qui visent l'excellence.
           </p>
         </div>
@@ -152,38 +152,38 @@
       <div class="space-y-px bg-white/5 border border-white/10 rounded-2xl md:rounded-3xl overflow-hidden">
         @for (service of serviceCards(); track $index; let i = $index) {
           <div
-            class="group relative p-6 md:p-8 lg:p-10 bg-gray-900 hover:bg-white/[0.03] transition-colors duration-500 cursor-pointer border-b border-white/5 last:border-b-0"
+            class="group relative p-4 sm:p-6 md:p-8 lg:p-10 bg-gray-900 hover:bg-white/[0.03] transition-colors duration-500 cursor-pointer border-b border-white/5 last:border-b-0"
             (click)="toggleService(i)"
             (mouseenter)="expandedServiceIndex.set(i)"
             (mouseleave)="expandedServiceIndex.set(null)"
           >
-            <div class="grid md:grid-cols-12 gap-6 md:gap-8 items-start">
+            <div class="grid md:grid-cols-12 gap-4 sm:gap-6 md:gap-8 items-start">
               <!-- Service Title & Description -->
               <div class="md:col-span-4">
-                <h3 class="text-xl md:text-2xl font-bold mb-2 group-hover:text-[#E06732] transition-colors text-white">
+                <h3 class="text-lg sm:text-xl md:text-2xl font-bold mb-1 sm:mb-2 group-hover:text-[#E06732] transition-colors text-white">
                   {{ service.title }}
                 </h3>
-                <p class="text-white/40 font-light text-sm md:text-base">{{ service.desc }}</p>
+                <p class="text-white/40 font-light text-xs sm:text-sm md:text-base">{{ service.desc }}</p>
               </div>
 
               <!-- Expandable Details -->
               <div class="md:col-span-8">
                 <div class="service-expandable" [class.expanded]="expandedServiceIndex() === i">
-                  <div class="grid md:grid-cols-2 gap-6 md:gap-8 pb-2">
+                  <div class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 md:gap-8 pb-2">
                     <div>
-                      <p class="text-base md:text-lg text-white/80 font-light mb-4">{{ service.detail }}</p>
-                      <div class="flex flex-wrap gap-2">
+                      <p class="text-sm sm:text-base md:text-lg text-white/80 font-light mb-3 sm:mb-4">{{ service.detail }}</p>
+                      <div class="flex flex-wrap gap-1 sm:gap-2">
                         @for (tag of service.tags; track tag) {
-                          <span class="px-3 py-1 text-xs border border-white/10 rounded-full text-white/60 hover:text-[#E06732] hover:border-[#E06732]/50 transition-colors">
+                          <span class="px-2 sm:px-3 py-0.5 sm:py-1 text-xs border border-white/10 rounded-full text-white/60 hover:text-[#E06732] hover:border-[#E06732]/50 transition-colors">
                             {{ tag }}
                           </span>
                         }
                       </div>
                     </div>
-                    <div class="flex flex-col justify-center items-end border-l border-white/10 pl-6">
-                      <span class="text-xs text-white/40 uppercase tracking-widest mb-2">Investissement</span>
-                      <span class="text-2xl md:text-3xl font-bold text-[#E06732] mb-4">{{ service.price }}</span>
-                      <button (click)="navigateTo('contact')" class="bg-[#E06732] text-white font-semibold py-2 px-6 rounded-lg hover:bg-[#C85A28] transition-all duration-300 text-sm">
+                    <div class="flex flex-col justify-center items-start sm:items-end border-l border-white/10 pl-4 sm:pl-6">
+                      <span class="text-xs text-white/40 uppercase tracking-widest mb-1 sm:mb-2">Investissement</span>
+                      <span class="text-2xl md:text-3xl font-bold text-[#E06732] mb-3 sm:mb-4">{{ service.price }}</span>
+                      <button (click)="navigateTo('contact')" class="bg-[#E06732] text-white font-semibold py-1.5 sm:py-2 px-4 sm:px-6 rounded-lg hover:bg-[#C85A28] transition-all duration-300 text-xs sm:text-sm whitespace-nowrap">
                         Discuter du Projet
                       </button>
                     </div>
@@ -208,22 +208,22 @@
   </section>
 
   <!-- Packs Section -->
-  <section class="relative py-12 md:py-16">
-    <div class="relative z-10 container mx-auto px-6">
+  <section class="relative py-8 sm:py-12 md:py-16">
+    <div class="relative z-10 container mx-auto px-4 sm:px-6">
       <!-- Header -->
-      <div class="text-center mb-16 md:mb-24">
-        <span class="text-[#E06732] text-sm tracking-widest uppercase mb-4 block font-semibold font-syne">Offres Packagées</span>
-        <h2 class="text-3xl md:text-5xl font-bold text-white mb-6">Nos Packs Stratégiques</h2>
-        <p class="text-white/60 max-w-2xl mx-auto font-light text-base md:text-lg">
+      <div class="text-center mb-10 sm:mb-16 md:mb-24">
+        <span class="text-[#E06732] text-xs sm:text-sm tracking-widest uppercase mb-2 sm:mb-4 block font-semibold font-syne">Offres Packagées</span>
+        <h2 class="text-2xl sm:text-3xl md:text-5xl font-bold text-white mb-3 sm:mb-6 leading-tight">Nos Packs Stratégiques</h2>
+        <p class="text-white/60 max-w-2xl mx-auto font-light text-xs sm:text-base md:text-lg leading-relaxed">
           Des solutions clés en main pour démarrer fort ou accélérer brutalement.
         </p>
       </div>
 
       <!-- Packs Grid -->
-      <div class="grid md:grid-cols-3 gap-6">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
         @for (pack of packs(); track $index; let i = $index) {
           <div class="animate-fade-up" [style.animation-delay]="(i * 0.1) + 's'">
-            <div [class]="'relative h-full p-8 rounded-2xl border flex flex-col transition-all duration-300 ' + (pack.popular ? 'bg-white/5 border-[#E06732] shadow-2xl shadow-[#E06732]/10' : 'bg-transparent border-white/10 hover:border-white/20')">
+            <div [class]="'relative h-full p-6 sm:p-8 rounded-2xl border flex flex-col transition-all duration-300 ' + (pack.popular ? 'bg-white/5 border-[#E06732] shadow-2xl shadow-[#E06732]/10' : 'bg-transparent border-white/10 hover:border-white/20')">
 
               <!-- Recommandé Badge -->
               @if (pack.popular) {
@@ -233,17 +233,17 @@
               }
 
               <!-- Pack Header -->
-              <div class="mb-8">
-                <h3 class="text-2xl font-bold text-white mb-3">{{ pack.name }}</h3>
-                <div class="text-4xl font-bold text-[#E06732] mb-4">{{ pack.price }}</div>
-                <p class="text-white/50 text-sm leading-relaxed">{{ pack.desc }}</p>
+              <div class="mb-6 sm:mb-8">
+                <h3 class="text-xl sm:text-2xl font-bold text-white mb-2 sm:mb-3">{{ pack.name }}</h3>
+                <div class="text-3xl sm:text-4xl font-bold text-[#E06732] mb-3 sm:mb-4">{{ pack.price }}</div>
+                <p class="text-white/50 text-xs sm:text-sm leading-relaxed">{{ pack.desc }}</p>
               </div>
 
               <!-- Features List -->
-              <ul class="space-y-4 mb-8 flex-1">
+              <ul class="space-y-2 sm:space-y-4 mb-6 sm:mb-8 flex-1">
                 @for (feature of pack.features; track feature) {
-                  <li class="flex items-start gap-3 text-sm text-white/80">
-                    <svg class="w-5 h-5 text-[#E06732] shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                  <li class="flex items-start gap-2 sm:gap-3 text-xs sm:text-sm text-white/80">
+                    <svg class="w-4 sm:w-5 h-4 sm:h-5 text-[#E06732] shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
                       <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
                     </svg>
                     <span>{{ feature }}</span>
@@ -252,7 +252,7 @@
               </ul>
 
               <!-- CTA Button -->
-              <button (click)="scrollTo('contact')" [class]="'w-full py-3 px-6 rounded-lg font-semibold transition-all duration-300 text-sm uppercase tracking-widest ' + (pack.popular ? 'bg-[#E06732] text-white hover:bg-[#C85A28] shadow-lg' : 'border-2 border-white/20 text-white hover:bg-white hover:text-gray-900')">
+              <button (click)="scrollTo('contact')" [class]="'w-full py-2 sm:py-3 px-4 sm:px-6 rounded-lg font-semibold transition-all duration-300 text-xs sm:text-sm uppercase tracking-widest ' + (pack.popular ? 'bg-[#E06732] text-white hover:bg-[#C85A28] shadow-lg' : 'border-2 border-white/20 text-white hover:bg-white hover:text-gray-900')">
                 {{ pack.cta }}
               </button>
             </div>
@@ -264,22 +264,22 @@
 </div>
 
       <!-- Process Section -->
-      <section id="process" class="py-24 md:py-40 bg-orange-50">
-        <div class="container mx-auto px-6">
-          <div class="text-center mb-16 md:mb-24">
-            <span class="text-[#E06732] text-sm tracking-widest uppercase mb-4 block font-semibold font-syne">Notre Méthode</span>
-            <h2 class="text-3xl md:text-5xl font-bold text-gray-900">Un parcours en 4 étapes vers l'excellence.</h2>
+      <section id="process" class="py-12 sm:py-20 md:py-40 bg-orange-50">
+        <div class="container mx-auto px-4 sm:px-6">
+          <div class="text-center mb-10 sm:mb-16 md:mb-24">
+            <span class="text-[#E06732] text-xs sm:text-sm tracking-widest uppercase mb-2 sm:mb-4 block font-semibold font-syne">Notre Méthode</span>
+            <h2 class="text-2xl sm:text-3xl md:text-5xl font-bold text-gray-900 leading-tight">Un parcours en 4 étapes vers l'excellence.</h2>
           </div>
-          
-          <div class="flex overflow-x-auto snap-x snap-mandatory md:grid md:grid-cols-4 md:gap-8 md:overflow-visible pb-4 md:pb-0 -mx-6 px-6 md:mx-0 md:px-0 space-x-6 md:space-x-0">
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 md:gap-8">
             @for (step of processSteps(); track step.step) {
-              <div class="flex-shrink-0 w-[80%] sm:w-1/2 md:w-auto snap-center text-center">
-                  <div class="flex items-center justify-center h-12 w-12 rounded-full bg-[#E06732] text-white font-bold text-lg mx-auto mb-6">
+              <div class="text-center">
+                  <div class="flex items-center justify-center h-10 sm:h-12 w-10 sm:w-12 rounded-full bg-[#E06732] text-white font-bold text-base sm:text-lg mx-auto mb-4 sm:mb-6">
                     {{ step.step }}
                   </div>
-                  <h4 class="text-xl font-bold text-gray-900">{{ step.title }}</h4>
-                  <hr class="my-4 border-[#E06732] max-w-[150px] mx-auto">
-                  <p class="text-gray-800 text-m">{{ step.description }}</p>
+                  <h4 class="text-base sm:text-lg md:text-xl font-bold text-gray-900 mb-2 sm:mb-4">{{ step.title }}</h4>
+                  <hr class="my-2 sm:my-4 border-[#E06732] max-w-[150px] mx-auto">
+                  <p class="text-xs sm:text-sm md:text-base text-gray-800 leading-relaxed">{{ step.description }}</p>
               </div>
             }
           </div>
@@ -305,13 +305,13 @@
     </main>
 
     <!-- CTA Section -->
-    <section class="container mx-auto px-6 relative z-10 pt-20 md:pt-32">
-      <div class="bg-[#E06732] rounded-lg shadow-xl p-6 md:p-12 text-center -mb-20 md:-mb-32 max-w-4xl mx-auto">
-        <h2 class="text-2xl md:text-4xl font-bold text-white mb-3 md:mb-4">Nous contacter</h2>
-        <p class="text-sm md:text-lg text-[#FFF0E9] max-w-3xl mx-auto mb-6 md:mb-8">
+    <section class="container mx-auto px-4 sm:px-6 relative z-10 pt-16 sm:pt-20 md:pt-32">
+      <div class="bg-[#E06732] rounded-lg shadow-xl p-6 sm:p-8 md:p-12 text-center -mb-16 sm:-mb-20 md:-mb-32 max-w-4xl mx-auto">
+        <h2 class="text-xl sm:text-3xl md:text-4xl font-bold text-white mb-2 sm:mb-3 md:mb-4">Nous contacter</h2>
+        <p class="text-xs sm:text-base md:text-lg text-[#FFF0E9] max-w-3xl mx-auto mb-4 sm:mb-6 md:mb-8 leading-relaxed">
           Des questions, des idées ou simplement envie d'échanger ? On est là pour vous répondre et discuter des sujets qui vous intéressent.
         </p>
-        <button (click)="navigateTo(&quot;contact&quot;)" class="bg-transparent border-2 border-white text-white font-semibold px-6 md:px-8 py-2 md:py-3 rounded-lg hover:bg-white hover:text-[#E06732] transition-all duration-300 text-sm md:text-base">
+        <button (click)="navigateTo(&quot;contact&quot;)" class="bg-transparent border-2 border-white text-white font-semibold px-4 sm:px-6 md:px-8 py-2 md:py-3 rounded-lg hover:bg-white hover:text-[#E06732] transition-all duration-300 text-xs sm:text-sm md:text-base whitespace-nowrap">
           Nous contacter
         </button>
       </div>
@@ -324,15 +324,15 @@
   }
 
   <!-- Footer visible sur toutes les pages -->
-  <footer [class]="activeView() === 'main' ? 'bg-[#0F1923] text-gray-400 pt-24 md:pt-44 pb-8 md:pb-12 relative' : 'bg-[#0F1923] text-gray-400 pt-8 md:pt-12 pb-4 relative'">
-      <div class="container mx-auto px-6">
-        <div class="grid md:grid-cols-12 gap-6 md:gap-8 mb-8">
-          <div class="md:col-span-12 lg:col-span-5">
-            <h3 (click)="scrollTo('hero')" class="text-xl md:text-2xl font-bold text-white cursor-pointer flex items-center gap-2 md:gap-3">
-            <img src="assets/logo.png" class="h-10 md:h-12 w-auto">
-            AGS<span class="text-[#E06732] -ml-1">Concept</span>
+  <footer [class]="activeView() === 'main' ? 'bg-[#0F1923] text-gray-400 pt-12 sm:pt-16 md:pt-44 pb-6 sm:pb-8 md:pb-12 relative' : 'bg-[#0F1923] text-gray-400 pt-6 sm:pt-8 md:pt-12 pb-3 sm:pb-4 relative'">
+      <div class="container mx-auto px-4 sm:px-6">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-12 gap-6 sm:gap-8 mb-6 sm:mb-8">
+          <div class="sm:col-span-2 md:col-span-12 lg:col-span-5">
+            <h3 (click)="scrollTo('hero')" class="text-lg sm:text-xl md:text-2xl font-bold text-white cursor-pointer flex items-center gap-2 md:gap-3 mb-3 sm:mb-4">
+            <img src="assets/logo.png" class="h-8 sm:h-10 md:h-12 w-auto">
+            <span>AGS<span class="text-[#E06732] -ml-1">Concept</span></span>
             </h3>
-            <div class="flex space-x-4 mt-4">
+            <div class="flex space-x-4 mt-3 sm:mt-4">
               <a href="#" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-[#E06732] transition-colors">
                 <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 1.17.054 1.97.24 2.43.403a4.08 4.08 0 011.47.96c.458.458.779.924.96 1.47.163.46.349 1.26.403 2.43.058 1.266.07 1.646.07 4.85s-.012 3.584-.07 4.85c-.054 1.17-.24 1.97-.403 2.43a4.08 4.08 0 01-.96 1.47 4.08 4.08 0 01-1.47.96c-.46.163-1.26.349-2.43.403-1.266.058-1.646.07-4.85.07s-3.584-.012-4.85-.07c-1.17-.054-1.97-.24-2.43-.403a4.08 4.08 0 01-1.47-.96 4.08 4.08 0 01-.96-1.47c-.163-.46-.349-1.26-.403-2.43C2.175 15.584 2.163 15.204 2.163 12s.012-3.584.07-4.85c.054-1.17.24-1.97.403-2.43a4.08 4.08 0 01.96-1.47 4.08 4.08 0 011.47-.96c.46-.163 1.26-.349 2.43-.403C8.416 2.175 8.796 2.163 12 2.163M12 0C8.741 0 8.333.014 7.053.072 5.775.13 4.902.333 4.14.63a6.21 6.21 0 00-2.246 1.264A6.21 6.21 0 00.63 4.14C.333 4.902.13 5.775.072 7.053.014 8.333 0 8.741 0 12s.014 3.667.072 4.947c.058 1.278.261 2.151.558 2.913a6.21 6.21 0 001.264 2.246 6.21 6.21 0 002.246 1.264c.762.297 1.635.5 2.913.558C8.333 23.986 8.741 24 12 24s3.667-.014 4.947-.072c1.278-.058 2.151-.261 2.913-.558a6.21 6.21 0 002.246-1.264 6.21 6.21 0 001.264-2.246c.297-.762.5-1.635.558-2.913.058-1.28.072-1.688.072-4.947s-.014-3.667-.072-4.947c-.058-1.278-.261-2.151-.558-2.913a6.21 6.21 0 00-1.264-2.246A6.21 6.21 0 0019.86.63c-.762-.297-1.635-.5-2.913-.558C15.667.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
@@ -343,21 +343,22 @@
               </a>
             </div>
           </div>
-          
-          <div class="md:col-span-2"></div>
 
-          <div class="md:col-span-4 lg:col-span-2">
-            <h4 class="font-semibold text-white mb-4">Nos Services</h4>
-            <ul class="space-y-3">
+
+          <div class="sm:col-span-1 md:col-span-2"></div>
+
+          <div class="sm:col-span-1 md:col-span-4 lg:col-span-2">
+            <h4 class="font-semibold text-white mb-3 sm:mb-4 text-sm sm:text-base">Nos Services</h4>
+            <ul class="space-y-2 sm:space-y-3 text-xs sm:text-sm">
               <li><a (click)="scrollTo('services')" class="hover:text-[#E06732] transition-colors cursor-pointer">Développement Web</a></li>
               <li><a (click)="scrollTo('services')" class="hover:text-[#E06732] transition-colors cursor-pointer">Design & UX/UI</a></li>
               <li><a (click)="scrollTo('services')" class="hover:text-[#E06732] transition-colors cursor-pointer">Référencement (SEO)</a></li>
             </ul>
           </div>
 
-          <div class="md:col-span-4 lg:col-span-2">
-            <h4 class="font-semibold text-white mb-4">Nous Connaître</h4>
-            <ul class="space-y-3">
+          <div class="sm:col-span-1 md:col-span-4 lg:col-span-2">
+            <h4 class="font-semibold text-white mb-3 sm:mb-4 text-sm sm:text-base">Nous Connaître</h4>
+            <ul class="space-y-2 sm:space-y-3 text-xs sm:text-sm">
               <li><a (click)="scrollTo('about')" class="hover:text-[#E06732] transition-colors cursor-pointer">À propos de nous</a></li>
               <li><a (click)="scrollTo('process')" class="hover:text-[#E06732] transition-colors cursor-pointer">Notre Processus</a></li>
               <li><a (click)="scrollTo('portfolio')" class="hover:text-[#E06732] transition-colors cursor-pointer">Nos réalisations</a></li>
@@ -365,9 +366,9 @@
           </div>
         </div>
 
-        <hr class="border-gray-700 my-8">
+        <hr class="border-gray-700 my-6 sm:my-8">
 
-        <div class="flex flex-col-reverse md:flex-row justify-between items-center text-sm">
+        <div class="flex flex-col-reverse gap-4 sm:gap-0 md:flex-row justify-between items-center text-xs sm:text-sm">
 
           <p class="mt-4 md:mt-0">&copy; {{ currentYear }} AGS Concept. Tous droits réservés.</p>
           <div class="flex space-x-6">
@@ -380,8 +381,8 @@
 
 <!-- Scroll to Top Button -->
 @if(isScrolled()) {
-  <button (click)="scrollToTop()" class="fixed bottom-6 md:bottom-8 right-6 md:right-8 bg-[#E06732] text-white rounded-full p-2 md:p-3 shadow-lg hover:bg-[#C85A28] transition-all duration-300 z-50">
-    <svg class="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"></path></svg>
+  <button (click)="scrollToTop()" class="fixed bottom-4 sm:bottom-6 md:bottom-8 right-4 sm:right-6 md:right-8 bg-[#E06732] text-white rounded-full p-1.5 sm:p-2 md:p-3 shadow-lg hover:bg-[#C85A28] transition-all duration-300 z-50">
+    <svg class="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"></path></svg>
   </button>
 }
 
