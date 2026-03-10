@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, signal, effect, PLATFORM_ID, Inject, AfterViewChecked, HostListener } from '@angular/core';
+import { Component, ChangeDetectionStrategy, signal, effect, PLATFORM_ID, Inject, AfterViewChecked, HostListener, ViewChild } from '@angular/core';
 import { isPlatformBrowser, CommonModule } from '@angular/common';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { ContactComponent } from './contact/contact.component';
@@ -6,6 +6,7 @@ import { PortfolioV2Component } from './portfolio/portfolio.component';
 import { CookieBannerComponent } from './cookie-banner/cookie-banner.component';
 import { HeroComponent } from './hero/hero.component';
 import { ServicesComponent } from './services/services.component';
+import { SidebarComponent } from './sidebar/sidebar.component';
 
 interface Service {
   icon: string;
@@ -49,9 +50,11 @@ interface Project {
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [CommonModule, ContactComponent, PortfolioV2Component, CookieBannerComponent, HeroComponent, ServicesComponent]
+  imports: [CommonModule, ContactComponent, PortfolioV2Component, CookieBannerComponent, HeroComponent, ServicesComponent, SidebarComponent]
 })
 export class AppComponent implements AfterViewChecked{
+  @ViewChild(SidebarComponent) sidebar!: SidebarComponent;
+
   isMenuOpen = signal(false);
   isScrolled = signal(false);
   headerDark = signal(false);
@@ -272,7 +275,8 @@ ngAfterViewChecked(): void {
   }
   
   toggleMenu(): void {
-    this.isMenuOpen.update(v => !v);
+    // Use new sidebar component instead of menu signal
+    this.sidebar?.toggleSidebar();
   }
 
   nextProject(): void {

@@ -1,0 +1,45 @@
+/* Hamburger Menu Button */
+.sidebar-toggle {
+  position: relative;
+  width: 44px;
+  height: 44px;
+  background: transparent;
+  border: 1px solid rgba(224, 103, 50, 0.15);
+  border-radius: 0.5rem;
+  cursor: pointer;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  color: #0F1923;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+}
+
+.sidebar-toggle:hover {
+  border-color: #E06732;
+  color: #E06732;
+  background: rgba(224, 103, 50, 0.08);
+}
+
+.sidebar-toggle:active {
+  transform: scale(0.95);
+}
+
+/* Show toggle on mobile */
+@media (max-width: 768px) {
+  .sidebar-toggle {
+    display: flex;
+  }
+}
+
+/* Dark header variant */
+.header-dark .sidebar-toggle {
+  color: #1a1a1a;
+  border-color: rgba(26, 26, 26, 0.15);
+}
+
+.header-dark .sidebar-toggle:hover {
+  color: #E06732;
+  border-color: #E06732;
+  background: rgba(224, 103, 50, 0.08);
+}
