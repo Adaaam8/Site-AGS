@@ -109,6 +109,10 @@
   font-family: 'Syne', sans-serif;
 }
 
+.font-cormorant {
+  font-family: 'Cormorant Garamond', serif;
+}
+
 .letter-spacing-tight {
   letter-spacing: -0.02em;
 }

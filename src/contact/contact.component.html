@@ -24,7 +24,7 @@
         Disponible maintenant
       </div>
 
-      <h1 class="font-extrabold text-2xl sm:text-4xl lg:text-5xl leading-tight text-navy mb-6">
+      <h1 class="font-extrabold text-2xl sm:text-4xl lg:text-5xl leading-tight text-navy mb-6 font-cormorant">
         <span class="block overflow-hidden">
           <span class="block opacity-0 translate-y-full animate-lineUp" style="animation-delay: 0.5s">Votre projet</span>
         </span>
@@ -71,21 +71,21 @@
         <div class="flex items-center gap-4 p-4 border border-slate-200 rounded-2xl bg-white hover:border-orange/30 hover:shadow-lg transition-all">
           <span class="text-2xl flex-shrink-0">🎯</span>
           <div>
-            <strong class="block font-bold text-sm text-navy ">À l'écoute avant tout</strong>
+            <strong class="block font-bold text-sm text-navy font-cormorant">À l'écoute avant tout</strong>
             <span class="text-sm text-muted leading-relaxed">On comprend votre activité avant de proposer quoi que ce soit.</span>
           </div>
         </div>
         <div class="flex items-center gap-4 p-4 border border-slate-200 rounded-2xl bg-white hover:border-orange/30 hover:shadow-lg transition-all">
           <span class="text-2xl flex-shrink-0">💡</span>
           <div>
-            <strong class="block font-bold text-sm text-navy ">Conseils honnêtes</strong>
+            <strong class="block font-bold text-sm text-navy font-cormorant">Conseils honnêtes</strong>
             <span class="text-sm text-muted leading-relaxed">Uniquement ce dont vous avez besoin — rien de superflu.</span>
           </div>
         </div>
         <div class="flex items-center gap-4 p-4 border border-slate-200 rounded-2xl bg-white hover:border-orange/30 hover:shadow-lg transition-all">
           <span class="text-2xl flex-shrink-0">🤝</span>
           <div>
-            <strong class="block font-bold text-sm text-navy ">Transparence totale</strong>
+            <strong class="block font-bold text-sm text-navy font-cormorant">Transparence totale</strong>
             <span class="text-sm text-muted leading-relaxed">Tarifs clairs, délais réalistes, suivi régulier.</span>
           </div>
         </div>
@@ -98,7 +98,7 @@
           <div class="flex gap-4 relative pb-8">
             <div class="w-8 h-8 rounded-full border border-orange/40 bg-orange-light flex items-center justify-center font-bold text-sm text-orange  flex-shrink-0 relative z-10">1</div>
             <div>
-              <strong class="block text-base font-semibold text-navy">On lit votre demande</strong>
+              <strong class="block text-base font-semibold text-navy font-cormorant">On lit votre demande</strong>
               <span class="text-sm text-muted">Analyse approfondie de votre projet sous 24h</span>
             </div>
             <div class="absolute left-4 top-8 w-0.5 h-12 bg-gradient-to-b from-orange/35 to-transparent"></div>
@@ -106,7 +106,7 @@
           <div class="flex gap-4 relative pb-8">
             <div class="w-8 h-8 rounded-full border border-orange/40 bg-orange-light flex items-center justify-center font-bold text-sm text-orange  flex-shrink-0 relative z-10">2</div>
             <div>
-              <strong class="block text-base font-semibold text-navy">Un appel de 15 min</strong>
+              <strong class="block text-base font-semibold text-navy font-cormorant">Un appel de 15 min</strong>
               <span class="text-sm text-muted">Pour affiner ensemble vos besoins</span>
             </div>
             <div class="absolute left-4 top-8 w-0.5 h-12 bg-gradient-to-b from-orange/35 to-transparent"></div>
@@ -114,7 +114,7 @@
           <div class="flex gap-4 relative">
             <div class="w-8 h-8 rounded-full border border-orange/40 bg-orange-light flex items-center justify-center font-bold text-sm text-orange  flex-shrink-0 relative z-10">3</div>
             <div>
-              <strong class="block text-base font-semibold text-navy">Devis personnalisé</strong>
+              <strong class="block text-base font-semibold text-navy font-cormorant">Devis personnalisé</strong>
               <span class="text-sm text-muted">Gratuit, clair, sans mauvaise surprise</span>
             </div>
           </div>
@@ -157,7 +157,7 @@
 
         <div class="mb-8 relative z-10">
           <div class="text-xs sm:text-sm font-bold uppercase tracking-wider text-orange mb-2">Formulaire de contact</div>
-          <div class="text-2xl sm:text-3xl font-extrabold  text-navy leading-tight mb-4">Décrivez-nous<br>votre projet ✦</div>
+          <div class="text-2xl sm:text-3xl font-extrabold  text-navy leading-tight mb-4 font-cormorant">Décrivez-nous<br>votre projet ✦</div>
           <div class="flex flex-wrap gap-2">
             <span class="inline-flex items-center gap-1 sm:gap-2 text-xs sm:text-sm font-medium text-slate-600 bg-slate-100 border border-slate-200 px-2 sm:px-3 py-1 sm:py-1.5 rounded-full">
               <svg class="w-3 h-3 text-orange flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
@@ -256,7 +256,7 @@
               @if (step() === 0 && !stepperDone()) {
                 <div class="animate-stepIn">
                   <div class="text-sm text-orange font-bold mb-3">👋 Bienvenue !</div>
-                  <p class="text-base font-semibold text-navy mb-2">Quel(s) service(s) vous intéresse(nt) ?</p>
+                  <p class="text-base font-semibold text-navy mb-2 font-cormorant">Quel(s) service(s) vous intéresse(nt) ?</p>
                   <p class="text-sm text-muted mb-5">Plusieurs choix possibles</p>
                   <div class="grid grid-cols-2 gap-3">
                     @for (service of ['🌐 Site vitrine', '🛒 E-commerce', '🚀 Landing page', '🎨 Identité visuelle', '🔍 SEO Google', '☁️ Hébergement']; track service) {
@@ -278,7 +278,7 @@
               @if (step() === 1 && !stepperDone()) {
                 <div class="animate-stepIn">
                   <div class="text-sm text-orange font-bold mb-3">✨ Bonne sélection !</div>
-                  <p class="text-base font-semibold text-navy mb-2">Où en êtes-vous actuellement ?</p>
+                  <p class="text-base font-semibold text-navy mb-2 font-cormorant">Où en êtes-vous actuellement ?</p>
                   <p class="text-sm text-muted mb-5">Choisissez la situation la plus proche</p>
                   <div class="space-y-3">
                     @for (option of [
@@ -302,7 +302,7 @@
               @if (step() === 2 && !stepperDone()) {
                 <div class="animate-stepIn">
                   <div class="text-sm text-orange font-bold mb-3">👌 On prend note !</div>
-                  <p class="text-base font-semibold text-navy mb-2">Qu'est-ce qui compte le plus pour vous ?</p>
+                  <p class="text-base font-semibold text-navy mb-2 font-cormorant">Qu'est-ce qui compte le plus pour vous ?</p>
                   <p class="text-sm text-muted mb-5">Plusieurs choix possibles</p>
                   <div class="space-y-3">
                     @for (option of [
@@ -327,7 +327,7 @@
               @if (step() === 3 && !stepperDone()) {
                 <div class="animate-stepIn">
                   <div class="text-sm text-orange font-bold mb-3">🎯 Super !</div>
-                  <p class="text-base font-semibold text-navy mb-2">À qui s'adresse votre projet ?</p>
+                  <p class="text-base font-semibold text-navy mb-2 font-cormorant">À qui s'adresse votre projet ?</p>
                   <p class="text-sm text-muted mb-5">Votre audience cible</p>
                   <div class="space-y-3">
                     @for (option of [
@@ -353,7 +353,7 @@
               @if (step() === 4 && !stepperDone()) {
                 <div class="animate-stepIn">
                   <div class="text-sm text-orange font-bold mb-3">⏱ On y est presque !</div>
-                  <p class="text-base font-semibold text-navy mb-2">Quel est votre délai souhaité ?</p>
+                  <p class="text-base font-semibold text-navy mb-2 font-cormorant">Quel est votre délai souhaité ?</p>
                   <p class="text-sm text-muted mb-5">On planifie selon vos contraintes</p>
                   <div class="space-y-3">
                     @for (option of [
@@ -377,7 +377,7 @@
               @if (step() === 5 && !stepperDone()) {
                 <div class="animate-stepIn">
                   <div class="text-sm text-orange font-bold mb-3">🎉 Dernière étape !</div>
-                  <p class="text-base font-semibold text-navy mb-2">Décrivez votre projet en quelques mots</p>
+                  <p class="text-base font-semibold text-navy mb-2 font-cormorant">Décrivez votre projet en quelques mots</p>
                   <p class="text-sm text-muted mb-5">Votre vision, vos inspirations, vos contraintes… tout est utile !</p>
                   <textarea
                     formControlName="description"
@@ -396,7 +396,7 @@
                 <div class="w-16 h-16 rounded-full bg-gradient-to-br from-orange-light to-orange/20 border-2 border-orange flex items-center justify-center mx-auto mb-6 animate-popIn" style="animation-delay: 0.2s">
                   <svg class="w-8 h-8 text-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
                 </div>
-                <div class="font-bold text-2xl text-navy mb-2 animate-fadeUp" style="animation-delay: 0.3s">Questionnaire complété 🎉</div>
+                <div class="font-bold text-2xl text-navy mb-2 animate-fadeUp font-cormorant" style="animation-delay: 0.3s">Questionnaire complété 🎉</div>
                 <p class="text-base text-muted mb-6 animate-fadeUp" style="animation-delay: 0.4s">On a tout ce qu'il faut pour vous répondre sous 24h.</p>
                 <div class="flex flex-wrap gap-2 justify-center mb-8 animate-fadeUp" id="completedTags" style="animation-delay: 0.5s"></div>
                 <button type="button" class="btn-redo text-sm px-6 py-2 animate-fadeUp" (click)="resetStepper()" style="animation-delay: 0.6s">✏️ Modifier les réponses</button>
@@ -497,21 +497,21 @@
         <div class="w-20 h-20 rounded-full bg-orange-light border border-orange/25 flex items-center justify-center mx-auto mb-4 animate-popIn" style="animation-delay: 0.3s">
           <svg class="w-9 h-9 text-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
         </div>
-        <h2 class="text-2xl font-extrabold  text-navy mb-2 animate-fadeUp" style="animation-delay: 0.4s">C'est envoyé ! 🎉</h2>
+        <h2 class="text-2xl font-extrabold  text-navy mb-2 animate-fadeUp font-cormorant" style="animation-delay: 0.4s">C'est envoyé ! 🎉</h2>
         <p class="text-muted text-sm leading-relaxed animate-fadeUp" style="animation-delay: 0.5s">Votre demande a bien été reçue. On revient vers vous très rapidement avec une proposition adaptée.</p>
       </div>
       <div class="p-8 text-center">
         <div class="grid grid-cols-3 gap-4 mb-6 py-4 border-t  animate-fadeUp" style="animation-delay: 0.6s">
           <div>
-            <p class="text-2xl font-extrabold text-orange ">24h</p>
+            <p class="text-2xl font-extrabold text-orange font-cormorant">24h</p>
             <p class="text-xs text-muted">Délai de réponse</p>
           </div>
           <div>
-            <p class="text-2xl font-extrabold text-orange ">0 €</p>
+            <p class="text-2xl font-extrabold text-orange font-cormorant">0 €</p>
             <p class="text-xs text-muted">Devis gratuit</p>
           </div>
           <div>
-            <p class="text-2xl font-extrabold text-orange ">0</p>
+            <p class="text-2xl font-extrabold text-orange font-cormorant">0</p>
             <p class="text-xs text-muted">Engagement</p>
           </div>
         </div>
