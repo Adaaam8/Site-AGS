@@ -36,13 +36,16 @@ export class ContactComponent implements OnInit, OnDestroy {
     firstName: ['', Validators.required],
     lastName: ['', Validators.required],
     email: ['', [Validators.required, Validators.email]],
-    phone: [''],
-    company: [''],
+    phone: ['', Validators.required],
+    company: ['', Validators.required],
+    postalCode: ['', Validators.required],
+    country: ['', Validators.required],
     projectType: [[] as string[], Validators.required],
     situation: [[] as string[], Validators.required],
     priority: [[] as string[], Validators.required],
     target: [[] as string[], Validators.required],
     deadline: [[] as string[], Validators.required],
+    budget: [[] as string[], Validators.required],
     description: [''],
     message: [''],
     privacy: [false, Validators.requiredTrue]
@@ -66,8 +69,8 @@ export class ContactComponent implements OnInit, OnDestroy {
   private t = 0;
   private mouse = { x: -999, y: -999 };
 
-  totalSteps = 6;
-  encouragements = ['👋 Bienvenue !', '✨ Bonne sélection !', '👌 On prend note !', '🎯 Super !', '⏱ On y est presque !', '🎉 Dernière étape !'];
+  totalSteps = 7;
+  encouragements = ['👋 Bienvenue !', '✨ Bonne sélection !', '👌 On prend note !', '🎯 Super !', '⏱ On y est presque !', '💰 Budget ?', '🎉 Dernière étape !'];
 
   countries = signal([
     { name: 'France', code: 'FR' },
@@ -256,10 +259,10 @@ export class ContactComponent implements OnInit, OnDestroy {
 
   isCurrentStepValid(): boolean {
     const s = this.step();
-    const fields = ['projectType', 'situation', 'priority', 'target', 'deadline', 'description'];
+    const fields = ['projectType', 'situation', 'priority', 'target', 'deadline', 'budget', 'description'];
 
-    // Step 5 (description) est optionnel
-    if (s === 5) {
+    // Step 6 (description) est optionnel
+    if (s === 6) {
       return true;
     }
 
@@ -286,10 +289,10 @@ export class ContactComponent implements OnInit, OnDestroy {
 
   validateStep(s: number): boolean {
     this.stepError.set('');
-    const fields = ['projectType', 'situation', 'priority', 'target', 'deadline', 'description'];
+    const fields = ['projectType', 'situation', 'priority', 'target', 'deadline', 'budget', 'description'];
 
-    // Pour l'étape 5 (description), ce n'est pas obligatoire
-    if (s === 5) {
+    // Pour l'étape 6 (description), ce n'est pas obligatoire
+    if (s === 6) {
       return true;
     }
 
@@ -347,19 +350,19 @@ export class ContactComponent implements OnInit, OnDestroy {
 
     this.isSending.set(true);
 
+    const fullName = `${this.contactForm.value.firstName} ${this.contactForm.value.lastName}`.trim();
     const payload = {
-      firstName: this.contactForm.value.firstName,
-      lastName: this.contactForm.value.lastName,
+      fullName: fullName,
       email: this.contactForm.value.email,
       phone: this.contactForm.value.phone,
       company: this.contactForm.value.company,
+      postalCode: this.contactForm.value.postalCode,
+      country: this.contactForm.value.country,
       projectType: this.contactForm.value.projectType,
-      situation: this.contactForm.value.situation,
-      priority: this.contactForm.value.priority,
-      target: this.contactForm.value.target,
+      budget: this.contactForm.value.budget,
       deadline: this.contactForm.value.deadline,
+      existingAssets: this.contactForm.value.situation || [],
       description: this.contactForm.value.description || '',
-      message: this.contactForm.value.message || '',
     };
 
     this.http.post<{ success: boolean; message: string }>(this.API_URL, payload).subscribe({
@@ -373,6 +376,7 @@ export class ContactComponent implements OnInit, OnDestroy {
           priority: [],
           target: [],
           deadline: [],
+          budget: [],
           description: '',
         });
         this.submitted.set(false);
@@ -414,11 +418,14 @@ export class ContactComponent implements OnInit, OnDestroy {
   get email() { return this.contactForm.get('email'); }
   get phone() { return this.contactForm.get('phone'); }
   get company() { return this.contactForm.get('company'); }
+  get postalCode() { return this.contactForm.get('postalCode'); }
+  get country() { return this.contactForm.get('country'); }
   get projectType() { return this.contactForm.get('projectType'); }
   get situation() { return this.contactForm.get('situation'); }
   get priority() { return this.contactForm.get('priority'); }
   get target() { return this.contactForm.get('target'); }
   get deadline() { return this.contactForm.get('deadline'); }
+  get budget() { return this.contactForm.get('budget'); }
   get description() { return this.contactForm.get('description'); }
   get message() { return this.contactForm.get('message'); }
   get privacy() { return this.contactForm.get('privacy'); }

@@ -224,14 +224,70 @@
 
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label class="block text-xs sm:text-sm font-bold uppercase tracking-widest sm:tracking-wider text-navy2 mb-2">Téléphone <span class="text-slate-400 font-normal text-xs lowercase tracking-normal">optionnel</span></label>
+              <label class="block text-xs sm:text-sm font-bold uppercase tracking-widest sm:tracking-wider text-navy2 mb-2">Téléphone <span class="text-orange">*</span></label>
               <input type="tel" formControlName="phone" placeholder="+33 6 00 00 00 00" (input)="markFilled($event)"
-                     class="w-full bg-slate-50 border border-slate-300 rounded-2xl px-4 py-3 text-navy font-light focus:outline-none focus:ring-2 focus:ring-orange focus:border-transparent transition">
+                     class="w-full bg-slate-50 border border-slate-300 rounded-2xl px-4 py-3 text-navy font-light focus:outline-none focus:ring-2 focus:ring-orange focus:border-transparent transition"
+                     [class.bg-green-50]="phone?.valid && phone?.value"
+                     [class.border-green-400]="phone?.valid && phone?.value"
+                     [class.bg-red-50]="submitted() && phone?.invalid"
+                     [class.border-red-400]="submitted() && phone?.invalid">
+              @if (submitted() && phone?.invalid) {
+                <p class="text-red-600 text-xs mt-1 flex items-center gap-1">
+                  <span>⚠️</span> Merci d'entrer votre téléphone
+                </p>
+              }
             </div>
             <div>
-              <label class="block text-xs sm:text-sm font-bold uppercase tracking-widest sm:tracking-wider text-navy2 mb-2">Société <span class="text-slate-400 font-normal text-xs lowercase tracking-normal">optionnel</span></label>
+              <label class="block text-xs sm:text-sm font-bold uppercase tracking-widest sm:tracking-wider text-navy2 mb-2">Société <span class="text-orange">*</span></label>
               <input type="text" formControlName="company" placeholder="Mon entreprise" (input)="markFilled($event)"
-                     class="w-full bg-slate-50 border border-slate-300 rounded-2xl px-4 py-3 text-navy font-light focus:outline-none focus:ring-2 focus:ring-orange focus:border-transparent transition">
+                     class="w-full bg-slate-50 border border-slate-300 rounded-2xl px-4 py-3 text-navy font-light focus:outline-none focus:ring-2 focus:ring-orange focus:border-transparent transition"
+                     [class.bg-green-50]="company?.valid && company?.value"
+                     [class.border-green-400]="company?.valid && company?.value"
+                     [class.bg-red-50]="submitted() && company?.invalid"
+                     [class.border-red-400]="submitted() && company?.invalid">
+              @if (submitted() && company?.invalid) {
+                <p class="text-red-600 text-xs mt-1 flex items-center gap-1">
+                  <span>⚠️</span> Merci d'entrer votre société
+                </p>
+              }
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs sm:text-sm font-bold uppercase tracking-widest sm:tracking-wider text-navy2 mb-2">Code postal <span class="text-orange">*</span></label>
+              <input type="text" formControlName="postalCode" placeholder="75000" (input)="markFilled($event)"
+                     class="w-full bg-slate-50 border border-slate-300 rounded-2xl px-4 py-3 text-navy font-light focus:outline-none focus:ring-2 focus:ring-orange focus:border-transparent transition"
+                     [class.bg-green-50]="postalCode?.valid && postalCode?.value"
+                     [class.border-green-400]="postalCode?.valid && postalCode?.value"
+                     [class.bg-red-50]="submitted() && postalCode?.invalid"
+                     [class.border-red-400]="submitted() && postalCode?.invalid">
+              @if (submitted() && postalCode?.invalid) {
+                <p class="text-red-600 text-xs mt-1 flex items-center gap-1">
+                  <span>⚠️</span> Merci d'entrer votre code postal
+                </p>
+              }
+            </div>
+            <div>
+              <label class="block text-xs sm:text-sm font-bold uppercase tracking-widest sm:tracking-wider text-navy2 mb-2">Pays <span class="text-orange">*</span></label>
+              <select formControlName="country" (input)="markFilled($event)"
+                     class="w-full bg-slate-50 border border-slate-300 rounded-2xl px-4 py-3 text-navy font-light focus:outline-none focus:ring-2 focus:ring-orange focus:border-transparent transition"
+                     [class.bg-green-50]="country?.valid && country?.value"
+                     [class.border-green-400]="country?.valid && country?.value"
+                     [class.bg-red-50]="submitted() && country?.invalid"
+                     [class.border-red-400]="submitted() && country?.invalid">
+                <option value="" disabled selected>Sélectionner un pays</option>
+                <option value="France">France</option>
+                <option value="Belgique">Belgique</option>
+                <option value="Suisse">Suisse</option>
+                <option value="Canada">Canada</option>
+                <option value="Autre">Autre</option>
+              </select>
+              @if (submitted() && country?.invalid) {
+                <p class="text-red-600 text-xs mt-1 flex items-center gap-1">
+                  <span>⚠️</span> Merci de sélectionner un pays
+                </p>
+              }
             </div>
           </div>
 
@@ -373,8 +429,33 @@
                 </div>
               }
 
-              <!-- Step 5: Description -->
+              <!-- Step 5: Budget -->
               @if (step() === 5 && !stepperDone()) {
+                <div class="animate-stepIn">
+                  <div class="text-sm text-orange font-bold mb-3">💰 Budget !</div>
+                  <p class="text-base font-semibold text-navy mb-2 font-cormorant">Quel est votre enveloppe budgétaire ?</p>
+                  <p class="text-sm text-muted mb-5">Cela nous aide à proposer une solution adaptée</p>
+                  <div class="space-y-3">
+                    @for (option of [
+                      '💚 Moins de 1 000€',
+                      '💛 1 000€ à 5 000€',
+                      '🧡 5 000€ à 10 000€',
+                      '❤️ 10 000€ à 20 000€',
+                      '💜 Plus de 20 000€'
+                    ]; track option) {
+                      <button type="button" class="pill w-full text-left"
+                              (click)="pickPill('budget', option)"
+                              [class.selected]="isSelected('budget', option)"
+                              data-f="budget" [attr.data-v]="option">
+                        {{option}}
+                      </button>
+                    }
+                  </div>
+                </div>
+              }
+
+              <!-- Step 6: Description -->
+              @if (step() === 6 && !stepperDone()) {
                 <div class="animate-stepIn">
                   <div class="text-sm text-orange font-bold mb-3">🎉 Dernière étape !</div>
                   <p class="text-base font-semibold text-navy mb-2 font-cormorant">Décrivez votre projet en quelques mots</p>
