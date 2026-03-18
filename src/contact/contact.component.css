@@ -4,7 +4,18 @@
   display: block;
   margin: 0;
   padding: 0;
-  background: #ffffff;
+  font-family: 'Syne', sans-serif;
+  --orange: #E06732;
+  --orange-light: rgba(224, 103, 50, 0.1);
+  --dark: #0F1923;
+  --dark-2: #1a2332;
+  --light: #F7F4EF;
+  --gray: #6B7280;
+  --border: rgba(224, 103, 50, 0.15);
+  --navy: #0F1923;
+  --navy2: #1E293B;
+  --muted: #64748B;
+  --white: #ffffff;
 }
 
 @keyframes fadeDown {
@@ -70,18 +81,7 @@
   animation: popIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) both;
 }
 
-/* Colors */
-:root {
-  --orange: #E06732;
-  --orange-dark: #C85A28;
-  --orange-light: #FDF0EA;
-  --dark: #0F1923;
-  --light: #F7F4EF;
-  --navy: #0F1923;
-  --navy2: #1E293B;
-  --muted: #64748B;
-  --white: #ffffff;
-}
+/* Colors - defined in :host above */
 
 .text-orange { color: var(--orange); }
 .text-orange-dark { color: var(--orange-dark); }
@@ -281,13 +281,12 @@
 /* Page Hero */
 .page-hero {
   min-height: 6rem;
-  background: #0F1923 !important;
+  z-index: 10;
+  background: var(--dark) !important;
   padding: 6rem 2rem 2rem !important;
   text-align: center;
   position: relative;
   overflow: hidden;
-  width: 100%;
-  z-index: 10;
 }
 
 .page-hero::before {
@@ -308,7 +307,6 @@
   color: #E06732 !important;
   margin-bottom: 1.5rem;
   position: relative;
-  font-family: 'Syne', sans-serif;
 }
 
 .page-hero-label::before,
@@ -316,15 +314,15 @@
   content: '';
   width: 40px;
   height: 1px;
-  background: #E06732;
+  background: var(--orange);
   opacity: 0.4;
 }
 
 .page-hero h1 {
   font-family: 'Cormorant Garamond', serif;
-  font-size: 6rem !important;
+  font-size: 6rem;
   font-weight: 300;
-  color: #F7F4EF;
+  color: var(--light);
   line-height: 1.05;
   position: relative;
   margin-bottom: 0.75rem;
@@ -332,7 +330,7 @@
 
 .page-hero h1 em {
   font-style: italic;
-  color: #E06732;
+  color: var(--orange);
   font-weight: 300;
 }
 
@@ -343,7 +341,6 @@
   margin: 0 auto;
   line-height: 1.7;
   position: relative;
-  font-family: 'Syne', sans-serif;
 }
 .hero {
   background-color: #F7F4EF;
@@ -359,7 +356,7 @@
 
 @media (max-width: 768px) {
   .page-hero {
-    padding: 3rem 1.5rem 2rem !important;
+    padding: 4rem 1.5rem 2rem;
     min-height: auto;
   }
 
@@ -369,8 +366,7 @@
   }
 
   .page-hero h1 {
-    font-size: clamp(1.5rem, 5vw, 2.5rem) !important;
-    margin-top: 0 !important;
+    font-size: clamp(2rem, 5vw, 3rem);
     margin-bottom: 0.5rem;
   }
 
@@ -398,12 +394,17 @@
 }
 
 @media (max-width: 480px) {
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
   .page-hero {
-    padding: 2.5rem 1rem 1.5rem !important;
+    padding: 3rem 1rem 1.5rem;
   }
 
   .page-hero h1 {
-    font-size: clamp(1.25rem, 4vw, 2rem) !important;
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
   }
 
   .page-hero p {
