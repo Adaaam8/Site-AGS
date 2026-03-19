@@ -287,6 +287,17 @@
   color: var(--orange);
 }
 
+button[type="submit"] {
+  transition: all 0.3s ease;
+  box-shadow: 0 0 30px rgba(224, 103, 50, 0.3);
+}
+
+button[type="submit"]:hover:not(:disabled) {
+  background-color: #C85A28 !important;
+  box-shadow: 0 0 50px rgba(224, 103, 50, 0.5) !important;
+  transform: translateY(-2px);
+}
+
 .bg-gradient-radial {
   background: radial-gradient(circle, rgba(224,103,50,0.06) 0%, transparent 70%);
 }
