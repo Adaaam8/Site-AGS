@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,600&family=Syne:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,200;0,300;0,400;0,600;1,300;1,600&family=Syne:wght@400;500;600;700;800&display=swap');
 
 :host {
   display: block;
@@ -116,7 +116,7 @@
 .portfolio-title-style {
   font-family: 'Cormorant Garamond', serif;
   font-size: clamp(3rem, 7vw, 5.5rem);
-  font-weight: 300;
+  font-weight: 200;
   line-height: 0.9;
   color: #0F0E0C;
   letter-spacing: -0.02em;
