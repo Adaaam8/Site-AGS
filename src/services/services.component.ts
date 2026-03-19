@@ -25,23 +25,6 @@ export class ServicesComponent implements AfterViewInit {
     }, { threshold: 0.15 });
 
     document.querySelectorAll('.service-block').forEach(el => observer.observe(el));
-
-    // Nav active
-    const navItems = document.querySelectorAll('.nav-item');
-    const sections = document.querySelectorAll('[id]');
-
-    window.addEventListener('scroll', () => {
-      let current = '';
-      sections.forEach(section => {
-        const htmlElement = section as HTMLElement;
-        if (window.scrollY >= htmlElement.offsetTop - 120) current = section.id;
-      });
-      navItems.forEach(item => {
-        item.classList.remove('active');
-        const href = item.getAttribute('href');
-        if (href === '#' + current) item.classList.add('active');
-      });
-    });
   }
 
   navigateToContactClick(): void {

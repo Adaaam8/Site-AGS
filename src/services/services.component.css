@@ -115,58 +115,42 @@
   }
 }
 
-.services-nav {
-  position: relative;
-  z-index: 1;
+.services-ticker {
+  overflow: hidden;
+  white-space: nowrap;
+  background-color: #f5f0e8;
+  border-top: 1px solid #e0d8cc;
+  border-bottom: 1px solid #e0d8cc;
+  padding: 12px 0;
   margin-top: -20px;
-  background: var(--light);
-  overflow: hidden;
-  border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
-  padding: 0.75rem 0;
-}
-.services-nav-inner {
   position: relative;
   z-index: 1;
-  display: inline-flex;
-  align-items: center;
-  gap: 2.5rem;
-  overflow: hidden;
-  white-space: nowrap;
-  animation: nav-ticker 30s linear infinite;
-  width: 100%;
 }
 
-.nav-item {
-  font-size: 0.65rem;
+.services-ticker-inner {
+  display: inline-block;
+  animation: ticker-scroll 20s linear infinite;
+}
+
+.services-ticker-inner span {
+  font-size: 0.75rem;
   font-weight: 700;
-  letter-spacing: 0.25em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--orange);
-  cursor: pointer;
-  white-space: nowrap;
-  text-decoration: none;
-  background: none;
-  font-family: inherit;
-  border: none;
-  padding: 0;
-  transition: color 0.25s ease;
+  color: #2a2a2a;
+  margin: 0 18px;
+  display: inline-block;
 }
 
-.services-nav-inner .accent {
-  color: var(--orange);
-  font-size: 0.65rem;
+.services-ticker-inner .accent {
+  color: #c0392b;
+  margin: 0;
 }
 
-.nav-item:hover {
-  color: var(--orange);
+@keyframes ticker-scroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
 }
-
-.nav-item.active {
-  color: var(--orange);
-}
-
-/* Animations removed - using ticker animation on parent */
 
 /* ── LAYOUT ── */
 .container {
@@ -639,16 +623,6 @@
 
 /* ── RESPONSIVE ── */
 @media (max-width: 768px) {
-  .services-nav {
-    margin-top: -10px;
-  }
-  .services-nav-inner {
-    gap: 1.75rem;
-  }
-  .nav-item {
-    font-size: 0.65rem;
-    letter-spacing: 0.2em;
-  }
   .service-inner {
     grid-template-columns: 1fr;
     gap: 0.75rem;
@@ -677,17 +651,6 @@
 }
 
 @media (max-width: 480px) {
-  .services-nav {
-    margin-top: 0;
-    padding: 0.5rem 0;
-  }
-  .services-nav-inner {
-    gap: 1.5rem;
-  }
-  .nav-item {
-    font-size: 0.6rem;
-    letter-spacing: 0.2em;
-  }
   .container {
     padding-left: 1rem;
     padding-right: 1rem;
