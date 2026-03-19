@@ -115,7 +115,7 @@
 
 .portfolio-title-style {
   font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(3rem, 7vw, 5.5rem);
+  font-size: clamp(2.2rem, 5vw, 4rem);
   font-weight: 200;
   line-height: 0.9;
   color: #0F0E0C;
