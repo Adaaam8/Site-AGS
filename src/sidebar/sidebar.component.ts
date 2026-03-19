@@ -7,7 +7,7 @@ import { Component, OnInit, OnDestroy, Output, EventEmitter } from '@angular/cor
   standalone: true
 })
 export class SidebarComponent implements OnInit, OnDestroy {
-  @Output() navigate = new EventEmitter<'main' | 'contact' | 'services'>();
+  @Output() navigate = new EventEmitter<'main' | 'contact' | 'services' | 'portfolio'>();
 
   private sidebar: HTMLElement | null = null;
   private backdrop: HTMLElement | null = null;
@@ -93,8 +93,8 @@ export class SidebarComponent implements OnInit, OnDestroy {
 
     // Get the data-page attribute
     const page = link.getAttribute('data-page');
-    if (page === 'services' || page === 'contact' || page === 'home') {
-      this.navigate.emit(page === 'home' ? 'main' : (page as 'contact' | 'services'));
+    if (page === 'services' || page === 'contact' || page === 'portfolio' || page === 'home') {
+      this.navigate.emit(page === 'home' ? 'main' : (page as 'contact' | 'services' | 'portfolio'));
     }
 
     // Close sidebar on mobile

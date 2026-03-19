@@ -59,7 +59,7 @@ export class AppComponent implements AfterViewChecked{
   isScrolled = signal(false);
   headerDark = signal(false);
   currentYear = new Date().getFullYear();
-  activeView = signal<'main' | 'contact' | 'services'>('main');
+  activeView = signal<'main' | 'contact' | 'services' | 'portfolio'>('main');
   private videoStarted = false;
 
   services = signal<Service[]>([
@@ -263,7 +263,7 @@ ngAfterViewChecked(): void {
     }
   }
   
-  navigateTo(view: 'main' | 'contact' | 'services'): void {
+  navigateTo(view: 'main' | 'contact' | 'services' | 'portfolio'): void {
     this.activeView.set(view);
     this.videoStarted = false; // Reset video state to allow replay when returning to main view
     if (isPlatformBrowser(this.platformId)) {

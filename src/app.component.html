@@ -86,7 +86,7 @@
 <!-- New Sidebar Navigation -->
 <app-sidebar (navigate)="navigateTo($event)"></app-sidebar>
 
-<div [class]="'relative text-gray-800 ' + (activeView() === 'services' ? '' : 'bg-white/80 backdrop-blur-sm')">
+<div [class]="'relative text-gray-800 ' + (activeView() === 'services' || activeView() === 'portfolio' ? '' : 'bg-white/80 backdrop-blur-sm')">
 
   @if (activeView() === 'main') {
     <main>
@@ -304,6 +304,8 @@
 
     } @else if (activeView() === 'services') {
     <app-services (navigateToContact)="navigateTo('contact')"></app-services>
+  } @else if (activeView() === 'portfolio') {
+    <app-portfolio-v2 (contactClick)="navigateTo('contact')"></app-portfolio-v2>
   } @else {
     <app-contact (backToHome)="navigateTo('main')"></app-contact>
   }
