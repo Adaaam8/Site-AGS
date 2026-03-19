@@ -290,6 +290,12 @@
 button[type="submit"] {
   transition: all 0.3s ease;
   box-shadow: 0 0 30px rgba(224, 103, 50, 0.3);
+  font-family: 'Syne', sans-serif !important;
+  font-size: 0.8rem !important;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.85rem 2rem !important;
 }
 
 button[type="submit"]:hover:not(:disabled) {
