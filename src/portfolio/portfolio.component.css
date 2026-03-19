@@ -82,7 +82,7 @@
 .pf-ticker-inner {
   display: inline-flex;
   gap: 3rem;
-  animation: ticker 18s linear infinite;
+  animation: ticker 35s linear infinite;
 }
 
 .pf-ticker-inner span {
