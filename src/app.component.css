@@ -15,12 +15,28 @@ header {
 
 .header-nav-link {
   color: #F7F4EF;
+  stroke: #F7F4EF;
+}
+
+.header-nav-link svg {
+  stroke: #F7F4EF;
+  stroke-width: 2;
 }
 
 .header-dark .header-nav-link {
   color: #1a1a1a !important;
+  stroke: #1a1a1a !important;
+}
+
+.header-dark .header-nav-link svg {
+  stroke: #1a1a1a !important;
+  stroke-width: 2;
 }
 
 .header-dark .header-nav-link:hover {
   color: #E06732 !important;
+}
+
+.header-dark .header-nav-link:hover svg {
+  stroke: #E06732 !important;
 }
