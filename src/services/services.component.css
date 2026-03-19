@@ -129,7 +129,7 @@
 
 .services-nav-inner {
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
   gap: 0;
   padding: 0;
