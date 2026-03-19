@@ -316,7 +316,7 @@
                   <p class="text-sm text-muted mb-5">Plusieurs choix possibles</p>
                   <div class="grid grid-cols-2 gap-3">
                     @for (service of ['🌐 Site vitrine', '🛒 E-commerce', '🚀 Landing page', '🎨 Identité visuelle', '🔍 SEO Google', '☁️ Hébergement']; track service) {
-                      <button type="button" class="pill text-center"
+                      <button type="button" class="pill text-center font-cormorant"
                               (click)="toggle('projectType', service.substring(2))"
                               [class.selected]="isSelected('projectType', service.substring(2))"
                               data-f="projectType" [attr.data-v]="service.substring(2)">
@@ -343,7 +343,7 @@
                       '🔄 Je veux une refonte complète',
                       '👁 Je veux plus de visibilité'
                     ]; track option) {
-                      <button type="button" class="pill w-full text-left"
+                      <button type="button" class="pill w-full text-left font-cormorant"
                               (click)="pickPill('situation', option)"
                               [class.selected]="isSelected('situation', option)"
                               data-f="situation" [attr.data-v]="option">
@@ -368,7 +368,7 @@
                       '⚡ Une livraison rapide',
                       '🤝 Un accompagnement sur le long terme'
                     ]; track option) {
-                      <button type="button" class="pill w-full text-left"
+                      <button type="button" class="pill w-full text-left font-cormorant"
                               (click)="toggle('priority', option)"
                               [class.selected]="isSelected('priority', option)"
                               data-f="priority" [attr.data-v]="option">
@@ -394,7 +394,7 @@
                       '🌍 Un public international',
                       '🤷 Je ne sais pas encore'
                     ]; track option) {
-                      <button type="button" class="pill w-full text-left"
+                      <button type="button" class="pill w-full text-left font-cormorant"
                               (click)="pickPill('target', option)"
                               [class.selected]="isSelected('target', option)"
                               data-f="target" [attr.data-v]="option">
@@ -418,7 +418,7 @@
                       '🗓 2 à 3 mois',
                       '😌 Pas de contrainte particulière'
                     ]; track option) {
-                      <button type="button" class="pill w-full text-left"
+                      <button type="button" class="pill w-full text-left font-cormorant"
                               (click)="pickPill('deadline', option)"
                               [class.selected]="isSelected('deadline', option)"
                               data-f="deadline" [attr.data-v]="option">
@@ -443,7 +443,7 @@
                       '❤️ 10 000€ à 20 000€',
                       '💜 Plus de 20 000€'
                     ]; track option) {
-                      <button type="button" class="pill w-full text-left"
+                      <button type="button" class="pill w-full text-left font-cormorant"
                               (click)="pickPill('budget', option)"
                               [class.selected]="isSelected('budget', option)"
                               data-f="budget" [attr.data-v]="option">
