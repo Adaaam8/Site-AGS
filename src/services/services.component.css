@@ -142,7 +142,7 @@
   font-weight: 700;
   letter-spacing: 0.25em;
   text-transform: uppercase;
-  color: var(--muted);
+  color: var(--orange);
   cursor: pointer;
   white-space: nowrap;
   text-decoration: none;
@@ -151,6 +151,11 @@
   border: none;
   padding: 0;
   transition: color 0.25s ease;
+}
+
+.services-nav-inner .accent {
+  color: var(--orange);
+  font-size: 0.65rem;
 }
 
 .nav-item:hover {
