@@ -119,10 +119,10 @@
   overflow: hidden;
   white-space: nowrap;
   background-color: #f5f0e8;
-  border-top: 1px solid #e0d8cc;
-  border-bottom: 1px solid #e0d8cc;
+  border-top: 1px solid #E06732;
+  border-bottom: 1px solid #E06732;
   padding: 12px 0;
-  margin-top: -20px;
+  margin-top: 0px;
   position: relative;
   z-index: 1;
 }
