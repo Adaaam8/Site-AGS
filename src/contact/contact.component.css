@@ -113,6 +113,15 @@
   font-family: 'Cormorant Garamond', serif;
 }
 
+.portfolio-title-style {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(3rem, 7vw, 5.5rem);
+  font-weight: 300;
+  line-height: 0.9;
+  color: #0F0E0C;
+  letter-spacing: -0.02em;
+}
+
 .letter-spacing-tight {
   letter-spacing: -0.02em;
 }
