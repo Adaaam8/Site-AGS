@@ -264,7 +264,7 @@ ngAfterViewChecked(): void {
     }
   }
   
-  navigateTo(view: 'main' | 'contact' | 'services' | 'portfolio'): void {
+  navigateTo(view: 'main' | 'contact' | 'services' | 'portfolio' | 'mentions-legales' | 'politique-confidentialite'): void {
     this.activeView.set(view);
     this.videoStarted = false; // Reset video state to allow replay when returning to main view
     if (isPlatformBrowser(this.platformId)) {
