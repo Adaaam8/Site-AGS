@@ -8,11 +8,17 @@ import { Component, OnInit, OnDestroy, Output, EventEmitter } from '@angular/cor
 })
 export class SidebarComponent implements OnInit, OnDestroy {
   @Output() navigate = new EventEmitter<'main' | 'contact' | 'services' | 'portfolio'>();
+  @Output() scrollRequest = new EventEmitter<string>();
 
   private sidebar: HTMLElement | null = null;
   private backdrop: HTMLElement | null = null;
   private closeBtn: HTMLElement | null = null;
   private links: NodeListOf<Element> | null = null;
+
+  private backdropClickHandler: (() => void) | null = null;
+  private closeBtnHandler: (() => void) | null = null;
+  private keydownHandler: ((e: KeyboardEvent) => void) | null = null;
+  private linkHandlers: Map<Element, (e: Event) => void> = new Map();
 
   ngOnInit(): void {
     this.initSidebar();
@@ -38,48 +44,56 @@ export class SidebarComponent implements OnInit, OnDestroy {
   private attachEventListeners(): void {
     // Backdrop click
     if (this.backdrop) {
-      this.backdrop.addEventListener('click', () => this.closeSidebar());
+      this.backdropClickHandler = () => this.closeSidebar();
+      this.backdrop.addEventListener('click', this.backdropClickHandler);
     }
 
     // Close button click
     if (this.closeBtn) {
-      this.closeBtn.addEventListener('click', () => this.closeSidebar());
+      this.closeBtnHandler = () => this.closeSidebar();
+      this.closeBtn.addEventListener('click', this.closeBtnHandler);
     }
 
     // Link clicks
     if (this.links) {
       this.links.forEach((link) => {
-        link.addEventListener('click', (e) => {
+        const handler = (e: Event) => {
           e.preventDefault();
           this.handleLinkClick(link as HTMLElement);
-        });
+        };
+        this.linkHandlers.set(link, handler);
+        link.addEventListener('click', handler);
       });
     }
 
     // Keyboard escape
-    document.addEventListener('keydown', (e) => {
+    this.keydownHandler = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
         this.closeSidebar();
       }
-    });
+    };
+    document.addEventListener('keydown', this.keydownHandler);
   }
 
   private removeEventListeners(): void {
-    if (this.backdrop) {
-      this.backdrop.removeEventListener('click', () => this.closeSidebar());
+    if (this.backdrop && this.backdropClickHandler) {
+      this.backdrop.removeEventListener('click', this.backdropClickHandler);
     }
-    if (this.closeBtn) {
-      this.closeBtn.removeEventListener('click', () => this.closeSidebar());
+    if (this.closeBtn && this.closeBtnHandler) {
+      this.closeBtn.removeEventListener('click', this.closeBtnHandler);
     }
     if (this.links) {
       this.links.forEach((link) => {
-        link.removeEventListener('click', (e) => {
-          e.preventDefault();
-          this.handleLinkClick(link as HTMLElement);
-        });
+        const handler = this.linkHandlers.get(link);
+        if (handler) {
+          link.removeEventListener('click', handler);
+          this.linkHandlers.delete(link);
+        }
       });
     }
-    document.removeEventListener('keydown', () => {});
+    if (this.keydownHandler) {
+      document.removeEventListener('keydown', this.keydownHandler);
+    }
   }
 
   private handleLinkClick(link: HTMLElement): void {
@@ -95,6 +109,9 @@ export class SidebarComponent implements OnInit, OnDestroy {
     const page = link.getAttribute('data-page');
     if (page === 'services' || page === 'contact' || page === 'portfolio' || page === 'home') {
       this.navigate.emit(page === 'home' ? 'main' : (page as 'contact' | 'services' | 'portfolio'));
+    } else if (page === 'about') {
+      this.navigate.emit('main');
+      this.scrollRequest.emit('about');
     }
 
     // Close sidebar on mobile

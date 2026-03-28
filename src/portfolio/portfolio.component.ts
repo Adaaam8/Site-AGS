@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, signal, effect, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, OnDestroy, signal, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 interface Project {
@@ -52,7 +52,7 @@ export class PortfolioV2Component implements OnInit, OnDestroy {
 
   current = signal(0);
   isTransitioning = signal(false);
-  private autoPlayInterval: any;
+  private autoPlayInterval: ReturnType<typeof setInterval> | null = null;
 
   get total(): number {
     return this.projects().length;

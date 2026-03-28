@@ -7,6 +7,8 @@ import { CookieBannerComponent } from './cookie-banner/cookie-banner.component';
 import { HeroComponent } from './hero/hero.component';
 import { ServicesComponent } from './services/services.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
+import { MentionsLegalesComponent } from './mentions-legales/mentions-legales.component';
+import { PolitiqueConfidentialiteComponent } from './politique-confidentialite/politique-confidentialite.component';
 
 interface Service {
   icon: string;
@@ -50,7 +52,7 @@ interface Project {
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [CommonModule, ContactComponent, PortfolioV2Component, CookieBannerComponent, HeroComponent, ServicesComponent, SidebarComponent]
+  imports: [CommonModule, ContactComponent, PortfolioV2Component, CookieBannerComponent, HeroComponent, ServicesComponent, SidebarComponent, MentionsLegalesComponent, PolitiqueConfidentialiteComponent]
 })
 export class AppComponent implements AfterViewChecked{
   @ViewChild(SidebarComponent) sidebar!: SidebarComponent;
@@ -59,7 +61,7 @@ export class AppComponent implements AfterViewChecked{
   isScrolled = signal(false);
   headerDark = signal(false);
   currentYear = new Date().getFullYear();
-  activeView = signal<'main' | 'contact' | 'services' | 'portfolio'>('main');
+  activeView = signal<'main' | 'contact' | 'services' | 'portfolio' | 'mentions-legales' | 'politique-confidentialite'>('main');
   private videoStarted = false;
 
   services = signal<Service[]>([
@@ -226,9 +228,8 @@ ngAfterViewChecked(): void {
     if (video) {
       video.muted = true;
       video.play().then(() => {
-        this.videoStarted = false;
+        this.videoStarted = true;
       }).catch(() => {});
-      this.videoStarted = true;
     }
   }
 }

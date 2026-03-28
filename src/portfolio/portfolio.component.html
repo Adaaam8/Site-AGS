@@ -16,18 +16,18 @@
   <!-- Ticker -->
   <div class="pf-ticker">
     <div class="pf-ticker-inner">
-      <span>Site Vitrine</span><span class="accent">✦</span>
-      <span>E-commerce</span><span class="accent">✦</span>
-      <span>Image de Marque</span><span class="accent">✦</span>
-      <span>Hébergement</span><span class="accent">✦</span>
-      <span>SEO & Visibilité</span><span class="accent">✦</span>
-      <span>Application Web</span><span class="accent">✦</span>
-      <span>Site Vitrine</span><span class="accent">✦</span>
-      <span>E-commerce</span><span class="accent">✦</span>
-      <span>Image de Marque</span><span class="accent">✦</span>
-      <span>Hébergement</span><span class="accent">✦</span>
-      <span>SEO & Visibilité</span><span class="accent">✦</span>
-      <span>Application Web</span><span class="accent">✦</span>
+      <span>Site Vitrine</span><span class="accent" aria-hidden="true">✦</span>
+      <span>E-commerce</span><span class="accent" aria-hidden="true">✦</span>
+      <span>Image de Marque</span><span class="accent" aria-hidden="true">✦</span>
+      <span>Hébergement</span><span class="accent" aria-hidden="true">✦</span>
+      <span>SEO & Visibilité</span><span class="accent" aria-hidden="true">✦</span>
+      <span>Application Web</span><span class="accent" aria-hidden="true">✦</span>
+      <span>Site Vitrine</span><span class="accent" aria-hidden="true">✦</span>
+      <span>E-commerce</span><span class="accent" aria-hidden="true">✦</span>
+      <span>Image de Marque</span><span class="accent" aria-hidden="true">✦</span>
+      <span>Hébergement</span><span class="accent" aria-hidden="true">✦</span>
+      <span>SEO & Visibilité</span><span class="accent" aria-hidden="true">✦</span>
+      <span>Application Web</span><span class="accent" aria-hidden="true">✦</span>
     </div>
   </div>
 
@@ -38,7 +38,7 @@
     <div class="pf-image-zone" [class.transitioning]="isTransitioning()">
       <img [src]="currentProject.image" [alt]="currentProject.title" loading="lazy">
       <div class="pf-image-overlay"></div>
-      <div class="pf-big-number">{{ bigNumber }}</div>
+      <div class="pf-big-number" aria-hidden="true">{{ bigNumber }}</div>
       <div class="pf-image-tag">{{ currentProject.category }}</div>
     </div>
 
@@ -52,7 +52,7 @@
               <p class="item-cat">{{ project.category }}</p>
               <p class="item-title">{{ project.title }}</p>
             </div>
-            <svg class="item-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            <svg class="item-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
           </li>
         }
       </ul>

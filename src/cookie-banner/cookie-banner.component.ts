@@ -12,13 +12,7 @@ export class CookieBannerComponent implements OnInit {
   isVisible = signal(false);
   showDetails = signal(false);
 
-  constructor(@Inject(PLATFORM_ID) private platformId: Object) {
-    effect(() => {
-      if (isPlatformBrowser(this.platformId)) {
-        // L'effet se déclenche quand isVisible change
-      }
-    });
-  }
+  constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
 
   ngOnInit(): void {
     if (isPlatformBrowser(this.platformId)) {

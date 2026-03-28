@@ -3,8 +3,6 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 
-declare var libphonenumber: any;
-
 interface AnimatedParticle {
   x: number;
   y: number;
@@ -68,6 +66,8 @@ export class ContactComponent implements OnInit, OnDestroy {
   private canvasH = 0;
   private t = 0;
   private mouse = { x: -999, y: -999 };
+  private resizeHandler: (() => void) | null = null;
+  private mouseMoveHandler: ((e: MouseEvent) => void) | null = null;
 
   totalSteps = 7;
   encouragements = ['👋 Bienvenue !', '✨ Bonne sélection !', '👌 On prend note !', '🎯 Super !', '⏱ On y est presque !', '💰 Budget ?', '🎉 Dernière étape !'];
@@ -95,6 +95,12 @@ export class ContactComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     if (this.animationFrameId !== null) {
       cancelAnimationFrame(this.animationFrameId);
+    }
+    if (this.resizeHandler) {
+      window.removeEventListener('resize', this.resizeHandler);
+    }
+    if (this.mouseMoveHandler) {
+      window.removeEventListener('mousemove', this.mouseMoveHandler);
     }
   }
 
@@ -198,7 +204,8 @@ export class ContactComponent implements OnInit, OnDestroy {
         this.animationFrameId = requestAnimationFrame(draw);
       };
 
-      window.addEventListener('resize', resize);
+      this.resizeHandler = resize;
+      window.addEventListener('resize', this.resizeHandler);
       resize();
       draw();
     });
@@ -206,10 +213,11 @@ export class ContactComponent implements OnInit, OnDestroy {
 
   private setupMouseListener(): void {
     this.ngZone.runOutsideAngular(() => {
-      window.addEventListener('mousemove', (e) => {
+      this.mouseMoveHandler = (e: MouseEvent) => {
         this.mouse.x = e.clientX;
         this.mouse.y = e.clientY;
-      });
+      };
+      window.addEventListener('mousemove', this.mouseMoveHandler);
     });
   }
 
@@ -359,10 +367,13 @@ export class ContactComponent implements OnInit, OnDestroy {
       postalCode: this.contactForm.value.postalCode,
       country: this.contactForm.value.country,
       projectType: this.contactForm.value.projectType,
+      priority: this.contactForm.value.priority || [],
+      target: this.contactForm.value.target || [],
       budget: this.contactForm.value.budget,
       deadline: this.contactForm.value.deadline,
       existingAssets: this.contactForm.value.situation || [],
       description: this.contactForm.value.description || '',
+      message: this.contactForm.value.message || '',
     };
 
     this.http.post<{ success: boolean; message: string }>(this.API_URL, payload).subscribe({
@@ -403,6 +414,7 @@ export class ContactComponent implements OnInit, OnDestroy {
       priority: [],
       target: [],
       deadline: [],
+      budget: [],
       description: '',
     });
     this.backToHome.emit();

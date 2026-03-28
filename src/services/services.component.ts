@@ -1,4 +1,4 @@
-import { Component, AfterViewInit, Output, EventEmitter, PLATFORM_ID, Inject, ViewEncapsulation } from '@angular/core';
+import { Component, AfterViewInit, Output, EventEmitter, PLATFORM_ID, Inject, ViewEncapsulation, OnDestroy } from '@angular/core';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 
 @Component({
@@ -9,8 +9,10 @@ import { CommonModule, isPlatformBrowser } from '@angular/common';
   imports: [CommonModule],
   standalone: true
 })
-export class ServicesComponent implements AfterViewInit {
+export class ServicesComponent implements AfterViewInit, OnDestroy {
   @Output() navigateToContact = new EventEmitter<void>();
+
+  private scrollHandler: (() => void) | null = null;
 
   constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
 
@@ -30,7 +32,7 @@ export class ServicesComponent implements AfterViewInit {
     const navItems = document.querySelectorAll('.nav-item');
     const sections = document.querySelectorAll('[id]');
 
-    window.addEventListener('scroll', () => {
+    this.scrollHandler = () => {
       let current = '';
       sections.forEach(section => {
         const htmlElement = section as HTMLElement;
@@ -38,10 +40,21 @@ export class ServicesComponent implements AfterViewInit {
       });
       navItems.forEach(item => {
         item.classList.remove('active');
+        item.removeAttribute('aria-current');
         const href = item.getAttribute('href');
-        if (href === '#' + current) item.classList.add('active');
+        if (href === '#' + current) {
+          item.classList.add('active');
+          item.setAttribute('aria-current', 'page');
+        }
       });
-    });
+    };
+    window.addEventListener('scroll', this.scrollHandler);
+  }
+
+  ngOnDestroy(): void {
+    if (this.scrollHandler) {
+      window.removeEventListener('scroll', this.scrollHandler);
+    }
   }
 
   navigateToContactClick(): void {

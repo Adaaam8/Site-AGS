@@ -84,7 +84,7 @@
 </header>
 
 <!-- New Sidebar Navigation -->
-<app-sidebar (navigate)="navigateTo($event)"></app-sidebar>
+<app-sidebar (navigate)="navigateTo($event)" (scrollRequest)="scrollTo($event)"></app-sidebar>
 
 <div [class]="'relative text-gray-800 ' + (activeView() === 'services' || activeView() === 'portfolio' || activeView() === 'contact' ? '' : 'bg-white/80 backdrop-blur-sm')">
 
@@ -308,6 +308,12 @@
   } @else if (activeView() === 'portfolio') {
     <app-portfolio-v2 (contactClick)="navigateTo('contact')"></app-portfolio-v2>
 
+  } @else if (activeView() === 'mentions-legales') {
+    <app-mentions-legales (backToHome)="navigateTo('main')"></app-mentions-legales>
+
+  } @else if (activeView() === 'politique-confidentialite') {
+    <app-politique-confidentialite (backToHome)="navigateTo('main')"></app-politique-confidentialite>
+
   } @else {
     <app-contact (backToHome)="navigateTo('main')"></app-contact>
   }
@@ -361,8 +367,8 @@
 
           <p class="mt-4 md:mt-0">&copy; {{ currentYear }} AGS Concept. Tous droits réservés.</p>
           <div class="flex space-x-6">
-            <a href="#" class="hover:text-[#E06732] transition-colors">Mentions Légales</a>
-            <a href="#" class="hover:text-[#E06732] transition-colors">Politique de confidentialité</a>
+            <a (click)="navigateTo('mentions-legales')" class="hover:text-[#E06732] transition-colors cursor-pointer">Mentions Légales</a>
+            <a (click)="navigateTo('politique-confidentialite')" class="hover:text-[#E06732] transition-colors cursor-pointer">Politique de confidentialité</a>
           </div>
         </div>
       </div>

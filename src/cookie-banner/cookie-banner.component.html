@@ -1,7 +1,7 @@
 @if (isVisible()) {
-  <div class="cookie-banner-overlay" (click)="rejectCookies()"></div>
+  <div class="cookie-banner-overlay"></div>
 
-  <div class="cookie-banner animate-slideUp">
+  <div class="cookie-banner animate-slideUp" (click)="$event.stopPropagation()">
     <!-- Header du bandeau -->
     <div class="cookie-header">
       <div class="cookie-content">
