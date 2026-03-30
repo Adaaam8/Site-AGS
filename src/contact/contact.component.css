@@ -192,9 +192,9 @@
 
 /* Pills */
 .pill {
-  padding: 1rem 1.25rem;
+  padding: 0.875rem 1.5rem;
   border: 2px solid #cbd5e1;
-  border-radius: 0.75rem;
+  border-radius: 50px;
   font-size: 1rem;
   font-weight: 500;
   cursor: pointer;
@@ -205,10 +205,12 @@
   display: inline-flex;
   align-items: center;
   justify-content: space-between;
-  width: 100%;
+  width: auto;
+  max-width: 100%;
   text-align: left;
   position: relative;
   overflow: hidden;
+  white-space: nowrap;
 }
 
 .pill::before {
@@ -237,14 +239,6 @@
   color: white;
   box-shadow: 0 10px 25px rgba(224, 103, 50, 0.3);
   font-weight: 600;
-}
-
-.pill.selected::after {
-  content: '✓';
-  position: absolute;
-  right: 1rem;
-  font-weight: 700;
-  font-size: 1.1rem;
 }
 
 .btn-prev {
