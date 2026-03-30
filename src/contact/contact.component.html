@@ -578,14 +578,16 @@
     <div class="fixed inset-0 flex items-center justify-center z-40 p-4">
       <div class="bg-white rounded-3xl shadow-2xl w-full max-w-3xl max-h-[90vh] overflow-hidden flex flex-col">
         <!-- Modal Header -->
-        <div class="sticky top-0 bg-white border-b border-slate-200 p-6 flex items-center justify-between">
-          <div>
-            <div class="text-sm font-bold uppercase tracking-wider text-orange mb-1">Formulaire de contact</div>
+        <div class="sticky top-0 bg-white border-b border-slate-200 p-8 flex items-start justify-between">
+          <div class="flex-1">
+            <div class="text-xs font-bold uppercase tracking-widest text-orange mb-3">Formulaire de contact</div>
             @if (selectedService()) {
-              <h3 class="text-lg font-bold text-navy">{{ selectedService() }}</h3>
+              <h2 class="portfolio-title-style mb-0" style="font-size: clamp(2rem, 4vw, 3.2rem); line-height: 1.1;">
+                {{ selectedService() }}<span class="text-orange"> ✦</span>
+              </h2>
             }
           </div>
-          <button (click)="goHome()" class="text-slate-500 hover:text-slate-700 text-2xl leading-none flex-shrink-0">
+          <button (click)="goHome()" class="text-slate-400 hover:text-slate-600 text-3xl leading-none flex-shrink-0 ml-4 transition">
             ×
           </button>
         </div>
