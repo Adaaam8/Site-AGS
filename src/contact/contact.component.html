@@ -594,7 +594,7 @@
             </button>
           </div>
 
-          <form [formGroup]="contactForm" (ngSubmit)="submitForm()" class="p-6 space-y-5">
+          <form [formGroup]="contactForm" (ngSubmit)="submitForm()" class="p-5 space-y-4">
 
             <!-- INFOS PERSO (avant le stepper) -->
             <div class="bg-slate-50 rounded-2xl p-4 mb-4">
@@ -644,7 +644,7 @@
             </div>
 
             <!-- STEPPER SECTION -->
-            <div class="bg-slate-50 border border-slate-300 rounded-2xl p-4">
+            <div class="bg-slate-50 border border-slate-300 rounded-2xl p-3">
               <div class="flex items-center justify-between mb-2">
                 <span class="font-bold text-sm text-navy">🎯 Votre projet</span>
                 <span class="text-xs font-bold text-orange bg-orange-light border border-orange/20 px-2 py-1 rounded-full">{{ step() }} / {{ effectiveTotalSteps() }}</span>
@@ -655,7 +655,7 @@
                      [style.width.%]="(step() / effectiveTotalSteps()) * 100"></div>
               </div>
 
-              <div class="min-h-64 pb-4">
+              <div class="min-h-48 pb-3">
                 <!-- Step 1: Situation -->
                 @if (step() === 1 && !stepperDone()) {
                   <div>
