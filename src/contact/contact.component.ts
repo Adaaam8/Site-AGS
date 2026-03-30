@@ -295,7 +295,17 @@ export class ContactComponent implements OnInit, OnDestroy {
   }
 
   pickPill(field: string, value: string): void {
-    this.contactForm.get(field)?.setValue([value]);
+    const arr = this.contactForm.get(field)?.value as string[];
+    const idx = arr.indexOf(value);
+    if (idx > -1) {
+      // Déjà sélectionné → annuler
+      arr.splice(idx, 1);
+    } else {
+      // Pas sélectionné → sélectionner
+      arr.length = 0; // Vider d'abord (single-select)
+      arr.push(value);
+    }
+    this.contactForm.get(field)?.setValue([...arr]);
     this.showStepError.set(false);
     this.cdr.markForCheck();
   }
