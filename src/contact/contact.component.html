@@ -575,139 +575,257 @@
 
   <!-- MODAL FORM (si venant d'un service) -->
   @if (isModalMode()) {
-    <div class="fixed inset-0 flex items-center justify-center z-40 p-4 top-16">
-      <div class="bg-white rounded-3xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+    <div class="fixed inset-0 flex items-center justify-center z-40 p-4">
+      <div class="bg-white rounded-3xl shadow-2xl w-full max-w-3xl max-h-[90vh] overflow-hidden flex flex-col">
         <!-- Modal Header -->
         <div class="sticky top-0 bg-white border-b border-slate-200 p-6 flex items-center justify-between">
           <div>
-            <div class="text-sm font-bold uppercase tracking-wider text-orange mb-2">Formulaire de contact</div>
+            <div class="text-sm font-bold uppercase tracking-wider text-orange mb-1">Formulaire de contact</div>
             @if (selectedService()) {
-              <h3 class="text-xl font-bold text-navy">{{ selectedService() }}</h3>
+              <h3 class="text-lg font-bold text-navy">{{ selectedService() }}</h3>
             }
           </div>
-          <button (click)="goHome()" class="text-slate-500 hover:text-slate-700 text-2xl leading-none">
+          <button (click)="goHome()" class="text-slate-500 hover:text-slate-700 text-2xl leading-none flex-shrink-0">
             ×
           </button>
         </div>
 
-        <!-- Modal Form -->
-        <div class="p-6">
-          <form [formGroup]="contactForm" (ngSubmit)="submitForm()" class="space-y-4">
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div>
-                <label class="block text-xs font-bold uppercase tracking-wider text-navy2 mb-2">Prénom <span class="text-orange">*</span></label>
-                <input type="text" formControlName="firstName" placeholder="Jean" (input)="markFilled($event)"
-                       class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 text-sm text-navy font-light focus:outline-none focus:ring-2 focus:ring-orange transition"
-                       [class.bg-green-50]="firstName?.valid && firstName?.value"
-                       [class.border-green-400]="firstName?.valid && firstName?.value"
-                       [class.bg-red-50]="submitted() && firstName?.invalid"
-                       [class.border-red-400]="submitted() && firstName?.invalid">
+        <!-- Modal Form Content (scrollable) -->
+        <div class="overflow-y-auto flex-1">
+          <form [formGroup]="contactForm" (ngSubmit)="submitForm()" class="p-6 space-y-5">
+
+            <!-- INFOS PERSO (avant le stepper) -->
+            <div class="bg-slate-50 rounded-2xl p-4 mb-4">
+              <div class="text-xs font-bold uppercase tracking-wider text-navy2 mb-4">📋 Vos informations</div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-3">
+                <div>
+                  <label class="block text-xs font-bold uppercase tracking-wider text-navy2 mb-1">Prénom <span class="text-orange">*</span></label>
+                  <input type="text" formControlName="firstName" placeholder="Jean" (input)="markFilled($event)"
+                         class="w-full bg-white border border-slate-300 rounded-lg px-3 py-2 text-sm text-navy font-light focus:outline-none focus:ring-2 focus:ring-orange transition"
+                         [class.bg-green-50]="firstName?.valid && firstName?.value"
+                         [class.border-green-400]="firstName?.valid && firstName?.value">
+                </div>
+                <div>
+                  <label class="block text-xs font-bold uppercase tracking-wider text-navy2 mb-1">Nom <span class="text-orange">*</span></label>
+                  <input type="text" formControlName="lastName" placeholder="Dupont" (input)="markFilled($event)"
+                         class="w-full bg-white border border-slate-300 rounded-lg px-3 py-2 text-sm text-navy font-light focus:outline-none focus:ring-2 focus:ring-orange transition"
+                         [class.bg-green-50]="lastName?.valid && lastName?.value"
+                         [class.border-green-400]="lastName?.valid && lastName?.value">
+                </div>
               </div>
-              <div>
-                <label class="block text-xs font-bold uppercase tracking-wider text-navy2 mb-2">Nom <span class="text-orange">*</span></label>
-                <input type="text" formControlName="lastName" placeholder="Dupont" (input)="markFilled($event)"
-                       class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 text-sm text-navy font-light focus:outline-none focus:ring-2 focus:ring-orange transition"
-                       [class.bg-green-50]="lastName?.valid && lastName?.value"
-                       [class.border-green-400]="lastName?.valid && lastName?.value"
-                       [class.bg-red-50]="submitted() && lastName?.invalid"
-                       [class.border-red-400]="submitted() && lastName?.invalid">
+
+              <div class="mb-3">
+                <label class="block text-xs font-bold uppercase tracking-wider text-navy2 mb-1">Email <span class="text-orange">*</span></label>
+                <input type="email" formControlName="email" placeholder="jean@exemple.fr" (input)="markFilled($event)"
+                       class="w-full bg-white border border-slate-300 rounded-lg px-3 py-2 text-sm text-navy font-light focus:outline-none focus:ring-2 focus:ring-orange transition"
+                       [class.bg-green-50]="email?.valid && email?.value"
+                       [class.border-green-400]="email?.valid && email?.value">
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div>
+                  <label class="block text-xs font-bold uppercase tracking-wider text-navy2 mb-1">Téléphone <span class="text-orange">*</span></label>
+                  <input type="tel" formControlName="phone" placeholder="+33 6 00 00 00 00" (input)="markFilled($event)"
+                         class="w-full bg-white border border-slate-300 rounded-lg px-3 py-2 text-sm text-navy font-light focus:outline-none focus:ring-2 focus:ring-orange transition"
+                         [class.bg-green-50]="phone?.valid && phone?.value"
+                         [class.border-green-400]="phone?.valid && phone?.value">
+                </div>
+                <div>
+                  <label class="block text-xs font-bold uppercase tracking-wider text-navy2 mb-1">Société <span class="text-orange">*</span></label>
+                  <input type="text" formControlName="company" placeholder="Mon entreprise" (input)="markFilled($event)"
+                         class="w-full bg-white border border-slate-300 rounded-lg px-3 py-2 text-sm text-navy font-light focus:outline-none focus:ring-2 focus:ring-orange transition"
+                         [class.bg-green-50]="company?.valid && company?.value"
+                         [class.border-green-400]="company?.valid && company?.value">
+                </div>
               </div>
             </div>
 
-            <div>
-              <label class="block text-xs font-bold uppercase tracking-wider text-navy2 mb-2">Email <span class="text-orange">*</span></label>
-              <input type="email" formControlName="email" placeholder="jean@exemple.fr" (input)="markFilled($event)"
-                     class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 text-sm text-navy font-light focus:outline-none focus:ring-2 focus:ring-orange transition"
-                     [class.bg-green-50]="email?.valid && email?.value"
-                     [class.border-green-400]="email?.valid && email?.value"
-                     [class.bg-red-50]="submitted() && email?.invalid"
-                     [class.border-red-400]="submitted() && email?.invalid">
+            <!-- STEPPER SECTION -->
+            <div class="bg-slate-50 border border-slate-300 rounded-2xl p-4">
+              <div class="flex items-center justify-between mb-2">
+                <span class="font-bold text-sm text-navy">🎯 Votre projet</span>
+                <span class="text-xs font-bold text-orange bg-orange-light border border-orange/20 px-2 py-1 rounded-full">{{ step() + 1 }} / {{ totalSteps }}</span>
+              </div>
+
+              <div class="w-full h-0.5 bg-slate-300 rounded mb-4 overflow-hidden">
+                <div class="h-full bg-gradient-to-r from-orange to-orange-300 transition-all duration-500"
+                     [style.width.%]="((step() + 1) / totalSteps) * 100"></div>
+              </div>
+
+              <div class="min-h-64 pb-4">
+                <!-- Step 0: Service -->
+                @if (step() === 0 && !stepperDone()) {
+                  <div>
+                    <p class="text-sm font-semibold text-navy mb-3">Quel(s) service(s) vous intéresse(nt) ?</p>
+                    <div class="space-y-2">
+                      @for (service of ['🌐 Site vitrine', '🛒 E-commerce', '🚀 Landing page', '🎨 Identité visuelle', '🔍 SEO Google', '☁️ Hébergement']; track service) {
+                        <button type="button" class="w-full text-left px-3 py-2 rounded-lg border border-slate-300 text-sm font-cormorant bg-white hover:border-orange hover:bg-orange-light transition"
+                                (click)="toggle('projectType', service.substring(2))"
+                                [class.border-orange]="isSelected('projectType', service.substring(2))"
+                                [class.bg-orange-light]="isSelected('projectType', service.substring(2))">
+                          {{service}}
+                        </button>
+                      }
+                    </div>
+                  </div>
+                }
+
+                <!-- Step 1: Situation -->
+                @if (step() === 1 && !stepperDone()) {
+                  <div>
+                    <p class="text-sm font-semibold text-navy mb-3">Où en êtes-vous actuellement ?</p>
+                    <div class="space-y-2">
+                      @for (option of ['🌱 Je démarre de zéro', '⚡ J\'ai un site à améliorer', '🔄 Je veux une refonte complète', '👁 Je veux plus de visibilité']; track option) {
+                        <button type="button" class="w-full text-left px-3 py-2 rounded-lg border border-slate-300 text-sm font-cormorant bg-white hover:border-orange hover:bg-orange-light transition"
+                                (click)="pickPill('situation', option)"
+                                [class.border-orange]="isSelected('situation', option)"
+                                [class.bg-orange-light]="isSelected('situation', option)">
+                          {{option}}
+                        </button>
+                      }
+                    </div>
+                  </div>
+                }
+
+                <!-- Step 2: Priorité -->
+                @if (step() === 2 && !stepperDone()) {
+                  <div>
+                    <p class="text-sm font-semibold text-navy mb-3">Qu'est-ce qui compte le plus ?</p>
+                    <div class="space-y-2">
+                      @for (option of ['✨ Un design qui impressionne', '💰 Générer des ventes', '🔍 Être visible sur Google', '⚡ Une livraison rapide']; track option) {
+                        <button type="button" class="w-full text-left px-3 py-2 rounded-lg border border-slate-300 text-sm font-cormorant bg-white hover:border-orange hover:bg-orange-light transition"
+                                (click)="toggle('priority', option)"
+                                [class.border-orange]="isSelected('priority', option)"
+                                [class.bg-orange-light]="isSelected('priority', option)">
+                          {{option}}
+                        </button>
+                      }
+                    </div>
+                  </div>
+                }
+
+                <!-- Step 3: Cible -->
+                @if (step() === 3 && !stepperDone()) {
+                  <div>
+                    <p class="text-sm font-semibold text-navy mb-3">À qui s'adresse votre projet ?</p>
+                    <div class="space-y-2">
+                      @for (option of ['👤 Des particuliers', '🏢 Des TPE / PME', '🛍 Des e-acheteurs', '⚕️ Des professionnels libéraux']; track option) {
+                        <button type="button" class="w-full text-left px-3 py-2 rounded-lg border border-slate-300 text-sm font-cormorant bg-white hover:border-orange hover:bg-orange-light transition"
+                                (click)="pickPill('target', option)"
+                                [class.border-orange]="isSelected('target', option)"
+                                [class.bg-orange-light]="isSelected('target', option)">
+                          {{option}}
+                        </button>
+                      }
+                    </div>
+                  </div>
+                }
+
+                <!-- Step 4: Délai -->
+                @if (step() === 4 && !stepperDone()) {
+                  <div>
+                    <p class="text-sm font-semibold text-navy mb-3">Quel est votre délai souhaité ?</p>
+                    <div class="space-y-2">
+                      @for (option of ['🔥 Urgent (moins de 2 semaines)', '📅 1 à 2 mois', '🗓 2 à 3 mois', '😌 Pas de contrainte']; track option) {
+                        <button type="button" class="w-full text-left px-3 py-2 rounded-lg border border-slate-300 text-sm font-cormorant bg-white hover:border-orange hover:bg-orange-light transition"
+                                (click)="pickPill('deadline', option)"
+                                [class.border-orange]="isSelected('deadline', option)"
+                                [class.bg-orange-light]="isSelected('deadline', option)">
+                          {{option}}
+                        </button>
+                      }
+                    </div>
+                  </div>
+                }
+
+                <!-- Step 5: Budget -->
+                @if (step() === 5 && !stepperDone()) {
+                  <div>
+                    <p class="text-sm font-semibold text-navy mb-3">Quel est votre enveloppe budgétaire ?</p>
+                    <div class="space-y-2">
+                      @for (option of ['💚 Moins de 1 000€', '💛 1 000€ à 5 000€', '🧡 5 000€ à 10 000€', '❤️ 10 000€+' ]; track option) {
+                        <button type="button" class="w-full text-left px-3 py-2 rounded-lg border border-slate-300 text-sm font-cormorant bg-white hover:border-orange hover:bg-orange-light transition"
+                                (click)="pickPill('budget', option)"
+                                [class.border-orange]="isSelected('budget', option)"
+                                [class.bg-orange-light]="isSelected('budget', option)">
+                          {{option}}
+                        </button>
+                      }
+                    </div>
+                  </div>
+                }
+
+                <!-- Step 6: Description -->
+                @if (step() === 6 && !stepperDone()) {
+                  <div>
+                    <p class="text-sm font-semibold text-navy mb-3">Décrivez votre projet</p>
+                    <textarea formControlName="description"
+                              class="w-full text-sm text-navy border border-slate-300 rounded-lg p-3 resize-none focus:outline-none focus:border-orange transition"
+                              rows="4"
+                              placeholder="Votre vision, inspirations, contraintes..."></textarea>
+                  </div>
+                }
+
+                <!-- Completed state -->
+                @if (stepperDone()) {
+                  <div class="flex flex-col items-center justify-center py-8">
+                    <div class="w-12 h-12 rounded-full bg-orange-light border-2 border-orange flex items-center justify-center mb-3">
+                      <svg class="w-6 h-6 text-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                    </div>
+                    <div class="font-bold text-lg text-navy mb-1 font-cormorant">Questionnaire complété 🎉</div>
+                    <p class="text-xs text-muted">Cliquez sur "Envoyer" pour finaliser</p>
+                  </div>
+                }
+              </div>
+
+              <!-- Stepper Navigation -->
+              @if (!stepperDone()) {
+                <div class="flex items-center justify-between gap-2 pt-4 border-t border-slate-300">
+                  <button type="button" class="text-xs px-3 py-1.5 rounded-lg border border-slate-300 disabled:opacity-30 disabled:cursor-not-allowed" [disabled]="step() === 0" (click)="prevStep()">
+                    ← Retour
+                  </button>
+                  <button type="button" class="text-xs px-4 py-1.5 rounded-lg bg-orange text-white font-bold disabled:opacity-50 disabled:cursor-not-allowed" [disabled]="!isCurrentStepValid()" (click)="nextStep()">
+                    @if (step() < totalSteps - 1) {
+                      Suivant →
+                    } @else {
+                      Terminer ✓
+                    }
+                  </button>
+                </div>
+              }
             </div>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div>
-                <label class="block text-xs font-bold uppercase tracking-wider text-navy2 mb-2">Téléphone <span class="text-orange">*</span></label>
-                <input type="tel" formControlName="phone" placeholder="+33 6 00 00 00 00" (input)="markFilled($event)"
-                       class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 text-sm text-navy font-light focus:outline-none focus:ring-2 focus:ring-orange transition"
-                       [class.bg-green-50]="phone?.valid && phone?.value"
-                       [class.border-green-400]="phone?.valid && phone?.value"
-                       [class.bg-red-50]="submitted() && phone?.invalid"
-                       [class.border-red-400]="submitted() && phone?.invalid">
-              </div>
-              <div>
-                <label class="block text-xs font-bold uppercase tracking-wider text-navy2 mb-2">Société <span class="text-orange">*</span></label>
-                <input type="text" formControlName="company" placeholder="Mon entreprise" (input)="markFilled($event)"
-                       class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 text-sm text-navy font-light focus:outline-none focus:ring-2 focus:ring-orange transition"
-                       [class.bg-green-50]="company?.valid && company?.value"
-                       [class.border-green-400]="company?.valid && company?.value"
-                       [class.bg-red-50]="submitted() && company?.invalid"
-                       [class.border-red-400]="submitted() && company?.invalid">
-              </div>
-            </div>
-
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div>
-                <label class="block text-xs font-bold uppercase tracking-wider text-navy2 mb-2">Code postal <span class="text-orange">*</span></label>
-                <input type="text" formControlName="postalCode" placeholder="75000" (input)="markFilled($event)"
-                       class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 text-sm text-navy font-light focus:outline-none focus:ring-2 focus:ring-orange transition"
-                       [class.bg-green-50]="postalCode?.valid && postalCode?.value"
-                       [class.border-green-400]="postalCode?.valid && postalCode?.value"
-                       [class.bg-red-50]="submitted() && postalCode?.invalid"
-                       [class.border-red-400]="submitted() && postalCode?.invalid">
-              </div>
-              <div>
-                <label class="block text-xs font-bold uppercase tracking-wider text-navy2 mb-2">Pays <span class="text-orange">*</span></label>
-                <select formControlName="country" (input)="markFilled($event)"
-                       class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 text-sm text-navy font-light focus:outline-none focus:ring-2 focus:ring-orange transition"
-                       [class.bg-green-50]="country?.valid && country?.value"
-                       [class.border-green-400]="country?.valid && country?.value"
-                       [class.bg-red-50]="submitted() && country?.invalid"
-                       [class.border-red-400]="submitted() && country?.invalid">
-                  <option value="" disabled>Sélectionner</option>
-                  <option value="France">France</option>
-                  <option value="Belgique">Belgique</option>
-                  <option value="Suisse">Suisse</option>
-                  <option value="Canada">Canada</option>
-                  <option value="Autre">Autre</option>
-                </select>
-              </div>
-            </div>
-
-            <div>
-              <label class="block text-xs font-bold uppercase tracking-wider text-navy2 mb-2">Votre demande <span class="text-orange">*</span></label>
-              <textarea formControlName="message" rows="4" placeholder="Décrivez-nous votre projet..." (input)="markFilled($event)"
-                        class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 text-sm text-navy font-light focus:outline-none focus:ring-2 focus:ring-orange transition"
-                        [class.bg-green-50]="message?.valid && message?.value"
-                        [class.border-green-400]="message?.valid && message?.value"
-                        [class.bg-red-50]="submitted() && message?.invalid"
-                        [class.border-red-400]="submitted() && message?.invalid"></textarea>
-            </div>
-
-            <div class="flex items-start gap-3">
-              <input type="checkbox" id="privacy-modal" formControlName="privacy" class="w-4 h-4 mt-1 accent-orange cursor-pointer flex-shrink-0">
+            <!-- Privacy & Submit -->
+            <div class="flex items-start gap-2 mb-3">
+              <input type="checkbox" id="privacy-modal" formControlName="privacy" class="w-4 h-4 mt-0.5 accent-orange cursor-pointer flex-shrink-0">
               <label for="privacy-modal" class="text-xs text-slate-600 leading-relaxed">
-                J'accepte que mes données soient traitées conformément à la <a href="#" class="text-orange hover:underline">politique de confidentialité</a> <span class="text-orange">*</span>
+                J'accepte la <a href="#" class="text-orange hover:underline">politique de confidentialité</a> <span class="text-orange">*</span>
               </label>
             </div>
 
             @if (sendError()) {
-              <div class="bg-red-50 border border-red-200 rounded-lg p-3 text-red-700 text-sm">
+              <div class="bg-red-50 border border-red-200 rounded-lg p-3 text-red-700 text-xs">
                 {{ sendError() }}
               </div>
             }
+          </form>
+        </div>
 
-            <div class="flex gap-3 pt-4">
-              <button type="submit" [disabled]="isSending()" class="flex-1 bg-orange text-white font-bold py-2 rounded-lg hover:bg-orange-dark transition disabled:opacity-50">
-                @if (isSending()) {
-                  <span>Envoi en cours...</span>
-                } @else {
-                  <span>Envoyer ma demande</span>
-                }
-              </button>
-              <button type="button" (click)="goHome()" class="px-6 py-2 border border-slate-300 text-slate-700 font-semibold rounded-lg hover:bg-slate-50 transition">
-                Annuler
-              </button>
-            </div>
+        <!-- Modal Footer (fixed) -->
+        <div class="border-t border-slate-200 bg-white p-4 flex gap-3">
+          <button (click)="goHome()" class="px-4 py-2 border border-slate-300 text-slate-700 text-sm font-semibold rounded-lg hover:bg-slate-50 transition">
+            Annuler
+          </button>
+          <form [formGroup]="contactForm" (ngSubmit)="submitForm()" class="flex-1">
+            <button type="submit" [disabled]="isSending() || !stepperDone()" class="w-full bg-orange text-white text-sm font-bold py-2 rounded-lg hover:bg-orange-dark transition disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2">
+              @if (isSending()) {
+                <svg class="w-4 h-4 animate-spin" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+                Envoi...
+              } @else {
+                <span>✓ Envoyer</span>
+              }
+            </button>
           </form>
         </div>
       </div>
