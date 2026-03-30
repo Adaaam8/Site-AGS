@@ -10,7 +10,7 @@ import { CommonModule, isPlatformBrowser } from '@angular/common';
   standalone: true
 })
 export class ServicesComponent implements AfterViewInit, OnDestroy {
-  @Output() navigateToContact = new EventEmitter<void>();
+  @Output() navigateToContact = new EventEmitter<string>();
 
   private scrollHandler: (() => void) | null = null;
 
@@ -57,7 +57,7 @@ export class ServicesComponent implements AfterViewInit, OnDestroy {
     }
   }
 
-  navigateToContactClick(): void {
-    this.navigateToContact.emit();
+  navigateToContactClick(serviceName: string): void {
+    this.navigateToContact.emit(serviceName);
   }
 }

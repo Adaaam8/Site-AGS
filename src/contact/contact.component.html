@@ -3,11 +3,16 @@
 
 <div class="fixed inset-0 bg-gradient-to-br from-white to-white z-0 h-screen"></div>
 
-<div class="relative z-20 flex flex-col w-full">
+<!-- MODAL BACKDROP (si venant d'un service) -->
+@if (isModalMode()) {
+  <div class="fixed inset-0 bg-black/40 backdrop-blur-sm z-30"></div>
+}
 
+<div [class]="'relative ' + (isModalMode() ? 'z-40' : 'z-20') + ' flex flex-col w-full'">
 
-  <!-- HERO -->
-  <section class="page-hero">
+  <!-- HERO (caché si modal) -->
+  @if (!isModalMode()) {
+    <section class="page-hero">
     <div class="page-hero-label">AGS Concept</div>
     <h1>Nous <em>Contacter</em></h1>
     <p>Parlons de votre projet. Un appel de découverte offert, sans engagement.</p>
@@ -15,7 +20,7 @@
   </section>
 
   <!-- HERO -->
-  <section class="hero grid grid-cols-1 lg:grid-cols-2 gap-5 lg:gap-20 items-start max-w-7xl mx-auto w-full px-4 lg:px-8 py-8 lg:py-12">
+  <section class="hero grid grid-cols-1 lg:grid-cols-2 gap-5 lg:gap-20 items-start max-w-7xl mx-auto w-full px-4 lg:px-8 py-8 lg:py-12 transition-all duration-300" [class.blur-sm]="isModalMode()" [class.opacity-50]="isModalMode()">
 
     <!-- LEFT -->
     <div class="hero-left opacity-0 animate-fadeUp" style="animation-delay: 0.4s">
@@ -566,6 +571,148 @@
     </div>
 
   </section>
+  }
+
+  <!-- MODAL FORM (si venant d'un service) -->
+  @if (isModalMode()) {
+    <div class="fixed inset-0 flex items-center justify-center z-40 p-4 top-16">
+      <div class="bg-white rounded-3xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+        <!-- Modal Header -->
+        <div class="sticky top-0 bg-white border-b border-slate-200 p-6 flex items-center justify-between">
+          <div>
+            <div class="text-sm font-bold uppercase tracking-wider text-orange mb-2">Formulaire de contact</div>
+            @if (selectedService()) {
+              <h3 class="text-xl font-bold text-navy">{{ selectedService() }}</h3>
+            }
+          </div>
+          <button (click)="goHome()" class="text-slate-500 hover:text-slate-700 text-2xl leading-none">
+            ×
+          </button>
+        </div>
+
+        <!-- Modal Form -->
+        <div class="p-6">
+          <form [formGroup]="contactForm" (ngSubmit)="submitForm()" class="space-y-4">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-xs font-bold uppercase tracking-wider text-navy2 mb-2">Prénom <span class="text-orange">*</span></label>
+                <input type="text" formControlName="firstName" placeholder="Jean" (input)="markFilled($event)"
+                       class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 text-sm text-navy font-light focus:outline-none focus:ring-2 focus:ring-orange transition"
+                       [class.bg-green-50]="firstName?.valid && firstName?.value"
+                       [class.border-green-400]="firstName?.valid && firstName?.value"
+                       [class.bg-red-50]="submitted() && firstName?.invalid"
+                       [class.border-red-400]="submitted() && firstName?.invalid">
+              </div>
+              <div>
+                <label class="block text-xs font-bold uppercase tracking-wider text-navy2 mb-2">Nom <span class="text-orange">*</span></label>
+                <input type="text" formControlName="lastName" placeholder="Dupont" (input)="markFilled($event)"
+                       class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 text-sm text-navy font-light focus:outline-none focus:ring-2 focus:ring-orange transition"
+                       [class.bg-green-50]="lastName?.valid && lastName?.value"
+                       [class.border-green-400]="lastName?.valid && lastName?.value"
+                       [class.bg-red-50]="submitted() && lastName?.invalid"
+                       [class.border-red-400]="submitted() && lastName?.invalid">
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold uppercase tracking-wider text-navy2 mb-2">Email <span class="text-orange">*</span></label>
+              <input type="email" formControlName="email" placeholder="jean@exemple.fr" (input)="markFilled($event)"
+                     class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 text-sm text-navy font-light focus:outline-none focus:ring-2 focus:ring-orange transition"
+                     [class.bg-green-50]="email?.valid && email?.value"
+                     [class.border-green-400]="email?.valid && email?.value"
+                     [class.bg-red-50]="submitted() && email?.invalid"
+                     [class.border-red-400]="submitted() && email?.invalid">
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-xs font-bold uppercase tracking-wider text-navy2 mb-2">Téléphone <span class="text-orange">*</span></label>
+                <input type="tel" formControlName="phone" placeholder="+33 6 00 00 00 00" (input)="markFilled($event)"
+                       class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 text-sm text-navy font-light focus:outline-none focus:ring-2 focus:ring-orange transition"
+                       [class.bg-green-50]="phone?.valid && phone?.value"
+                       [class.border-green-400]="phone?.valid && phone?.value"
+                       [class.bg-red-50]="submitted() && phone?.invalid"
+                       [class.border-red-400]="submitted() && phone?.invalid">
+              </div>
+              <div>
+                <label class="block text-xs font-bold uppercase tracking-wider text-navy2 mb-2">Société <span class="text-orange">*</span></label>
+                <input type="text" formControlName="company" placeholder="Mon entreprise" (input)="markFilled($event)"
+                       class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 text-sm text-navy font-light focus:outline-none focus:ring-2 focus:ring-orange transition"
+                       [class.bg-green-50]="company?.valid && company?.value"
+                       [class.border-green-400]="company?.valid && company?.value"
+                       [class.bg-red-50]="submitted() && company?.invalid"
+                       [class.border-red-400]="submitted() && company?.invalid">
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-xs font-bold uppercase tracking-wider text-navy2 mb-2">Code postal <span class="text-orange">*</span></label>
+                <input type="text" formControlName="postalCode" placeholder="75000" (input)="markFilled($event)"
+                       class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 text-sm text-navy font-light focus:outline-none focus:ring-2 focus:ring-orange transition"
+                       [class.bg-green-50]="postalCode?.valid && postalCode?.value"
+                       [class.border-green-400]="postalCode?.valid && postalCode?.value"
+                       [class.bg-red-50]="submitted() && postalCode?.invalid"
+                       [class.border-red-400]="submitted() && postalCode?.invalid">
+              </div>
+              <div>
+                <label class="block text-xs font-bold uppercase tracking-wider text-navy2 mb-2">Pays <span class="text-orange">*</span></label>
+                <select formControlName="country" (input)="markFilled($event)"
+                       class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 text-sm text-navy font-light focus:outline-none focus:ring-2 focus:ring-orange transition"
+                       [class.bg-green-50]="country?.valid && country?.value"
+                       [class.border-green-400]="country?.valid && country?.value"
+                       [class.bg-red-50]="submitted() && country?.invalid"
+                       [class.border-red-400]="submitted() && country?.invalid">
+                  <option value="" disabled>Sélectionner</option>
+                  <option value="France">France</option>
+                  <option value="Belgique">Belgique</option>
+                  <option value="Suisse">Suisse</option>
+                  <option value="Canada">Canada</option>
+                  <option value="Autre">Autre</option>
+                </select>
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold uppercase tracking-wider text-navy2 mb-2">Votre demande <span class="text-orange">*</span></label>
+              <textarea formControlName="message" rows="4" placeholder="Décrivez-nous votre projet..." (input)="markFilled($event)"
+                        class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3 py-2 text-sm text-navy font-light focus:outline-none focus:ring-2 focus:ring-orange transition"
+                        [class.bg-green-50]="message?.valid && message?.value"
+                        [class.border-green-400]="message?.valid && message?.value"
+                        [class.bg-red-50]="submitted() && message?.invalid"
+                        [class.border-red-400]="submitted() && message?.invalid"></textarea>
+            </div>
+
+            <div class="flex items-start gap-3">
+              <input type="checkbox" id="privacy-modal" formControlName="privacy" class="w-4 h-4 mt-1 accent-orange cursor-pointer flex-shrink-0">
+              <label for="privacy-modal" class="text-xs text-slate-600 leading-relaxed">
+                J'accepte que mes données soient traitées conformément à la <a href="#" class="text-orange hover:underline">politique de confidentialité</a> <span class="text-orange">*</span>
+              </label>
+            </div>
+
+            @if (sendError()) {
+              <div class="bg-red-50 border border-red-200 rounded-lg p-3 text-red-700 text-sm">
+                {{ sendError() }}
+              </div>
+            }
+
+            <div class="flex gap-3 pt-4">
+              <button type="submit" [disabled]="isSending()" class="flex-1 bg-orange text-white font-bold py-2 rounded-lg hover:bg-orange-dark transition disabled:opacity-50">
+                @if (isSending()) {
+                  <span>Envoi en cours...</span>
+                } @else {
+                  <span>Envoyer ma demande</span>
+                }
+              </button>
+              <button type="button" (click)="goHome()" class="px-6 py-2 border border-slate-300 text-slate-700 font-semibold rounded-lg hover:bg-slate-50 transition">
+                Annuler
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  }
 </div>
 
 <!-- SUCCESS MODAL -->

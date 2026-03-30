@@ -58,6 +58,8 @@ export class ContactComponent implements OnInit, OnDestroy {
   sendSuccess = signal(false);
   sendError = signal('');
   showStepError = signal(false);
+  isModalMode = signal(false);
+  selectedService = signal<string | null>(null);
 
   // === Canvas animation ===
   private animationFrameId: number | null = null;
@@ -90,6 +92,16 @@ export class ContactComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.initCanvas();
     this.setupMouseListener();
+
+    // Vérifier si on vient d'un service
+    if (typeof window !== 'undefined') {
+      const service = sessionStorage.getItem('selectedService');
+      if (service) {
+        this.isModalMode.set(true);
+        this.selectedService.set(service);
+        sessionStorage.removeItem('selectedService');
+      }
+    }
   }
 
   ngOnDestroy(): void {

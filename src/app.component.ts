@@ -202,7 +202,7 @@ ngAfterViewChecked(): void {
     }
   }
   
-  navigateTo(view: 'main' | 'contact' | 'services' | 'portfolio' | 'mentions-legales' | 'politique-confidentialite'): void {
+  navigateTo(view: 'main' | 'contact' | 'services' | 'portfolio' | 'mentions-legales' | 'politique-confidentialite', fromService?: string): void {
     this.activeView.set(view);
     this.videoStarted = false; // Reset video state to allow replay when returning to main view
     if (isPlatformBrowser(this.platformId)) {
@@ -211,6 +211,11 @@ ngAfterViewChecked(): void {
         }, 0);
     }
     this.isMenuOpen.set(false);
+
+    // Passer le service au contact component
+    if (view === 'contact' && fromService) {
+      sessionStorage.setItem('selectedService', fromService);
+    }
   }
   
   toggleMenu(): void {

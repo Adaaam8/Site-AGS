@@ -303,7 +303,7 @@
     </section>
 
   } @else if (activeView() === 'services') {
-    <app-services (navigateToContact)="navigateTo('contact')"></app-services>
+    <app-services (navigateToContact)="navigateTo('contact', $event)"></app-services>
 
   } @else if (activeView() === 'portfolio') {
     <app-portfolio-v2 (contactClick)="navigateTo('contact')"></app-portfolio-v2>
