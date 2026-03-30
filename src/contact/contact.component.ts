@@ -72,6 +72,7 @@ export class ContactComponent implements OnInit, OnDestroy {
   private mouseMoveHandler: ((e: MouseEvent) => void) | null = null;
 
   totalSteps = 7;
+  effectiveTotalSteps = computed(() => this.isModalMode() ? 6 : 7);
   encouragements = ['👋 Bienvenue !', '✨ Bonne sélection !', '👌 On prend note !', '🎯 Super !', '⏱ On y est presque !', '💰 Budget ?', '🎉 Dernière étape !'];
 
   countries = signal([
@@ -100,6 +101,8 @@ export class ContactComponent implements OnInit, OnDestroy {
         this.isModalMode.set(true);
         this.selectedService.set(service);
         sessionStorage.removeItem('selectedService');
+        // Commencer directement à step 1 (Situation) en mode modal
+        this.step.set(1);
       }
     }
   }

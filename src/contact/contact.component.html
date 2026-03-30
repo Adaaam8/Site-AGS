@@ -645,32 +645,15 @@
             <div class="bg-slate-50 border border-slate-300 rounded-2xl p-4">
               <div class="flex items-center justify-between mb-2">
                 <span class="font-bold text-sm text-navy">🎯 Votre projet</span>
-                <span class="text-xs font-bold text-orange bg-orange-light border border-orange/20 px-2 py-1 rounded-full">{{ step() + 1 }} / {{ totalSteps }}</span>
+                <span class="text-xs font-bold text-orange bg-orange-light border border-orange/20 px-2 py-1 rounded-full">{{ step() }} / {{ effectiveTotalSteps() }}</span>
               </div>
 
               <div class="w-full h-0.5 bg-slate-300 rounded mb-4 overflow-hidden">
                 <div class="h-full bg-gradient-to-r from-orange to-orange-300 transition-all duration-500"
-                     [style.width.%]="((step() + 1) / totalSteps) * 100"></div>
+                     [style.width.%]="(step() / effectiveTotalSteps()) * 100"></div>
               </div>
 
               <div class="min-h-64 pb-4">
-                <!-- Step 0: Service -->
-                @if (step() === 0 && !stepperDone()) {
-                  <div>
-                    <p class="text-sm font-semibold text-navy mb-3">Quel(s) service(s) vous intéresse(nt) ?</p>
-                    <div class="space-y-2">
-                      @for (service of ['🌐 Site vitrine', '🛒 E-commerce', '🚀 Landing page', '🎨 Identité visuelle', '🔍 SEO Google', '☁️ Hébergement']; track service) {
-                        <button type="button" class="w-full text-left px-3 py-2 rounded-lg border border-slate-300 text-sm font-cormorant bg-white hover:border-orange hover:bg-orange-light transition"
-                                (click)="toggle('projectType', service.substring(2))"
-                                [class.border-orange]="isSelected('projectType', service.substring(2))"
-                                [class.bg-orange-light]="isSelected('projectType', service.substring(2))">
-                          {{service}}
-                        </button>
-                      }
-                    </div>
-                  </div>
-                }
-
                 <!-- Step 1: Situation -->
                 @if (step() === 1 && !stepperDone()) {
                   <div>
@@ -782,11 +765,11 @@
               <!-- Stepper Navigation -->
               @if (!stepperDone()) {
                 <div class="flex items-center justify-between gap-2 pt-4 border-t border-slate-300">
-                  <button type="button" class="text-xs px-3 py-1.5 rounded-lg border border-slate-300 disabled:opacity-30 disabled:cursor-not-allowed" [disabled]="step() === 0" (click)="prevStep()">
+                  <button type="button" class="text-xs px-3 py-1.5 rounded-lg border border-slate-300 disabled:opacity-30 disabled:cursor-not-allowed" [disabled]="isModalMode() ? step() === 1 : step() === 0" (click)="prevStep()">
                     ← Retour
                   </button>
                   <button type="button" class="text-xs px-4 py-1.5 rounded-lg bg-orange text-white font-bold disabled:opacity-50 disabled:cursor-not-allowed" [disabled]="!isCurrentStepValid()" (click)="nextStep()">
-                    @if (step() < totalSteps - 1) {
+                    @if (step() < effectiveTotalSteps() - 1) {
                       Suivant →
                     } @else {
                       Terminer ✓
