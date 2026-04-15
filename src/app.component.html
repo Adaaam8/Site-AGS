@@ -248,41 +248,6 @@
   </section>
 </div>
 
-      <!-- Process Section -->
-      <section id="process" class="py-12 sm:py-20 md:py-40 bg-orange-50">
-        <div class="container mx-auto px-4 sm:px-6">
-          <div class="text-center mb-10 sm:mb-16 md:mb-24">
-            <span class="text-[#E06732] text-xs sm:text-sm tracking-widest uppercase mb-2 sm:mb-4 block font-semibold font-syne">Notre Méthode</span>
-            <h2 class="text-2xl sm:text-3xl md:text-5xl font-bold text-gray-900 leading-tight">Un parcours en 4 étapes vers l'excellence.</h2>
-          </div>
-
-          <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 md:gap-8">
-            @for (step of processSteps(); track step.step) {
-              <div class="text-center">
-                  <div class="flex items-center justify-center h-10 sm:h-12 w-10 sm:w-12 rounded-full bg-[#E06732] text-white font-bold text-base sm:text-lg mx-auto mb-4 sm:mb-6">
-                    {{ step.step }}
-                  </div>
-                  <h4 class="text-base sm:text-lg md:text-xl font-bold text-gray-900 mb-2 sm:mb-4">{{ step.title }}</h4>
-                  <hr class="my-2 sm:my-4 border-[#E06732] max-w-[150px] mx-auto">
-                  <p class="text-xs sm:text-sm md:text-base text-gray-800 leading-relaxed">{{ step.description }}</p>
-              </div>
-            }
-          </div>
-        </div>
-      </section>
-
-      <!-- Elegant Separator -->
-      <div class="relative h-32 md:h-48 bg-gradient-to-b from-orange-50 to-[#F7F4EF] overflow-hidden flex items-center justify-center">
-        <svg class="absolute w-full h-full opacity-10" preserveAspectRatio="none" viewBox="0 0 1440 200" xmlns="http://www.w3.org/2000/svg">
-          <path d="M0,50 Q360,0 720,50 T1440,50 L1440,200 L0,200 Z" fill="#E06732"/>
-        </svg>
-        <div class="relative z-10 flex flex-col items-center gap-3">
-          <div class="w-1 h-1 bg-[#E06732] rounded-full opacity-60"></div>
-          <div class="w-8 h-0.5 bg-gradient-to-r from-transparent via-[#E06732] to-transparent"></div>
-          <div class="w-1 h-1 bg-[#E06732] rounded-full opacity-60"></div>
-        </div>
-      </div>
-
       <!-- Portfolio Section V2 -->
       <section id="portfolio">
         <app-portfolio-v2 (contactClick)="navigateTo('contact')"></app-portfolio-v2>
