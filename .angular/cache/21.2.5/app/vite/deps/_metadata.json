@@ -1,47 +1,62 @@
 {
-  "hash": "3dcb94cd",
-  "configHash": "3abf1ef4",
-  "lockfileHash": "8d815255",
-  "browserHash": "b66f47de",
+  "hash": "e7e45804",
+  "configHash": "5c03311c",
+  "lockfileHash": "460aff03",
+  "browserHash": "de79a8f1",
   "optimized": {
     "@angular/common": {
       "src": "../../../../../../node_modules/@angular/common/fesm2022/common.mjs",
       "file": "@angular_common.js",
-      "fileHash": "356854cb",
+      "fileHash": "812fe1f1",
       "needsInterop": false
     },
     "@angular/common/http": {
       "src": "../../../../../../node_modules/@angular/common/fesm2022/http.mjs",
       "file": "@angular_common_http.js",
-      "fileHash": "61aad47f",
+      "fileHash": "6694e8d9",
       "needsInterop": false
     },
     "@angular/core": {
       "src": "../../../../../../node_modules/@angular/core/fesm2022/core.mjs",
       "file": "@angular_core.js",
-      "fileHash": "e3fb30cd",
+      "fileHash": "f9fd86f2",
       "needsInterop": false
     },
     "@angular/forms": {
       "src": "../../../../../../node_modules/@angular/forms/fesm2022/forms.mjs",
       "file": "@angular_forms.js",
-      "fileHash": "b74595a6",
+      "fileHash": "73c20f34",
       "needsInterop": false
     },
     "@angular/platform-browser": {
       "src": "../../../../../../node_modules/@angular/platform-browser/fesm2022/platform-browser.mjs",
       "file": "@angular_platform-browser.js",
-      "fileHash": "bf7a65f4",
+      "fileHash": "c89972cd",
       "needsInterop": false
     },
     "three": {
       "src": "../../../../../../node_modules/three/build/three.module.js",
       "file": "three.js",
-      "fileHash": "d9021825",
+      "fileHash": "3c85601e",
+      "needsInterop": false
+    },
+    "firebase/app": {
+      "src": "../../../../../../node_modules/firebase/app/dist/esm/index.esm.js",
+      "file": "firebase_app.js",
+      "fileHash": "8ed6c50f",
+      "needsInterop": false
+    },
+    "firebase/firestore": {
+      "src": "../../../../../../node_modules/firebase/firestore/dist/esm/index.esm.js",
+      "file": "firebase_firestore.js",
+      "fileHash": "c114d782",
       "needsInterop": false
     }
   },
   "chunks": {
+    "chunk-C4LWZHJP": {
+      "file": "chunk-C4LWZHJP.js"
+    },
     "chunk-O2722HSY": {
       "file": "chunk-O2722HSY.js"
     },

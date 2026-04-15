@@ -2,6 +2,16 @@
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
   "framework": null,
+  "functions": {
+    "api/chat.ts": {
+      "runtime": "nodejs20.x",
+      "memory": 1024,
+      "maxDuration": 30
+    }
+  },
+  "env": {
+    "GEMINI_API_KEY": "@gemini_api_key"
+  },
   "headers": [
     {
       "source": "/sitemap.xml",

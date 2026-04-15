@@ -1,6 +1,7 @@
 import { Component, ChangeDetectionStrategy, signal, effect, PLATFORM_ID, Inject, AfterViewChecked, HostListener, ViewChild } from '@angular/core';
 import { isPlatformBrowser, CommonModule } from '@angular/common';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
 import { ContactComponent } from './contact/contact.component';
 import { PortfolioV2Component } from './portfolio/portfolio.component';
 import { CookieBannerComponent } from './cookie-banner/cookie-banner.component';
@@ -9,6 +10,7 @@ import { ServicesComponent } from './services/services.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { MentionsLegalesComponent } from './mentions-legales/mentions-legales.component';
 import { PolitiqueConfidentialiteComponent } from './politique-confidentialite/politique-confidentialite.component';
+import { ChatbotComponent } from './chatbot/chatbot.component';
 
 interface ServiceCard {
   title: string;
@@ -38,7 +40,7 @@ interface ProcessStep {
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [CommonModule, ContactComponent, PortfolioV2Component, CookieBannerComponent, HeroComponent, ServicesComponent, SidebarComponent, MentionsLegalesComponent, PolitiqueConfidentialiteComponent]
+  imports: [CommonModule, HttpClientModule, ContactComponent, PortfolioV2Component, CookieBannerComponent, HeroComponent, ServicesComponent, SidebarComponent, MentionsLegalesComponent, PolitiqueConfidentialiteComponent, ChatbotComponent]
 })
 export class AppComponent implements AfterViewChecked{
   @ViewChild(SidebarComponent) sidebar!: SidebarComponent;
